@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { client } from "./sanityClient";
 
 // ✅ Put your photos in: src/assets/ (exact filenames)
-// - running-photo.png
+// - running-photo2.png
 // - biking-photo.png
 // - ukraine-photo.jpeg
 // - family-photo.png   (or change the import extension below to match your file)
-import runningBg from "./assets/running-photo.png";
+import runningBg from "./assets/running-photo2.png";
 import bikingBg from "./assets/biking-photo.png";
 import ukraineBg from "./assets/ukraine-photo.jpeg";
 import familyBg from "./assets/family-photo.jpg";
@@ -13,7 +14,7 @@ import familyBg from "./assets/family-photo.jpg";
 /**
  * James Runs Across Canada
  * - Home: ONE combined hero + GPS tracker section on the running photo background, then charity on biking photo.
- *         The "How to support" section is now dark (no Ukraine photo).
+ *   The "How to support" section is now dark (no Ukraine photo).
  * - My Why: uses Family photo + Ukraine photo as section backgrounds.
  * - Blog: daily posts (localStorage)
  * - Contact: contact form (UI-only)
@@ -40,6 +41,63 @@ function uid() {
   return Math.random().toString(16).slice(2) + Date.now().toString(16);
 }
 
+function SponsorsGridSection({ sponsors = [] }) {
+  return (
+    <section className="bg-neutral-950 border-b border-white/10">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 py-14">
+
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="max-w-3xl">
+            <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">Sponsors</Pill>
+            <div className="mt-4 text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+              Partners powering the run
+            </div>
+            <div className="mt-2 text-sm sm:text-base text-white/70 leading-7">
+              Big thanks to the organizations helping turn kilometers into scholarships. (We’ll fill these in soon.)
+            </div>
+          </div>
+        </div>
+
+        {/* 3 big horizontal blocks */}
+        <div className="mt-10 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+          {Array.from({ length: 4 }).map((_, i) => {
+            const s = sponsors[i] || {};
+            return (
+              <Glass key={s.id ?? i} className="p-6 h-full">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <div className="text-sm font-black uppercase tracking-wide text-white">
+                      {s.name || "Sponsor Name"}
+                    </div>
+                    <div className="mt-1 text-xs font-black uppercase tracking-widest text-yellow-300/90">
+                      {s.tier || "Sponsor Tier"}
+                    </div>
+                  </div>
+
+                  <div className="h-10 w-10 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-[10px] font-black uppercase tracking-widest text-white/40">
+                    Logo
+                  </div>
+                </div>
+
+                <div className="mt-3 text-sm leading-6 text-white/75">
+                  {s.blurb || "Short sponsor blurb goes here."}
+                </div>
+
+                <div className="mt-4 text-xs font-black uppercase tracking-widest text-white/50">
+                  Details soon →
+                </div>
+              </Glass>
+            );
+          })}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+
+
 const SAMPLE_POSTS = [
   {
     id: "p1",
@@ -47,7 +105,7 @@ const SAMPLE_POSTS = [
     title: "Day 1 — Setting out",
     content:
       "Today is the first step. We met early, checked supplies, and mapped the route. The goal is simple: show up daily, learn loudly, and keep the charity at the center of every mile. If you’re reading this, you’re part of the story already — thank you.",
-    photos: [runningBg, bikingBg],
+    photos: [runningBg], //, bikingBg
   },
   {
     id: "p2",
@@ -55,7 +113,7 @@ const SAMPLE_POSTS = [
     title: "Day 2 — Small wins",
     content:
       "A little progress compounds fast. We hit our target distance and talked with people along the way. The charity exists because the ‘why’ matters more than the numbers — but the numbers help, too. We’re collecting stories and hope.",
-    photos: [bikingBg],
+    photos: [runningBg],
   },
   {
     id: "p3",
@@ -95,29 +153,55 @@ const SPONSORS = [
 ];
 
 
-function useLocalStoragePosts() {
-  const [posts, setPosts] = useState(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return SAMPLE_POSTS;
-      const parsed = JSON.parse(raw);
-      if (!Array.isArray(parsed)) return SAMPLE_POSTS;
-      return parsed;
-    } catch {
-      return SAMPLE_POSTS;
-    }
-  });
+
+
+async function fetchSanityPosts() {
+  // Basic query: newest first
+  return client.fetch(
+    `*[_type == "post"] | order(date desc) {
+      _id,
+      title,
+      date,
+      content,
+      "photos": photos[].asset->url
+    }`
+  );
+}
+
+function useSanityPosts() {
+  const [posts, setPosts] = useState([]);
+  const [postsLoading, setPostsLoading] = useState(true);
+  const [postsError, setPostsError] = useState(null);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-    } catch {
-      // ignore
-    }
-  }, [posts]);
+    let alive = true;
 
-  return [posts, setPosts];
+    (async () => {
+      try {
+        setPostsLoading(true);
+        const data = await fetchSanityPosts();
+        if (!alive) return;
+        setPosts(data || []);
+        setPostsError(null);
+      } catch (e) {
+        console.error(e);
+        if (!alive) return;
+        setPostsError("Failed to load blog posts.");
+      } finally {
+        if (alive) setPostsLoading(false);
+      }
+    })();
+
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  return { posts, postsLoading, postsError };
 }
+
+
+
 
 /** Parallax: move background a bit as its section scrolls */
 function useParallaxOffset(sectionRef, strengthPx = 90) {
@@ -234,7 +318,7 @@ function SectionTitle({ title, subtitle }) {
   );
 }
 
-function Marquee({ text = "JAMES RUNS ACROSS CANADA • FOLLOW ALONG • DONATE • DAILY BLOG • " }) {
+function Marquee({ text = "JAMES RUNS ACROSS CANADA • LIVE • FOLLOW ALONG • DONATE • " }) {
   const repeated = useMemo(() => Array.from({ length: 12 }).map(() => text).join(""), [text]);
   return (
     <div className="overflow-hidden border-y border-white/15 bg-yellow-300">
@@ -483,14 +567,14 @@ function BlogSummary({ posts, onOpenPost }) {
           <div className="space-y-3">
             {sorted.map((p) => (
               <button
-                key={p.id}
-                onClick={() => onOpenPost(p.id)}
+                key={p._id || p.id}
+                onClick={() => onOpenPost(p._id || p.id)}
                 className="w-full rounded-2xl border border-white/10 bg-white/5 p-3 text-left transition hover:border-yellow-300/40 hover:bg-white/10"
               >
                 <div className="flex gap-3">
                   <div className="h-14 w-14 overflow-hidden rounded-xl border border-white/10 bg-neutral-950/40">
                     {p.photos?.[0] ? (
-                      <img src={p.photos[0]} alt="" className="h-full w-full object-cover" loading="lazy" />
+                      <img src={p.photos[0]} alt="" className="h-full w-full object-contain bg-neutral-950/40" loading="lazy" />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-[11px] text-white/60">
                         No photo
@@ -519,23 +603,23 @@ function BlogSummary({ posts, onOpenPost }) {
 function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) {
   return (
     <ParallaxSection bg={runningBg} minH="min-h-[140vh]" objectPosition="50% 30%" strength={120}>
-      <div className="mx-auto max-w-6xl px-4 pb-14 pt-10">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pb-14 pt-10">
         {/* Hero */}
-        <div className="max-w-3xl">
+        <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
           <Pill className="bg-white/10 border-white/20">
             <span className="mr-2 inline-block h-2 w-2 rounded-full bg-yellow-300" />
             Live run + daily blog
           </Pill>
 
-          <h1 className="mt-4 text-4xl sm:text-7xl font-black uppercase tracking-tight text-white">
-            Two Marathons A Day - James Across Canada
+          <h1 className="mt-4 w-full text-4xl sm:text-7xl font-black uppercase tracking-tight text-white">
+            James Runs Canada - For Them
           </h1>
 
-<p className="mt-4 max-w-2xl rounded-2xl border border-white/15 bg-neutral-950/35 px-4 py-3 text-base sm:text-lg leading-7 text-white font-semibold tracking-tight backdrop-blur">
-            Join James for his across Canada to fund scholarships for youth who've also lost their parents - easing financial worry so they can focus on their future.
+<p className="mt-4 mx-auto w-full max-w-4xl rounded-2xl border border-white/15 bg-neutral-950/35 px-4 py-3 text-base sm:text-lg leading-7 text-white font-semibold tracking-tight backdrop-blur">
+            Join James for his 80km/day run across Canada to fund scholarships for youth who've also lost their parents - easing financial worry so they can focus on their future.
           </p>
 
-          <div className="mt-5 flex flex-wrap gap-2">
+          <div className="mt-5 flex flex-wrap justify-center gap-2">
             <a
               href="#"
               onClick={(e) => e.preventDefault()}
@@ -557,7 +641,7 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
             </button>
           </div>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          <div className="mt-6 grid w-full max-w-4xl gap-3 sm:grid-cols-3">
             {[
               { k: "Days", v: "01" },
               { k: "KM", v: "—" },
@@ -581,7 +665,7 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
             <div className="max-w-2xl">
               <div className="text-sm font-black uppercase tracking-widest text-white">GPS tracker</div>
               <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-white">
-                Follow along in real-time!
+                Follow In Real-time!
               </div>
               <div className="mt-2 text-sm text-white/80">
                 The gps tracker updates continuously as James makes progress each day. At the end of each day the tracker is paused and James will continue his run from there the next morning.
@@ -591,13 +675,70 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
           </div>
 
           <div id="gps" className="mt-10">
-  <div className="mx-auto max-w-4xl">
-    <InteractiveMap pins={pins} setPins={setPins} />
-  </div>
-  <div className="mt-3 text-center text-xs font-semibold uppercase tracking-widest text-white/60">
-    Live GPS tracker
-  </div>
-</div>
+            <div className="mx-auto w-full">
+              <InteractiveMap pins={pins} setPins={setPins} />
+            </div>
+            <div className="mt-3 text-center text-xs font-semibold uppercase tracking-widest text-white/60">
+              Live GPS tracker
+            </div>
+          </div>
+
+          {/* Mission (moved under GPS map) */}
+          <div className="mt-12">
+            <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pb-14 pt-10">
+              <div className="grid items-start gap-6 lg:grid-cols-[1fr_420px]">
+                <div className="max-w-2xl">
+                  <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">Charity</Pill>
+                  <div className="mt-4 text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+                    James&apos; Mission
+                  </div>
+
+                  <div className="mt-3 text-sm sm:text-base leading-7 text-white/85">
+                    I&apos;m raising $250,000 to support young people in alternative care (foster care / group homes / kinship care) who have lost their caregivers and are now being raised by someone else.
+                    These youth often face significant barriers when pursuing higher education or vocational learning.
+                    The money will be used to fund renewable and continous post-secondary scholarships, easing financial stress so recipients can focus on their future, rather than that focus being derailed by worry about how to pay for things like tuition, books, housing, and transportation.
+                  </div>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    <a
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+                    >
+                      Donate
+                    </a>
+                    <a
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="rounded-full border border-white/20 bg-white/5 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-white hover:border-yellow-300/50 hover:bg-white/10"
+                    >
+                      Learn more
+                    </a>
+                  </div>
+                </div>
+
+                <Glass className="p-6">
+                  <div className="text-sm font-black uppercase tracking-widest text-white">[Insert Charity Name]</div>
+                  <div className="mt-2 space-y-3 text-sm text-white/85">
+                    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                      <div className="text-xs font-black uppercase tracking-widest text-white/70">What we do</div>
+                      <div className="mt-1">___ Charity supports ____.</div>
+                    </div>
+                    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                      <div className="text-xs font-black uppercase tracking-widest text-white/70">Who it helps</div>
+                      <div className="mt-1">Name the group and what changes for them.</div>
+                    </div>
+                    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                      <div className="text-xs font-black uppercase tracking-widest text-white/70">Where funds go</div>
+                      <div className="mt-1">Be specific: programs, costs, or direct support.</div>
+                    </div>
+                  </div>
+                </Glass>
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </ParallaxSection>
@@ -628,14 +769,14 @@ function LatestBlogBreakSection({ posts, onOpenPost, onViewAll }) {
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {latest.map((p) => (
-            <button key={p.id} onClick={() => onOpenPost(p.id)} className="group text-left">
+            <button key={p._id || p.id} onClick={() => onOpenPost(p._id || p.id)} className="group text-left">
               <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
                 <div className="aspect-[16/10] overflow-hidden bg-neutral-900">
                   {p.photos?.[0] ? (
                     <img
                       src={p.photos[0]}
                       alt=""
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
+                      className="h-full w-full object-contain bg-neutral-950/40 transition duration-500 group-hover:scale-[1.02]"
                       loading="lazy"
                     />
                   ) : (
@@ -781,7 +922,8 @@ function SupportSection({ setTab }) {
 
 function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
   const sorted = useMemo(() => [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)), [posts]);
-  const latestPostId = sorted[0]?.id;
+  const latestPostId = sorted[0]?._id || sorted[0]?.id;
+
 
   return (
     <div className="text-white">
@@ -793,7 +935,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
         setPins={setPins}
       />
       <LatestBlogBreakSection posts={posts} onOpenPost={onOpenPost} onViewAll={() => setTab("blog")} />
-      <CharitySection />
+      <SponsorsGridSection sponsors={SPONSORS} />
       <SupportSection setTab={setTab} />
 
       <footer className="border-t border-white/10 bg-neutral-950">
@@ -827,18 +969,17 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
   );
 }
 
-/** BLOG (unchanged) */
-function BlogTab({ posts, setPosts, focusPostId, onFocused }) {
-  const [form, setForm] = useState({
-    date: new Date().toISOString().slice(0, 10),
-    title: "",
-    content: "",
-    photos: "",
-  });
-  const [error, setError] = useState(null);
+
+
+
+/** BLOG (read-only) */
+function BlogTab({ posts, focusPostId, onFocused, postsLoading, postsError }) {
   const listRef = useRef(null);
 
-  const sorted = useMemo(() => [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)), [posts]);
+  const sorted = useMemo(
+    () => [...(posts || [])].sort((a, b) => new Date(b.date) - new Date(a.date)),
+    [posts]
+  );
 
   useEffect(() => {
     if (!focusPostId) return;
@@ -849,129 +990,90 @@ function BlogTab({ posts, setPosts, focusPostId, onFocused }) {
     }
   }, [focusPostId, onFocused]);
 
-  const addPost = () => {
-    setError(null);
-    if (!form.date || !form.content.trim()) {
-      setError("Please add a date and some text.");
-      return;
-    }
-
-    const photos = form.photos
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-
-    const next = {
-      id: uid(),
-      date: form.date,
-      title: form.title.trim() || `Daily update — ${formatDate(form.date)}`,
-      content: form.content.trim(),
-      photos,
-    };
-
-    setPosts((prev) => [next, ...prev]);
-    setForm({ date: new Date().toISOString().slice(0, 10), title: "", content: "", photos: "" });
-    listRef.current?.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const deletePost = (id) => setPosts((prev) => prev.filter((p) => p.id !== id));
-
-  const inputCls =
-    "w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none placeholder:text-white/40 focus:border-yellow-300/50 focus:ring-2 focus:ring-yellow-300/20";
-
   return (
     <div className="relative min-h-screen overflow-hidden bg-neutral-950 text-white">
       <div className="pointer-events-none fixed inset-0 -z-10">
-        <img src={runningBg} alt="" className="h-full w-full object-cover opacity-15" style={{ objectPosition: "50% 30%" }} />
+        <img
+          src={runningBg}
+          alt=""
+          className="h-full w-full object-cover opacity-15"
+          style={{ objectPosition: "50% 30%" }}
+        />
         <div className="absolute inset-0 bg-neutral-950/85" />
       </div>
 
-      <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 lg:grid-cols-[360px_1fr]">
-        <Glass className="h-fit">
-          <div className="border-b border-white/10 px-4 py-3">
-            <SectionTitle title="Add a daily post" subtitle="Saved in your browser (localStorage)" />
-          </div>
-          <div className="space-y-3 p-4">
-            {error ? (
-              <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">{error}</div>
-            ) : null}
-
-            <label className="block">
-              <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Date</div>
-              <input type="date" value={form.date} onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))} className={inputCls} />
-            </label>
-
-            <label className="block">
-              <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Title</div>
-              <input value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} placeholder="Day 12 — Something memorable" className={inputCls} />
-            </label>
-
-            <label className="block">
-              <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Photos (comma-separated URLs)</div>
-              <input value={form.photos} onChange={(e) => setForm((f) => ({ ...f, photos: e.target.value }))} placeholder="https://… , https://…" className={inputCls} />
-            </label>
-
-            <label className="block">
-              <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Text</div>
-              <textarea value={form.content} onChange={(e) => setForm((f) => ({ ...f, content: e.target.value }))} placeholder="What happened today?" rows={7} className={inputCls + " resize-none"} />
-            </label>
-
-            <button onClick={addPost} className="w-full rounded-xl border border-yellow-300 bg-yellow-300 px-4 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200">
-              Publish post
-            </button>
-
-            <button
-              onClick={() => {
-                localStorage.removeItem(STORAGE_KEY);
-                setPosts(SAMPLE_POSTS);
-              }}
-              className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-black uppercase tracking-wide text-white hover:border-yellow-300/50 hover:bg-white/10"
-            >
-              Reset sample posts
-            </button>
-          </div>
-        </Glass>
-
-        <Glass className="min-h-[560px]">
+      <div className="mx-auto max-w-6xl px-4 py-10">
+        <Glass className="min-h-[calc(100vh-140px)]">
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-            <SectionTitle title="Daily posts" subtitle="Scrollable feed with photos and text" />
+            <SectionTitle title="Daily posts" subtitle="Updates from the road" />
             <div className="text-xs text-white/60">{sorted.length} posts</div>
           </div>
 
-          <div ref={listRef} className="max-h-[760px] overflow-y-auto p-4">
-            <div className="space-y-4">
-              {sorted.map((p) => (
-                <article key={p.id} id={`post-${p.id}`} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="min-w-0">
-                      <div className="truncate text-base font-black uppercase tracking-wide text-white">{p.title}</div>
-                      <div className="mt-0.5 text-xs text-white/60">{formatDate(p.date)}</div>
-                    </div>
-                    <button onClick={() => deletePost(p.id)} className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-white hover:border-yellow-300/50 hover:bg-white/10">
-                      Delete
-                    </button>
-                  </div>
-
-                  {p.photos?.length ? (
-                    <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                      {p.photos.slice(0, 4).map((src, i) => (
-                        <div key={src + i} className="overflow-hidden rounded-xl border border-white/10 bg-neutral-950/40">
-                          <img src={src} alt="" className="h-48 w-full object-cover" loading="lazy" />
+          <div ref={listRef} className="p-4">
+            {postsLoading ? (
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+                Loading posts…
+              </div>
+            ) : postsError ? (
+              <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200">
+                {postsError}
+              </div>
+            ) : sorted.length === 0 ? (
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+                No posts yet.
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {sorted.map((p) => (
+                  <article
+                    key={p._id || p.id}
+                    id={`post-${p._id || p.id}`}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="min-w-0">
+                        <div className="truncate text-base font-black uppercase tracking-wide text-white">
+                          {p.title || "Daily update"}
                         </div>
-                      ))}
+                        <div className="mt-0.5 text-xs text-white/60">{formatDate(p.date)}</div>
+                      </div>
                     </div>
-                  ) : null}
 
-                  <div className="mt-3 whitespace-pre-wrap text-sm leading-6 text-white/85">{p.content}</div>
-                </article>
-              ))}
-            </div>
+                    {p.photos?.length ? (
+                      <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                        {p.photos.slice(0, 4).map((src, i) => (
+                          <div
+                            key={(typeof src === "string" ? src : JSON.stringify(src)) + i}
+                            className="rounded-xl border border-white/10 bg-neutral-950/40 p-2"
+                          >
+                            <img
+                              src={src}
+                              alt=""
+                              className="w-full max-h-[520px] object-contain rounded-lg"
+                              loading="lazy"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
+
+
+                    <div className="mt-3 whitespace-pre-wrap text-sm leading-6 text-white/85">
+                      {p.content}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </Glass>
       </div>
     </div>
   );
 }
+
+
+
 
 /** MY STORY: Ukraine + Family photo backgrounds */
 function StoryTab() {
@@ -1170,7 +1272,7 @@ function ContactTab() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-neutral-950 text-white">
       <div className="pointer-events-none fixed inset-0 -z-10">
-        <img src={bikingBg} alt="" className="h-full w-full object-cover opacity-13" style={{ objectPosition: "50% 50%" }} />
+        <img src={runningBg} alt="" className="h-full w-full object-cover opacity-13" style={{ objectPosition: "50% 50%" }} />
         <div className="absolute inset-0 bg-neutral-950/86" />
       </div>
 
@@ -1202,35 +1304,34 @@ function ContactTab() {
             <div className="text-base font-black uppercase tracking-widest text-white">Contact form</div>
             <div className="mt-1 text-sm text-white/70"> Please be specific in your message, and if your representing an organization, please include any relavent information about them.</div>
           </div>
-          <form onSubmit={submit} className="space-y-3 px-6 py-6">
-            {status.type === "error" ? (
-              <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">{status.message}</div>
-            ) : null}
-            {status.type === "success" ? (
-              <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-3 text-sm text-green-200">
-                {status.message}
-              </div>
-            ) : null}
-
+          <form
+            action={import.meta.env.VITE_FORMSPREE_ENDPOINT}
+            method="POST"
+            className="space-y-3 px-6 py-6"
+          >
             <label className="block">
               <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Name</div>
-              <input value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} className={inputCls} />
+              <input name="name" className={inputCls} required />
             </label>
 
             <label className="block">
               <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Email</div>
-              <input type="email" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} className={inputCls} />
+              <input name="email" type="email" className={inputCls} required />
             </label>
 
             <label className="block">
               <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Message</div>
-              <textarea value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} rows={7} className={inputCls + " resize-none"} />
+              <textarea name="message" rows={7} className={inputCls + " resize-none"} required />
             </label>
 
-            <button type="submit" className="w-full rounded-xl border border-yellow-300 bg-yellow-300 px-4 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200">
+            <button
+              type="submit"
+              className="w-full rounded-xl border border-yellow-300 bg-yellow-300 px-4 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+            >
               Submit
             </button>
           </form>
+
         </Glass>
         </div>
 
@@ -1243,7 +1344,9 @@ function ContactTab() {
 
 export default function CharitySiteApp() {
   const [tab, setTab] = useState("home");
-  const [posts, setPosts] = useLocalStoragePosts();
+  const { posts, postsLoading, postsError } = useSanityPosts();
+
+
   const [focusPostId, setFocusPostId] = useState(null);
   const [pins, setPins] = useState([]);
 
@@ -1269,8 +1372,15 @@ export default function CharitySiteApp() {
       ) : null}
 
       {tab === "blog" ? (
-        <BlogTab posts={posts} setPosts={setPosts} focusPostId={focusPostId} onFocused={() => setFocusPostId(null)} />
+        <BlogTab
+          posts={posts}
+          focusPostId={focusPostId}
+          onFocused={() => setFocusPostId(null)}
+          postsLoading={postsLoading}
+          postsError={postsError}
+        />
       ) : null}
+
 
       {tab === "story" ? <StoryTab /> : null}
       {tab === "contact" ? <ContactTab /> : null}
