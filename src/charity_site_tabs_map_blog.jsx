@@ -337,7 +337,7 @@ function TopNav({ tab, setTab }) {
   const tabs = [
     { key: "home", label: "Home" },
     { key: "blog", label: "Blog" },
-    { key: "story", label: "My Why" },
+    //{ key: "story", label: "My Why" },
     { key: "contact", label: "Contact" },
   ];
 
@@ -606,10 +606,10 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
       <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pb-14 pt-10">
         {/* Hero */}
         <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
-          <Pill className="bg-white/10 border-white/20">
+          {/* <Pill className="bg-white/10 border-white/20">
             <span className="mr-2 inline-block h-2 w-2 rounded-full bg-yellow-300" />
             Live run + daily blog
-          </Pill>
+          </Pill> */}
 
           <h1 className="mt-4 w-full text-4xl sm:text-7xl font-black uppercase tracking-tight text-white">
             James Runs Canada - For Them
@@ -699,7 +699,7 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
                     The money will be used to fund renewable and continous post-secondary scholarships, easing financial stress so recipients can focus on their future, rather than that focus being derailed by worry about how to pay for things like tuition, books, housing, and transportation.
                   </div>
 
-                  <div className="mt-6 flex flex-wrap gap-2">
+                  {/* <div className="mt-6 flex flex-wrap gap-2">
                     <a
                       href="#"
                       onClick={(e) => e.preventDefault()}
@@ -714,7 +714,11 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
                     >
                       Learn more
                     </a>
-                  </div>
+                  </div> */}
+
+                  
+
+
                 </div>
 
                 <Glass className="p-6">
@@ -735,6 +739,52 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
                   </div>
                 </Glass>
               </div>
+
+
+                {/* WHY VIDEO */}
+                  {/* WHY VIDEO */}
+                  <div className="mt-6">
+                    <Glass className="p-4">
+                      <div className="flex items-end justify-between gap-3">
+                        <div>
+                          <div className="text-sm font-black uppercase tracking-widest text-white">A message from James</div>
+                          <div className="mt-1 text-sm text-white/70">Why I’m running, and who it’s for.</div>
+                        </div>
+
+                        <Pill className="bg-white/10 border-white/20">Coming soon</Pill>
+                      </div>
+
+                      {/* Placeholder instead of video */}
+                      <div className="mt-4 rounded-2xl border border-white/10 bg-neutral-950/60 p-6">
+                        <div className="text-sm font-semibold text-white/80">
+                          Video message coming in a couple days.
+                        </div>
+                        
+
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          <a
+                            href="#"
+                            onClick={(e) => e.preventDefault()}
+                            className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+                          >
+                            Donate
+                          </a>
+                          <button
+                            onClick={() => document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                            className="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-black uppercase tracking-wide text-white hover:border-yellow-300/50 hover:bg-white/10"
+                          >
+                            View map
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="mt-3 text-xs text-white/60">
+                        {/* Tip: Keep it ~60–120 seconds. Clear ask at the end: donate/share/sponsor. */}
+                      </div>
+                    </Glass>
+                  </div>
+
+
             </div>
           </div>
 
@@ -807,12 +857,12 @@ function CharitySection() {
           <div className="max-w-2xl">
             <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">Charity</Pill>
             <div className="mt-4 text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
-              James' Mission
+              James' Mission - Turning Kilometers into Scholarships
             </div>
             <div className="mt-3 text-sm sm:text-base leading-7 text-white/85">
-              I'm raising $250,000 to support young people in alternative care (foster care / group homes / kinship care) who have lost their caregivers and are now being raised by someone else. 
-              These youth often face significant barriers when pursuing higher education or vocational learning. 
-              The money will be used to fund renewable and continous post-secondary scholarships, easing financial stress so recipients can focus on their future, rather than that focus being derailed by worry about how to pay for things like tuition, books, housing, and transportation.
+              My goal is to raise $250,000 for youth in alternative care, who have lost their caregivers and are being raised by someone else. ALL funds will go towards renewable scholarships which will allow recipients to focus on their future and not be burned by the financial stress of post-secondary school.
+              I know first hand how much this means to a kid, as I was once one of these kids who’ve lost their parents and was displaced. However, due to charitable efforts and some supportive family and friends, I was able to build a good life. I am forever grateful to these people and support. And from this experience, I couldn’t imagine what my own life could have been like without some support, because even when I didn’t feel comfortable at home, or believe in myself, there were some who put in the extra effort and did, and that changed everything. I want to enable others who’ve also had a rough upbringing to know they're not alone, and their voice matters. This is me, and this is my why.
+
             </div>
 
             <div className="mt-6 flex flex-wrap gap-2">
@@ -1277,67 +1327,88 @@ function ContactTab() {
       </div>
 
       <div className="mx-auto max-w-6xl px-4 py-10">
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Glass>
-          <div className="border-b border-white/10 px-6 py-5">
-            <div className="text-base font-black uppercase tracking-widest text-white">Get in touch</div>
-            <div className="mt-1 text-sm text-white/70">Use this form, or email us directly here!</div>
-          </div>
-          <div className="space-y-3 px-6 py-6 text-sm text-white/85">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <div className="font-black uppercase tracking-widest text-white">Suggested contact details</div>
-              <div className="mt-2 space-y-1 text-sm text-white/75">
-                <div>✉️ Email: [Insert Officail Email Here]</div>
-                <div>📷 Instagram: @Jams_Newman</div>
-              </div>
-            </div>
-            <div className="text-sm text-white/70">
-              To make the form actually send messages, connect it to Formspree, Netlify Forms, or a simple server endpoint.
-            </div>
-          </div>
-        </Glass>
-
-         {/* include back end */}
-
-        <Glass>
-          <div className="border-b border-white/10 px-6 py-5">
-            <div className="text-base font-black uppercase tracking-widest text-white">Contact form</div>
-            <div className="mt-1 text-sm text-white/70"> Please be specific in your message, and if your representing an organization, please include any relavent information about them.</div>
-          </div>
-          <form
-            action={import.meta.env.VITE_FORMSPREE_ENDPOINT}
-            method="POST"
-            className="space-y-3 px-6 py-6"
-          >
-            <label className="block">
-              <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Name</div>
-              <input name="name" className={inputCls} required />
-            </label>
-
-            <label className="block">
-              <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Email</div>
-              <input name="email" type="email" className={inputCls} required />
-            </label>
-
-            <label className="block">
-              <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Message</div>
-              <textarea name="message" rows={7} className={inputCls + " resize-none"} required />
-            </label>
-
-            <button
-              type="submit"
-              className="w-full rounded-xl border border-yellow-300 bg-yellow-300 px-4 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
-            >
-              Submit
-            </button>
-          </form>
-
-        </Glass>
+      {/* ONE combined full-width box */}
+      <Glass className="w-full">
+        {/* Header */}
+        <div className="border-b border-white/10 px-6 py-5">
+          <div className="text-base font-black uppercase tracking-widest text-white">Get in touch</div>
+          <div className="mt-1 text-sm text-white/70">Use this form, or email us directly here!</div>
         </div>
 
-      {/* NEW sponsors strip */}
+        {/* Contact details */}
+        <div className="px-6 pt-6">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="font-black uppercase tracking-widest text-white">Contact details</div>
+            <div className="mt-2 space-y-1 text-sm text-white/75">
+              <div>✉️ Email: TEAM@jamesrunscanada.ca</div>
+              <div>📷 Instagram: @Jams_Newman</div>
+            </div>
+          </div>
+
+          <div className="mt-3 text-sm text-white/60">
+            
+          </div>
+        </div>
+
+        {/* Form (same outer box) */}
+        <div className="px-6 pb-6">
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5">
+            <div className="border-b border-white/10 px-4 py-4">
+              <div className="text-sm font-black uppercase tracking-widest text-white">Contact form</div>
+              <div className="mt-1 text-sm text-white/70">
+                Please be specific in your message, and if you’re representing an organization, include this too.
+              </div>
+            </div>
+
+            <form
+              action={import.meta.env.VITE_FORMSPREE_ENDPOINT}
+              method="POST"
+              className="space-y-3 px-4 py-5"
+            >
+              <label className="block">
+                <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Name</div>
+                <input
+                  name="name"
+                  required
+                  className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none placeholder:text-white/40 focus:border-yellow-300/50 focus:ring-2 focus:ring-yellow-300/20"
+                />
+              </label>
+
+              <label className="block">
+                <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Email</div>
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none placeholder:text-white/40 focus:border-yellow-300/50 focus:ring-2 focus:ring-yellow-300/20"
+                />
+              </label>
+
+              <label className="block">
+                <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Message</div>
+                <textarea
+                  name="message"
+                  rows={7}
+                  required
+                  className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none placeholder:text-white/40 focus:border-yellow-300/50 focus:ring-2 focus:ring-yellow-300/20 resize-none"
+                />
+              </label>
+
+              <button
+                type="submit"
+                className="w-full rounded-xl border border-yellow-300 bg-yellow-300 px-4 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </Glass>
+
+      {/* Sponsors stays full width right under it */}
       <SponsorCarousel sponsors={SPONSORS} />
-      </div>
+    </div>
+
     </div>
   );
 }
@@ -1382,7 +1453,7 @@ export default function CharitySiteApp() {
       ) : null}
 
 
-      {tab === "story" ? <StoryTab /> : null}
+      {/* {tab === "story" ? <StoryTab /> : null} */}
       {tab === "contact" ? <ContactTab /> : null}
     </div>
   );
