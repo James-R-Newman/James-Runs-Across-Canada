@@ -48,7 +48,7 @@ function SponsorsGridSection({ sponsors = [] }) {
 
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-3xl">
-            <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">Sponsors</Pill>
+            {/* <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">Sponsors</Pill> */}
             <div className="mt-4 text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
               Partners powering the run
             </div>
@@ -389,7 +389,6 @@ function InteractiveMap({ pins, setPins }) {
   const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
   const onWheel = (e) => {
-    e.preventDefault();
     const delta = e.deltaY;
     const next = clamp(scale * (delta > 0 ? 0.92 : 1.08), 0.85, 2.75);
     setScale(next);
@@ -688,15 +687,13 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
             <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pb-14 pt-10">
               <div className="grid items-start gap-6 lg:grid-cols-[1fr_420px]">
                 <div className="max-w-2xl">
-                  <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">Charity</Pill>
                   <div className="mt-4 text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
                     James&apos; Mission
                   </div>
 
                   <div className="mt-3 text-sm sm:text-base leading-7 text-white/85">
-                    I&apos;m raising $250,000 to support young people in alternative care (foster care / group homes / kinship care) who have lost their caregivers and are now being raised by someone else.
-                    These youth often face significant barriers when pursuing higher education or vocational learning.
-                    The money will be used to fund renewable and continous post-secondary scholarships, easing financial stress so recipients can focus on their future, rather than that focus being derailed by worry about how to pay for things like tuition, books, housing, and transportation.
+                    My goal is to raise $250,000 for youth in alternative care, who have lost their caregivers and are being raised by someone else. ALL funds will go towards renewable scholarships which will allow recipients to focus on their future and not be burned by the financial stress of post-secondary school.
+                    I know first hand how much this means to a kid, as I was once one of these kids who’ve lost their parents and was displaced. However, due to charitable efforts and some supportive family and friends, I was able to build a good life. I am forever grateful to these people and support. And from this experience, I couldn’t imagine what my own life could have been like without some support, because even when I didn’t feel comfortable at home, or believe in myself, there were some who put in the extra effort and did, and that changed everything. I want to enable others who’ve also had a rough upbringing to know they're not alone, and their voice matters. This is me, and this is my why.
                   </div>
 
                   {/* <div className="mt-6 flex flex-wrap gap-2">
@@ -722,19 +719,19 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
                 </div>
 
                 <Glass className="p-6">
-                  <div className="text-sm font-black uppercase tracking-widest text-white">[Insert Charity Name]</div>
+                  <div className="text-sm font-black uppercase tracking-widest text-white">Lighthouse</div>
                   <div className="mt-2 space-y-3 text-sm text-white/85">
                     <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
                       <div className="text-xs font-black uppercase tracking-widest text-white/70">What we do</div>
-                      <div className="mt-1">___ Charity supports ____.</div>
+                      <div className="mt-1">Here you will find free support, resources, and connections.</div>
                     </div>
                     <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
                       <div className="text-xs font-black uppercase tracking-widest text-white/70">Who it helps</div>
-                      <div className="mt-1">Name the group and what changes for them.</div>
+                      <div className="mt-1">Lighthouse support displaced kids and their future.</div>
                     </div>
                     <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
                       <div className="text-xs font-black uppercase tracking-widest text-white/70">Where funds go</div>
-                      <div className="mt-1">Be specific: programs, costs, or direct support.</div>
+                      <div className="mt-1">Funds go directly into scholarships for post-secondary school, easing financial worry for kids.</div>
                     </div>
                   </div>
                 </Glass>
@@ -912,7 +909,7 @@ function SupportSection({ setTab }) {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(253,224,71,0.10),transparent_55%)]" />
       <div className="mx-auto max-w-6xl px-4 py-16 relative">
         <div className="max-w-2xl">
-          <Pill className="bg-white/10 border-white/20">More</Pill>
+          {/* <Pill className="bg-white/10 border-white/20">More</Pill> */}
           <div className="mt-4 text-2xl sm:text-4xl font-black uppercase tracking-tight text-white">
             How to support the mission
           </div>
@@ -927,6 +924,16 @@ function SupportSection({ setTab }) {
             <div className="mt-2 text-sm text-white/80">
               A simple way to fund and be apart of the charity goal. Every dollar counts!
             </div>
+            <div className="mt-10 flex flex-wrap gap-2">
+            <a
+              href="#"
+              onClick={(e) => e.preventDefault()}
+              className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+            >
+              Donate
+            </a>
+          
+        </div>
           </Glass>
           <Glass className="p-6">
             <div className="text-sm font-black uppercase tracking-wide text-white">Share Online</div>
@@ -943,14 +950,34 @@ function SupportSection({ setTab }) {
               !
 
             </div>
+            <div className="mt-10 flex flex-wrap gap-2">
+            <a
+              href="#"
+              onClick={(e) => e.preventDefault()}
+              className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+            >
+              Instagram
+            </a>
+            
+          </div>
+
           </Glass>
           <Glass className="p-6">
             <div className="text-sm font-black uppercase tracking-wide text-white">Partners Wanted</div>
             <div className="mt-2 text-sm text-white/80">Chairties, sponsors, and anyone interest in being apart of this mission should reach out!</div>
+            <div className="mt-10 flex flex-wrap gap-2">
+          
+            <button
+              onClick={() => setTab("contact")}
+              className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+            >
+              Get in touch
+            </button>
+          </div>
           </Glass>
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-2">
+        {/* <div className="mt-10 flex flex-wrap gap-2">
           <a
             href="#"
             onClick={(e) => e.preventDefault()}
@@ -964,7 +991,7 @@ function SupportSection({ setTab }) {
           >
             Get in touch
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
@@ -1414,6 +1441,8 @@ function ContactTab() {
 }
 
 export default function CharitySiteApp() {
+  console.log("RENDER CharitySiteApp", new Date().toISOString());
+
   const [tab, setTab] = useState("home");
   const { posts, postsLoading, postsError } = useSanityPosts();
 
