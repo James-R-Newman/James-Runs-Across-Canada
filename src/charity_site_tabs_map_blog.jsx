@@ -6,7 +6,7 @@ import { client } from "./sanityClient";
 // - biking-photo.png
 // - ukraine-photo.jpeg
 // - family-photo.png   (or change the import extension below to match your file)
-import runningBg from "./assets/running-photo2.png";
+import runningBg from "./assets/running-photo3.png";
 import bikingBg from "./assets/biking-photo.png";
 import ukraineBg from "./assets/ukraine-photo.jpeg";
 import familyBg from "./assets/family-photo.jpg";
@@ -283,6 +283,7 @@ function ParallaxSection({
   );
 }
 
+
 function Pill({ children, className = "" }) {
   return (
     <div
@@ -318,7 +319,7 @@ function SectionTitle({ title, subtitle }) {
   );
 }
 
-function Marquee({ text = "JAMES RUNS ACROSS CANADA • LIVE • FOLLOW ALONG • DONATE • " }) {
+function Marquee({ text = " LIVE • TURNING KILOMETERS INTO SCHOLARSHIPS • FOLLOW ALONG • DONATE • " }) {
   const repeated = useMemo(() => Array.from({ length: 12 }).map(() => text).join(""), [text]);
   return (
     <div className="overflow-hidden border-y border-white/15 bg-yellow-300">
@@ -351,7 +352,7 @@ function TopNav({ tab, setTab }) {
           </Pill>
           <div className="min-w-0">
             <div className="truncate text-sm sm:text-base font-black uppercase tracking-tight text-white">
-              James Runs Across Canada
+              James Runs Canada - Turning kilometers into scholarships
             </div>
             <div className="hidden sm:block text-xs text-white/70">Live GPS Mapping • Daily Blog • The Charity Mission</div>
           </div>
@@ -611,7 +612,7 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
           </Pill> */}
 
           <h1 className="mt-4 w-full text-4xl sm:text-7xl font-black uppercase tracking-tight text-white">
-            James Runs Canada - For Them
+            James Runs Canada
           </h1>
 
 <p className="mt-4 mx-auto w-full max-w-4xl rounded-2xl border border-white/15 bg-neutral-950/35 px-4 py-3 text-base sm:text-lg leading-7 text-white font-semibold tracking-tight backdrop-blur">
@@ -744,7 +745,7 @@ function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) 
                     <Glass className="p-4">
                       <div className="flex items-end justify-between gap-3">
                         <div>
-                          <div className="text-sm font-black uppercase tracking-widest text-white">A message from James</div>
+                          <div className="text-sm font-black uppercase tracking-widest text-white">A Video message from James</div>
                           <div className="mt-1 text-sm text-white/70">Why I’m running, and who it’s for.</div>
                         </div>
 
@@ -1019,7 +1020,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
         <div className="mx-auto max-w-6xl px-4 py-10">
           <div className="grid gap-6 sm:grid-cols-2 sm:items-end">
             <div>
-              <div className="text-base font-black uppercase tracking-tight text-white">James Runs Across Canada</div>
+              <div className="text-base font-black uppercase tracking-tight text-white">James Runs Canada</div>
               <div className="mt-2 max-w-xl text-sm text-white/60">
                 Live GPS Mapping + Daily Blog
               </div>
