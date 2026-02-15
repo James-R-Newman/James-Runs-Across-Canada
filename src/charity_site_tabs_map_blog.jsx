@@ -1,15 +1,23 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useId, useEffect, useMemo, useRef, useState } from "react";
 import { client } from "./sanityClient";
 
+
 // ✅ Put your photos in: src/assets/ (exact filenames)
-// - running-photo2.png
+// - running-photo3.png
 // - biking-photo.png
 // - ukraine-photo.jpeg
 // - family-photo.png   (or change the import extension below to match your file)
-import runningBg from "./assets/running-photo3.png";
+import runningBg from "./assets/jameshome5.png";
 import bikingBg from "./assets/biking-photo.png";
 import ukraineBg from "./assets/ukraine-photo.jpeg";
 import familyBg from "./assets/family-photo.jpg";
+import heroRunner from "./assets/running-photo6.png";  
+import heroLogo from "./assets/logo.png"; 
+import map from "./assets/map.png";           
+import waveDivider from "./assets/wave-haikei3.svg";
+import nature from "./assets/nature.avif";
+
+
 
 /**
  * James Runs Across Canada
@@ -41,60 +49,116 @@ function uid() {
   return Math.random().toString(16).slice(2) + Date.now().toString(16);
 }
 
-function SponsorsGridSection({ sponsors = [] }) {
-  return (
-    <section className="bg-neutral-950 border-b border-white/10">
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 py-14">
 
-        <div className="flex flex-wrap items-end justify-between gap-4">
+
+
+const SPONSOR_GROUPS = [
+  {
+    key: "charity",
+    title: "Charity Supporters",
+    subtitle: "Organizations funding the scholarship / charity target.",
+    items: [
+      { id: "c1", name: "Sponsor Name", tier: "Title sponsor", blurb: "Helping fuel the scholarship fund." },
+      { id: "c2", name: "Sponsor Name", tier: "Partner", blurb: "Supporting youth scholarships directly." },
+    ],
+  },
+  {
+    key: "run",
+    title: "Run Funders",
+    subtitle: "Organizations covering costs to make the run possible (travel, gear, food, etc.).",
+    items: [
+      { id: "r1", name: "Sponsor Name", tier: "Gear partner", blurb: "Shoes, kits, nutrition." },
+      { id: "r2", name: "Sponsor Name", tier: "Logistics", blurb: "Helping cover travel + supplies." },
+    ],
+  },
+  {
+    key: "route",
+    title: "The Team Behind The Run",
+    subtitle: "People/teams donating time and effort (marketing, planning, community outreach).",
+    items: [
+      { id: "t1", name: "Marketing Team", tier: "Volunteer team", blurb: "Content, outreach, daily updates." },
+      { id: "t2", name: "Community Support", tier: "Volunteers", blurb: "Meetups, route support, local coordination." },
+    ],
+  },
+];
+
+
+
+
+
+function SponsorsGridSection({ groups = SPONSOR_GROUPS }) {
+  return (
+    <ParallaxSection
+      bg={nature}
+      minH="min-h-[90vh]"
+      objectPosition="50% 55%"
+      strength={60}
+      overlay={true}
+    >
+      <section className="border-b border-white/10">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-8 py-14">
           <div className="max-w-3xl">
-            {/* <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">Sponsors</Pill> */}
-            <div className="mt-4 text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+            <div className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
               Partners powering the run
             </div>
-            <div className="mt-2 text-sm sm:text-base text-white/70 leading-7">
-              Big thanks to the organizations helping turn kilometers into scholarships. (We’ll fill these in soon.)
+            <div className="mt-2 text-sm sm:text-base text-white/80 leading-7">
+              Each of these three ways to support the overarching mission of the run is critical to its success. We’re grateful for every individual and organization that contributes, whether through funding, resources, or time. Thank you.
             </div>
           </div>
-        </div>
 
-        {/* 3 big horizontal blocks */}
-        <div className="mt-10 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-          {Array.from({ length: 4 }).map((_, i) => {
-            const s = sponsors[i] || {};
-            return (
-              <Glass key={s.id ?? i} className="p-6 h-full">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <div className="text-sm font-black uppercase tracking-wide text-white">
-                      {s.name || "Sponsor Name"}
+          <div className="mt-10 space-y-10">
+            {groups.map((g) => (
+              <div key={g.key}>
+                <div className="flex flex-wrap items-end justify-between gap-3">
+                  <div className="max-w-3xl">
+                    <div className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
+                      {g.title}
                     </div>
-                    <div className="mt-1 text-xs font-black uppercase tracking-widest text-yellow-300/90">
-                      {s.tier || "Sponsor Tier"}
-                    </div>
+                    <div className="mt-1 text-sm text-white/70">{g.subtitle}</div>
                   </div>
 
-                  <div className="h-10 w-10 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-[10px] font-black uppercase tracking-widest text-white/40">
-                    Logo
+                  <div className="text-xs font-black uppercase tracking-widest text-white/60">
+                    {g.items?.length || 0} supporters
                   </div>
                 </div>
 
-                <div className="mt-3 text-sm leading-6 text-white/75">
-                  {s.blurb || "Short sponsor blurb goes here."}
-                </div>
+                <div className="mt-5 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+                  {(g.items?.length ? g.items : Array.from({ length: 2 })).map((s, i) => (
+                    <Glass key={s?.id ?? `${g.key}-${i}`} className="p-6 h-full">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="text-sm font-black uppercase tracking-wide text-white">
+                            {s?.name || "Sponsor Name"}
+                          </div>
+                          <div className="mt-1 text-xs font-black uppercase tracking-widest text-yellow-300/90">
+                            {s?.tier || "Sponsor Tier"}
+                          </div>
+                        </div>
 
-                <div className="mt-4 text-xs font-black uppercase tracking-widest text-white/50">
-                  Details soon →
+                        <div className="h-10 w-10 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-[10px] font-black uppercase tracking-widest text-white/40">
+                          Logo
+                        </div>
+                      </div>
+
+                      <div className="mt-3 text-sm leading-6 text-white/80">
+                        {s?.blurb || "Short sponsor blurb goes here."}
+                      </div>
+
+                      <div className="mt-4 text-xs font-black uppercase tracking-widest text-white/60">
+                        Details soon →
+                      </div>
+                    </Glass>
+                  ))}
                 </div>
-              </Glass>
-            );
-          })}
+              </div>
+            ))}
+          </div>
         </div>
-
-      </div>
-    </section>
+      </section>
+    </ParallaxSection>
   );
 }
+
 
 
 
@@ -125,32 +189,7 @@ const SAMPLE_POSTS = [
   },
 ];
 
-const SPONSORS = [
-  {
-    id: "s1",
-    name: "Sponsor Name",
-    tier: "Title sponsor",
-    blurb: "Helping fuel the miles into scholarships.",
-    logo: "", // optional: import a logo image or use a URL
-    href: "#", // optional
-  },
-  {
-    id: "s2",
-    name: "Sponsor Name",
-    tier: "Gear partner",
-    blurb: "Providing shoes, nutrition, and support.",
-    logo: "",
-    href: "#",
-  },
-  {
-    id: "s3",
-    name: "Sponsor Name",
-    tier: "Community partner",
-    blurb: "Supporting outreach along the route.",
-    logo: "",
-    href: "#",
-  },
-];
+
 
 
 
@@ -310,6 +349,95 @@ function Glass({ children, className = "" }) {
   );
 }
 
+
+
+// function TrailDivider({ flip = false, fill = "#ffffff", height = 180 }) {
+function TrailDivider({ flip = false, fill = "#fff" }) {
+  const d =
+    "M1.00012 357.716C8.95497 351.959 39.0488 325.35 86.8766 276.87C120.308 242.982 163.678 226.364 213.057 210.932C268.751 193.526 342.839 207.592 375.794 217.036C410.557 226.998 448.382 241.814 491.254 269.473C587.883 331.813 664.203 404.798 712.264 429.113C792.246 469.579 928.685 429.826 984.56 419.044C1070.75 402.41 1105.08 436.403 1178.24 487.398C1249.66 537.177 1328.21 553.68 1399.05 562.9C1444.5 568.816 1487.49 569.419 1577.87 567.518C1659.6 565.799 1710.9 541.035 1783.65 543.315C1854.15 545.525 1879.22 584.735 1938.05 614.976C1974.03 633.47 2015.45 615.737 2056.12 605.965C2092.39 597.252 2130.86 610.453 2156.2 624.276C2205.06 650.925 2244.88 711.227 2277.12 725.445C2338.85 752.22 2446.38 685.65 2502.91 658.216C2559.32 630.86 2654.48 571.227 2708.34 534.733C2799.22 473.077 2835.33 407.139 2894.48 384.337C2951.25 362.989 3026.82 360.123 3084.8 392.68C3099.2 435.45 3132.58 461.356 3182.24 499.899C3266.49 470.531 3299.29 455.39C3316.66 447.373 3326.65 430.399 3333.97 411.384C3372.4 311.551 3351.39 130.647 3362.57 80.2412C3370.36 45.1209 3387.74 18.3162 3400.86 7.32935C3426.3 -13.9697 3495.6 23.5653 3523.5 44.929C3555.5 69.429 3570.05 128.643 3602.5 135.929";
+
+  return (
+    <svg
+      className={"block w-full " + (flip ? "rotate-180" : "")}
+      viewBox="0 0 3604 737"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      style={{ width: '100%', height: '100%' }}
+    >
+      {/* Fill BELOW the curve */}
+      <path d={`${d} L3604 737 L0 737 Z`} fill={fill} />
+    </svg>
+  );
+}
+
+
+
+
+function TrailClipDefs({ id }) {
+  const d =
+    "M1.00012 357.716C8.95497 351.959 39.0488 325.35 86.8766 276.87C120.308 242.982 163.678 226.364 213.057 210.932C268.751 193.526 342.839 207.592 375.794 217.036C410.557 226.998 448.382 241.814 491.254 269.473C587.883 331.813 664.203 404.798 712.264 429.113C792.246 469.579 928.685 429.826 984.56 419.044C1070.75 402.41 1105.08 436.403 1178.24 487.398C1249.66 537.177 1328.21 553.68 1399.05 562.9C1444.5 568.816 1487.49 569.419 1577.87 567.518C1659.6 565.799 1710.9 541.035 1783.65 543.315C1854.15 545.525 1879.22 584.735 1938.05 614.976C1974.03 633.47 2015.45 615.737 2056.12 605.965C2092.39 597.252 2130.86 610.453 2156.2 624.276C2205.06 650.925 2244.88 711.227 2277.12 725.445C2338.85 752.22 2446.38 685.65 2502.91 658.216C2559.32 630.86 2654.48 571.227 2708.34 534.733C2799.22 473.077 2835.33 407.139 2894.48 384.337C2951.25 362.989 3026.82 360.123 3084.8 392.68C3099.2 435.45 3132.58 461.356C3182.24 499.899 3266.49 470.531 3299.29 455.39C3316.66 447.373 3326.65 430.399 3333.97 411.384C3372.4 311.551 3351.39 130.647 3362.57 80.2412C3370.36 45.1209 3387.74 18.3162 3400.86 7.32935C3426.3 -13.9697 3495.6 23.5653 3523.5 44.929C3555.5 69.429 3570.05 128.643 3602.5 135.929";
+
+  // Big rect (full area) in the SAME coordinate system as your curve
+  const rect = "M0 0 H3604 V737 H0 Z";
+
+  // The shape "below the curve" (we will SUBTRACT this)
+  const below = `${d} L3604 737 L0 737 Z`;
+
+  // evenodd => rect minus below => keeps area ABOVE the curve
+  const combined = `${rect} ${below}`;
+
+  const sx = 1 / 3604;
+  const sy = 1 / 737;
+
+  return (
+    <svg width="0" height="0" className="absolute">
+      <defs>
+        <clipPath id={id} clipPathUnits="objectBoundingBox">
+          <path
+            d={combined}
+            transform={`scale(${sx} ${sy})`}
+            fillRule="evenodd"
+            clipRule="evenodd"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
+
+
+
+const WAVE_DIVIDER_PATH =
+  "M1.00012 357.716C8.95497 351.959 39.0488 325.35 86.8766 276.87C120.308 242.982 163.678 226.364 213.057 210.932C268.751 193.526 342.839 207.592 375.794 217.036C410.557 226.998 448.382 241.814 491.254 269.473C587.883 331.813 664.203 404.798 712.264 429.113C792.246 469.579 928.685 429.826 984.56 419.044C1070.75 402.41 1105.08 436.403 1178.24 487.398C1249.66 537.177 1328.21 553.68 1399.05 562.9C1444.5 568.816 1487.49 569.419 1577.87 567.518C1659.6 565.799 1710.9 541.035 1783.65 543.315C1854.15 545.525 1879.22 584.735 1938.05 614.976C1974.03 633.47 2015.45 615.737 2056.12 605.965C2092.39 597.252 2130.86 610.453 2156.2 624.276C2205.06 650.925 2244.88 711.227 2277.12 725.445C2338.85 752.22 2446.38 685.65 2502.91 658.216C2559.32 630.86 2654.48 571.227 2708.34 534.733C2799.22 473.077 2835.33 407.139 2894.48 384.337C2951.25 362.989 3026.82 360.123 3084.8 392.68C3099.2 435.45 3132.58 461.356 3182.24 499.899C3266.49 470.531 3299.29 455.39C3316.66 447.373 3326.65 430.399 3333.97 411.384C3372.4 311.551 3351.39 130.647 3362.57 80.2412C3370.36 45.1209 3387.74 18.3162 3400.86 7.32935C3426.3 -13.9697 3495.6 23.5653 3523.5 44.929C3555.5 69.429 3570.05 128.643 3602.5 135.929";
+
+function WaveSectionDivider({ className = "", fill = "#ffffff" }) {
+  return (
+    <div className={`section-divider full-bleed ${className}`} aria-hidden="true">
+      {/*
+        preserveAspectRatio="none" lets the wave stretch to match the viewport width.
+        The wrapper is full-bleed (100vw) so it extends with the webpage, not the content container.
+      */}
+      <svg
+        className="section-divider__svg"
+        viewBox="0 -20 3603 780"
+        preserveAspectRatio="none"
+        role="presentation"
+      >
+        <path d={WAVE_DIVIDER_PATH} fill={fill} />
+      </svg>
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
 function SectionTitle({ title, subtitle }) {
   return (
     <div className="mb-3">
@@ -352,9 +480,9 @@ function TopNav({ tab, setTab }) {
           </Pill>
           <div className="min-w-0">
             <div className="truncate text-sm sm:text-base font-black uppercase tracking-tight text-white">
-              James Runs Canada - Turning kilometers into scholarships
+              James Runs Canada
             </div>
-            <div className="hidden sm:block text-xs text-white/70">Live GPS Mapping • Daily Blog • The Charity Mission</div>
+            <div className="hidden sm:block text-xs text-white/70">Turning kilometers into scholarships</div>
           </div>
         </div>
 
@@ -599,199 +727,247 @@ function BlogSummary({ posts, onOpenPost }) {
   );
 }
 
-/** HOME: merged Hero + GPS tracker into ONE running-background section */
-function HomeHeroGpsSection({ latestPostId, onOpenPost, posts, pins, setPins }) {
+
+ 
+
+
+
+
+
+function HomeHeroTop({ latestPostId, onOpenPost }) {
+  const clipId = useId();
+
   return (
-    <ParallaxSection bg={runningBg} minH="min-h-[140vh]" objectPosition="50% 30%" strength={120}>
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pb-14 pt-10">
-        {/* Hero */}
-        <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
-          {/* <Pill className="bg-white/10 border-white/20">
-            <span className="mr-2 inline-block h-2 w-2 rounded-full bg-yellow-300" />
-            Live run + daily blog
-          </Pill> */}
+    <section className=" hero relative overflow-hidden bg-white">
+      <TrailClipDefs id={clipId} />
 
-          <h1 className="mt-4 w-full text-4xl sm:text-7xl font-black uppercase tracking-tight text-white">
-            James Runs Canada
-          </h1>
+      {/* FULL-BLEED BACKGROUND PHOTO */}
+      <div className="absolute inset-0 bg-white" id="photo">
+        <img
+          src={runningBg}
+          alt=""
+          className="h-full w-full object-cover grayscale brightness-75 contrast-110 [object-position:75%_100%] -translate-y-7 -translate--7"
+          draggable={false}
+        />
+        <div className="absolute inset-0 " />
+        <div className="absolute i nset-0 bg-gradient-to-b from-black/25 via-black/22 to-transparent" />
+      </div>
 
-<p className="mt-4 mx-auto w-full max-w-4xl rounded-2xl border border-white/15 bg-neutral-950/35 px-4 py-3 text-base sm:text-lg leading-7 text-white font-semibold tracking-tight backdrop-blur">
-            Join James for his 80km/day run across Canada to fund scholarships for youth who've also lost their parents - easing financial worry so they can focus on their future.
-          </p>
 
-          <div className="mt-5 flex flex-wrap justify-center gap-2">
-            <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
-              className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
-            >
-              Donate
-            </a>
-            <button
-              onClick={() => latestPostId && onOpenPost(latestPostId)}
-              className="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-black uppercase tracking-wide text-white hover:border-yellow-300/50 hover:bg-white/10"
-            >
-              Read latest
-            </button>
-            <button
-              onClick={() => document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })}
-              className="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-black uppercase tracking-wide text-white hover:border-yellow-300/50 hover:bg-white/10"
-            >
-              View map
-            </button>
-          </div>
+      {/* CONTENT */}
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-12 pb-50">
+        <div className="grid gap-10 lg:grid-cols-2 items-start">
+          {/* optional: keep your cropped runner or remove it */}
+          <div className="hidden lg:block" />
 
-          <div className="mt-6 grid w-full max-w-4xl gap-3 sm:grid-cols-3">
-            {[
-              { k: "Days", v: "01" },
-              { k: "KM", v: "—" },
-              { k: "Raised", v: "—" },
-            ].map((s) => (
-              <div key={s.k} className="rounded-2xl border border-white/15 bg-neutral-950/45 p-4 backdrop-blur-xl">
-                <div className="text-xs font-black uppercase tracking-widest text-white/70">{s.k}</div>
-                <div className="mt-1 text-2xl font-black tracking-tight text-white">{s.v}</div>
+          {/* Right side panel */}
+          <div className="lg:justify-self-end w-full max-w-[720px]">
+            <div className="p-6 sm:p-10">
+
+
+
+              <div className="text-xs font-black uppercase tracking-widest text-white/80">
+                Turning kilometers into scholarships
               </div>
-            ))}
+
+              <h1 className="mt-3 text-4xl sm:text-6xl font-black uppercase tracking-tight text-white">
+                James Runs Canada
+              </h1>
+
+              <p className="mt-4 max-w-2xl text-base sm:text-lg leading-7 text-white/80">
+                Join James as he runs across Canada for 100 days, 80km/day, to fund scholarships for youth
+                who’ve also lost their parents — easing financial worry so they can focus on their future.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <button
+                  onClick={() => document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                  className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+                >
+                  View map
+                </button>
+
+                <a
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
+                  className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+                >
+                  Donate
+                </a>
+
+                <button
+                  onClick={() => latestPostId && onOpenPost(latestPostId)}
+                  className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+                >
+                  Updates
+                </button>
+              </div>
+
+              <div className="mt-7">
+                <img
+                  src={heroLogo}
+                  alt="James Runs Canada logo"
+                  className="h-20 w-auto drop-shadow-[0_16px_30px_rgba(0,0,0,0.18)]"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Curvy divider */}
+      {/* <div className="hero-divider" aria-hidden="true">
+        <img src={waveDivider} alt="" className="hero-divider__img" draggable={false} />
+      </div> */}
+
+
+
+
+      
+
+          
+
+
+    </section>
+  );
+}
+
+
+
+
+
+
+function HomeTrackerSection({ pins, setPins }) {
+  return (
+    <section className="home-tracker-section bg-white text-neutral-950">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pt-10 pb-16">
+        {/* TOP: Video (left) + Mission (right) */}
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* Video (LEFT) */}
+          <div className="rounded-3xl border border-neutral-950/10 bg-white shadow-[0_18px_60px_rgba(0,0,0,0.08)] p-4 sm:p-6">
+            <div className="flex items-end justify-between gap-3">
+              <div>
+                <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
+                  A Video message from James
+                </div>
+                <div className="mt-1 text-sm text-neutral-950/70">Why I’m running, and who it’s for.</div>
+              </div>
+              <div className="inline-flex items-center rounded-full border border-neutral-950/15 bg-neutral-950/5 px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-950">
+                Coming soon
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-2xl border border-neutral-950/10 bg-neutral-950/[0.03] p-6">
+              <div className="text-sm font-semibold text-neutral-950/80">
+                Video message coming in a couple days.
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                <a
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
+                  className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+                >
+                  Donate
+                </a>
+                <button
+                  onClick={() =>
+                    document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })
+                  }
+                  className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]"
+                >
+                  View map
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Mission (RIGHT) — transparent (no card) */}
+          <div className="self-center">
+            <div className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-neutral-950">
+              Why scholarships for youth?  
+            </div>
+            <div className="mt-3 text-sm sm:text-base leading-7 text-neutral-950/80">
+
+
+              A scholarship can be one of the best ways to support a child after a tragedy. You see, after displacement in childhood, it’s easy to feel the future is incredibly uncertain - especially as you’re still dependent on others. So, having something tangible in the future that points towards independence, and following one’s dreams, provides hope. Hope that may not otherwise be there.  
+
+              Follow along on my journey to run across Canada, raising funds for kids in need. Please consider supporting this mission in any way you can. Every little bit makes a huge difference. 
+              
+
+            </div>
           </div>
         </div>
 
-        <div className="mt-8">
-          <Marquee />
-        </div>
+        {/* BOTTOM: GPS Map with background image (pure image) */}
+        <div id="gps" className="relative mt-38 left-1/2 -translate-x-1/2 w-[100vw] overflow-hidden">
 
-        {/* GPS + Blog summary (still on running background) */}
-        <div id="gps" className="mt-10">
+          {/* background image */}
+          <div className="absolute inset-0">
+            <img
+              src={map}
+              alt=""
+              className="h-full w-full object-cover transform-gpu scale-110 [object-position:40%_70%]"
+              draggable={false}
+            />
+            
+          </div>
+
+          
+
+
+      {/* <section className="relative overflow-hidden text-neutral-950"> */}
+      {/* <div className="absolute inset-0"> */}
+
+        
+          <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8 py-10">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
-              <div className="text-sm font-black uppercase tracking-widest text-white">GPS tracker</div>
-              <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-white">
+              <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
+                GPS tracker
+              </div>
+              <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950">
                 Follow In Real-time!
               </div>
-              <div className="mt-2 text-sm text-white/80">
-                The gps tracker updates continuously as James makes progress each day. At the end of each day the tracker is paused and James will continue his run from there the next morning.
+              <div className="mt-2 text-sm text-neutral-950/70">
+                The gps tracker updates continuously as James makes progress each day. At the end of each day the tracker
+                is paused and James will continue his run from there the next morning.
               </div>
             </div>
-            <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">Live</Pill>
+
+            <div className="inline-flex items-center rounded-full border border-neutral-950/15 bg-neutral-950/5 px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-950">
+              Live
+            </div>
           </div>
 
-          <div id="gps" className="mt-10">
-            <div className="mx-auto w-full">
-              <InteractiveMap pins={pins} setPins={setPins} />
-            </div>
+          <div className="mt-8 rounded-[28px] border border-neutral-950/10 bg-neutral-950 p-4 sm:p-6">
+            <InteractiveMap pins={pins} setPins={setPins} />
             <div className="mt-3 text-center text-xs font-semibold uppercase tracking-widest text-white/60">
               Live GPS tracker
             </div>
           </div>
-
-          {/* Mission (moved under GPS map) */}
-          <div className="mt-12">
-            <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pb-14 pt-10">
-              <div className="grid items-start gap-6 lg:grid-cols-[1fr_420px]">
-                <div className="max-w-2xl">
-                  <div className="mt-4 text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
-                    James&apos; Mission
-                  </div>
-
-                  <div className="mt-3 text-sm sm:text-base leading-7 text-white/85">
-                    My goal is to raise $250,000 for youth in alternative care, who have lost their caregivers and are being raised by someone else. ALL funds will go towards renewable scholarships which will allow recipients to focus on their future and not be burned by the financial stress of post-secondary school.
-                    I know first hand how much this means to a kid, as I was once one of these kids who’ve lost their parents and was displaced. However, due to charitable efforts and some supportive family and friends, I was able to build a good life. I am forever grateful to these people and support. And from this experience, I couldn’t imagine what my own life could have been like without some support, because even when I didn’t feel comfortable at home, or believe in myself, there were some who put in the extra effort and did, and that changed everything. I want to enable others who’ve also had a rough upbringing to know they're not alone, and their voice matters. This is me, and this is my why.
-                  </div>
-
-                  {/* <div className="mt-6 flex flex-wrap gap-2">
-                    <a
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
-                    >
-                      Donate
-                    </a>
-                    <a
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      className="rounded-full border border-white/20 bg-white/5 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-white hover:border-yellow-300/50 hover:bg-white/10"
-                    >
-                      Learn more
-                    </a>
-                  </div> */}
-
-                  
-
-
-                </div>
-
-                <Glass className="p-6">
-                  <div className="text-sm font-black uppercase tracking-widest text-white">Lighthouse</div>
-                  <div className="mt-2 space-y-3 text-sm text-white/85">
-                    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                      <div className="text-xs font-black uppercase tracking-widest text-white/70">What we do</div>
-                      <div className="mt-1">Here you will find free support, resources, and connections.</div>
-                    </div>
-                    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                      <div className="text-xs font-black uppercase tracking-widest text-white/70">Who it helps</div>
-                      <div className="mt-1">Lighthouse support displaced kids and their future.</div>
-                    </div>
-                    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                      <div className="text-xs font-black uppercase tracking-widest text-white/70">Where funds go</div>
-                      <div className="mt-1">Funds go directly into scholarships for post-secondary school, easing financial worry for kids.</div>
-                    </div>
-                  </div>
-                </Glass>
-              </div>
-
-
-                {/* WHY VIDEO */}
-                  {/* WHY VIDEO */}
-                  <div className="mt-6">
-                    <Glass className="p-4">
-                      <div className="flex items-end justify-between gap-3">
-                        <div>
-                          <div className="text-sm font-black uppercase tracking-widest text-white">A Video message from James</div>
-                          <div className="mt-1 text-sm text-white/70">Why I’m running, and who it’s for.</div>
-                        </div>
-
-                        <Pill className="bg-white/10 border-white/20">Coming soon</Pill>
-                      </div>
-
-                      {/* Placeholder instead of video */}
-                      <div className="mt-4 rounded-2xl border border-white/10 bg-neutral-950/60 p-6">
-                        <div className="text-sm font-semibold text-white/80">
-                          Video message coming in a couple days.
-                        </div>
-                        
-
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          <a
-                            href="#"
-                            onClick={(e) => e.preventDefault()}
-                            className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
-                          >
-                            Donate
-                          </a>
-                          <button
-                            onClick={() => document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })}
-                            className="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-black uppercase tracking-wide text-white hover:border-yellow-300/50 hover:bg-white/10"
-                          >
-                            View map
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="mt-3 text-xs text-white/60">
-                        {/* Tip: Keep it ~60–120 seconds. Clear ask at the end: donate/share/sponsor. */}
-                      </div>
-                    </Glass>
-                  </div>
-
-
-            </div>
-          </div>
-
-
         </div>
       </div>
-    </ParallaxSection>
+      </div>
+    </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function LatestBlogBreakSection({ posts, onOpenPost, onViewAll }) {
   const latest = useMemo(() => {
@@ -800,6 +976,10 @@ function LatestBlogBreakSection({ posts, onOpenPost, onViewAll }) {
 
   return (
     <section className="bg-neutral-950 -mt-px border-b border-white/10">
+      {/* Marquee under hero */}
+      <div className="relative z-10">
+        <Marquee />
+      </div>
       <div className="mx-auto max-w-6xl px-4 py-14">
         <div className="flex items-end justify-between gap-3">
           <div className="text-center sm:text-left">
@@ -858,8 +1038,12 @@ function CharitySection() {
               James' Mission - Turning Kilometers into Scholarships
             </div>
             <div className="mt-3 text-sm sm:text-base leading-7 text-white/85">
-              My goal is to raise $250,000 for youth in alternative care, who have lost their caregivers and are being raised by someone else. ALL funds will go towards renewable scholarships which will allow recipients to focus on their future and not be burned by the financial stress of post-secondary school.
-              I know first hand how much this means to a kid, as I was once one of these kids who’ve lost their parents and was displaced. However, due to charitable efforts and some supportive family and friends, I was able to build a good life. I am forever grateful to these people and support. And from this experience, I couldn’t imagine what my own life could have been like without some support, because even when I didn’t feel comfortable at home, or believe in myself, there were some who put in the extra effort and did, and that changed everything. I want to enable others who’ve also had a rough upbringing to know they're not alone, and their voice matters. This is me, and this is my why.
+              Why a scholarship?  
+
+              A scholarship can be one of the best ways to support a child after a tragedy. You see, after displacement in childhood, it’s easy to feel the future is incredibly uncertain - especially as you’re still dependent on others. So, having something tangible in the future that points towards independence, and following one’s dreams, provides hope. Hope that may not otherwise be there.  
+
+              Follow along on my journey to run across Canada, raising funds for kids in need. Please consider supporting this mission in any way you can. Every little bit makes a huge difference. 
+              
 
             </div>
 
@@ -1005,15 +1189,10 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
 
   return (
     <div className="text-white">
-      <HomeHeroGpsSection
-        latestPostId={latestPostId}
-        onOpenPost={onOpenPost}
-        posts={posts}
-        pins={pins}
-        setPins={setPins}
-      />
+      <HomeHeroTop latestPostId={latestPostId} onOpenPost={onOpenPost} />
+      <HomeTrackerSection pins={pins} setPins={setPins} />
       <LatestBlogBreakSection posts={posts} onOpenPost={onOpenPost} onViewAll={() => setTab("blog")} />
-      <SponsorsGridSection sponsors={SPONSORS} />
+      <SponsorsGridSection groups={SPONSOR_GROUPS} />
       <SupportSection setTab={setTab} />
 
       <footer className="border-t border-white/10 bg-neutral-950">
@@ -1326,6 +1505,7 @@ function SponsorCarousel({ sponsors = [] }) {
   );
 }
 
+const ALL_SPONSORS = SPONSOR_GROUPS.flatMap(g => g.items || []);
 
 
 function ContactTab() {
@@ -1434,7 +1614,7 @@ function ContactTab() {
       </Glass>
 
       {/* Sponsors stays full width right under it */}
-      <SponsorCarousel sponsors={SPONSORS} />
+      <SponsorCarousel sponsors={ALL_SPONSORS} />
     </div>
 
     </div>
