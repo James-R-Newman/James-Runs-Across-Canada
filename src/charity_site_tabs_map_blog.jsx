@@ -746,8 +746,9 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
         <img
           src={runningBg}
           alt=""
-          className="h-full w-full object-cover grayscale brightness-75 contrast-110 [object-position:75%_100%] -translate-y-7 -translate--7"
+          className="h-full w-full object-cover grayscale brightness-75 contrast-110 [object-position:35%_100%] -translate-y-7 -translate--7"
           draggable={false}
+          
         />
         <div className="absolute inset-0 " />
         <div className="absolute i nset-0 bg-gradient-to-b from-black/25 via-black/22 to-transparent" />
