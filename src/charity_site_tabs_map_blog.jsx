@@ -756,7 +756,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
 
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-57 pb-50">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-27 pb-50">
         <div className="grid gap-10 lg:grid-cols-2 items-start">
           {/* optional: keep your cropped runner or remove it */}
           <div className="hidden lg:block" />
@@ -885,7 +885,7 @@ function HomeTrackerSection({ pins, setPins }) {
                   }
                   className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]"
                 >
-                  GPS Map
+                  Map
                 </button>
               </div>
             </div>
@@ -1214,7 +1214,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
             </div>
 
             <div className="sm:text-right">
-              <div className="text-sm font-semibold text-white/60">© {new Date().getFullYear()} James Runs Across Canada</div>
+              <div className="text-sm font-semibold text-white/60">© {new Date().getFullYear()} James Runs Canada</div>
               <div className="mt-2 flex flex-wrap gap-3 sm:justify-end">
                 <a href="#" onClick={(e) => e.preventDefault()} className="text-sm font-semibold text-white/70 hover:text-white">
                   Privacy
