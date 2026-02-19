@@ -7,7 +7,7 @@ import { client } from "./sanityClient";
 // - biking-photo.png
 // - ukraine-photo.jpeg
 // - family-photo.png   (or change the import extension below to match your file)
-import runningBg from "./assets/jameshome5.png";
+import runningBg from "./assets/jameshome6.png";
 import bikingBg from "./assets/biking-photo.png";
 import ukraineBg from "./assets/ukraine-photo.jpeg";
 import familyBg from "./assets/family-photo.jpg";
