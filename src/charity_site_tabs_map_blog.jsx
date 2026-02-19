@@ -478,9 +478,9 @@ function TopNav({ tab, setTab }) {
             <span className="mr-2 inline-block h-2 w-2 rounded-full bg-neutral-950" />
             Live
           </Pill>
-          <div className="min-w-0">
+          <div className="min-w-0 pl-2">
             <div className="truncate text-sm sm:text-base font-black uppercase tracking-tight text-white">
-              James Runs Canada
+               James Runs Canada
             </div>
             <div className="hidden sm:block text-xs uppercase text-white/70">Turning kilometers into scholarships</div>
           </div>
@@ -746,17 +746,17 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
         <img
           src={runningBg}
           alt=""
-          className="h-full w-full object-cover grayscale brightness-95 contrast-110 [object-position:45%_100%] -translate-y-7 -translate--7"
+          className="h-full w-full object-cover grayscale brightness-95 contrast-110 [object-position:45%_100%] -translate-y-20 -translate--7"
           draggable={false}
           
         />
         <div className="absolute inset-0 " />
-        <div className="absolute i nset-0 bg-gradient-to-b from-black/25 via-black/22 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/22 to-transparent" />
       </div>
 
 
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-37 pb-50">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-57 pb-50">
         <div className="grid gap-10 lg:grid-cols-2 items-start">
           {/* optional: keep your cropped runner or remove it */}
           <div className="hidden lg:block" />
@@ -768,16 +768,19 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
 
               <div className="text-3xl font-black uppercase tracking-widest text-yellow-300/90">
-                Turning kilometers into scholarships
+                Turning kilometers
+              </div>
+              <div className="text-3xl font-black uppercase tracking-widest text-yellow-300/90">
+                into scholarships
               </div>
 
               {/* <h1 className="mt-3 text-4xl sm:text-6xl font-black uppercase tracking-tight text-yellow-300/90">
                 James Runs Canada
               </h1> */}
 
-              <p className="mt-4 max-w-2xl text-base sm:text-xl leading-7 text-white/80">
+              <p className="mt-4 max-w-2xl text-base sm:text-xl leading-7 text-white">
                 Join James as he runs across Canada for 100 days, 80km/day, to fund scholarships for youth
-                who’ve also lost their parents — easing financial worry so they can focus on their future.
+                who’ve also been displaced in childhood — easing financial worry so they can focus on their future.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
@@ -785,7 +788,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                   onClick={() => document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })}
                   className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
                 >
-                  View map
+                  GPS Map
                 </button>
 
                 <a
@@ -804,7 +807,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 </button>
               </div>
 
-              <p className="mt-4 max-w-xl text-base sm:text-xl leading-7 text-white/80">
+              <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white">
                 Follow the run starting May 18th 2026!
               </p>
 
@@ -812,7 +815,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 <img
                   src={heroLogo}
                   alt="James Runs Canada logo"
-                  className="h-40 w-auto drop-shadow-[0_16px_30px_rgba(0,0,0,0.18)]"
+                  className="h-50 w-auto drop-shadow-[0_16px_30px_rgba(0,0,0,0.18)]"
                   loading="lazy"
                 />
               </div>
@@ -882,7 +885,7 @@ function HomeTrackerSection({ pins, setPins }) {
                   }
                   className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]"
                 >
-                  View map
+                  GPS Map
                 </button>
               </div>
             </div>
@@ -1364,7 +1367,7 @@ function StoryTab() {
               </p>
               <p>
                 <span className="font-black text-white">The goal.</span> 
-                 These scholarships are for kids in alternative care (foster care, group homes, or kinship care) — kids who’ve lost their caregivers and are now being raised by someone else.
+                These scholarships are for kids in alternative care (foster care, group homes, or kinship care) — kids who’ve lost their caregivers and are now being raised by someone else.
                 They help cover real barriers like tuition, books, housing, and transportation, so students can stay focused on their future instead of being derailed by financial stress.
                 
                 Beyond the money, the program is about mentorship and community. One of the hardest parts of growing up so differently, is feeling isolated and alone.
