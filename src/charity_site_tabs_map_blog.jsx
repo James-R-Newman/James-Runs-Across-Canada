@@ -482,7 +482,7 @@ function TopNav({ tab, setTab }) {
             <div className="truncate text-sm sm:text-base font-black uppercase tracking-tight text-white">
               James Runs Canada
             </div>
-            <div className="hidden sm:block text-xs text-white/70">Turning kilometers into scholarships</div>
+            <div className="hidden sm:block text-xs uppercase text-white/70">Turning kilometers into scholarships</div>
           </div>
         </div>
 
@@ -746,7 +746,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
         <img
           src={runningBg}
           alt=""
-          className="h-full w-full object-cover grayscale brightness-75 contrast-110 [object-position:35%_100%] -translate-y-7 -translate--7"
+          className="h-full w-full object-cover grayscale brightness-95 contrast-110 [object-position:45%_100%] -translate-y-7 -translate--7"
           draggable={false}
           
         />
@@ -756,7 +756,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
 
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-12 pb-50">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-37 pb-50">
         <div className="grid gap-10 lg:grid-cols-2 items-start">
           {/* optional: keep your cropped runner or remove it */}
           <div className="hidden lg:block" />
@@ -767,15 +767,15 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
 
 
-              <div className="text-xs font-black uppercase tracking-widest text-white/80">
+              <div className="text-3xl font-black uppercase tracking-widest text-yellow-300/90">
                 Turning kilometers into scholarships
               </div>
 
-              <h1 className="mt-3 text-4xl sm:text-6xl font-black uppercase tracking-tight text-white">
+              {/* <h1 className="mt-3 text-4xl sm:text-6xl font-black uppercase tracking-tight text-yellow-300/90">
                 James Runs Canada
-              </h1>
+              </h1> */}
 
-              <p className="mt-4 max-w-2xl text-base sm:text-lg leading-7 text-white/80">
+              <p className="mt-4 max-w-2xl text-base sm:text-xl leading-7 text-white/80">
                 Join James as he runs across Canada for 100 days, 80km/day, to fund scholarships for youth
                 who’ve also lost their parents — easing financial worry so they can focus on their future.
               </p>
@@ -804,11 +804,15 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 </button>
               </div>
 
+              <p className="mt-4 max-w-xl text-base sm:text-xl leading-7 text-white/80">
+                Follow the run starting May 18th 2026!
+              </p>
+
               <div className="mt-7">
                 <img
                   src={heroLogo}
                   alt="James Runs Canada logo"
-                  className="h-20 w-auto drop-shadow-[0_16px_30px_rgba(0,0,0,0.18)]"
+                  className="h-40 w-auto drop-shadow-[0_16px_30px_rgba(0,0,0,0.18)]"
                   loading="lazy"
                 />
               </div>
