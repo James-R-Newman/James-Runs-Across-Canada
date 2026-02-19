@@ -788,7 +788,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                   onClick={() => document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })}
                   className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
                 >
-                  GPS Map
+                  Map
                 </button>
 
                 <a
