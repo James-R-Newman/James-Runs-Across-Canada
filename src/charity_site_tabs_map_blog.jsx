@@ -53,15 +53,15 @@ function uid() {
 
 
 const SPONSOR_GROUPS = [
-  {
-    key: "charity",
-    title: "Charity Supporters",
-    subtitle: "Organizations funding the scholarship / charity target.",
-    items: [
-      { id: "c1", name: "Sponsor Name", tier: "Title sponsor", blurb: "Helping fuel the scholarship fund." },
-      { id: "c2", name: "Sponsor Name", tier: "Partner", blurb: "Supporting youth scholarships directly." },
-    ],
-  },
+  // {
+  //   key: "charity",
+  //   title: "Charity Supporters",
+  //   subtitle: "Organizations funding the scholarship / charity target.",
+  //   items: [
+  //     { id: "c1", name: "Sponsor Name", tier: "Title sponsor", blurb: "Helping fuel the scholarship fund." },
+  //     { id: "c2", name: "Sponsor Name", tier: "Partner", blurb: "Supporting youth scholarships directly." },
+  //   ],
+  // },
   {
     key: "run",
     title: "Run Funders",
