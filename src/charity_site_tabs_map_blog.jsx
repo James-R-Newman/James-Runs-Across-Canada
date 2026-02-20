@@ -432,6 +432,84 @@ function WaveSectionDivider({ className = "", fill = "#ffffff" }) {
 
 
 
+function clamp(n, min, max) {
+  return Math.max(min, Math.min(max, n));
+}
+
+function daysSince(startDateStr) {
+  const start = new Date(startDateStr + "T00:00:00");
+  const now = new Date();
+  const ms = now.getTime() - start.getTime();
+  const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+  return Math.max(0, days);
+}
+
+function useCountUp(value, durationMs = 900) {
+  const [display, setDisplay] = React.useState(0);
+
+  React.useEffect(() => {
+    let raf = 0;
+    const start = performance.now();
+    const from = display;
+    const to = value;
+
+    const tick = (t) => {
+      const p = clamp((t - start) / durationMs, 0, 1);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - p, 3);
+      setDisplay(Math.round(from + (to - from) * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
+  return display;
+}
+
+function StatCard({ label, value, suffix = "", prefix = "" }) {
+  const animated = useCountUp(value);
+  const formatted = new Intl.NumberFormat(undefined).format(animated);
+
+  return (
+    <div className="rounded-3xl border border-white/15 bg-black/55 px-5 py-4 backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
+      <div className="text-[11px] font-black uppercase tracking-widest text-white/70">
+        {label}
+      </div>
+      <div className="mt-2 text-2xl sm:text-3xl font-black tracking-tight text-white drop-shadow-[0_6px_18px_rgba(0,0,0,0.45)]">
+        {prefix}{formatted}{suffix}
+      </div>
+    </div>
+  );
+}
+
+function RunCounters({
+  startDate = "2026-05-18",
+  kmPerDay = 80,
+  totalGoalDays = 100,
+  amountRaised = 0, // swap this to real data later
+}) {
+  const [tick, setTick] = React.useState(0);
+
+  // refresh once a minute so "days passed" flips naturally at midnight-ish
+  React.useEffect(() => {
+    const id = setInterval(() => setTick((t) => t + 1), 60_000);
+    return () => clearInterval(id);
+  }, []);
+
+  const days = Math.min(daysSince(startDate), totalGoalDays);
+  const km = days * kmPerDay;
+
+  return (
+    <div className="mt-6 grid gap-4 sm:grid-cols-3">
+      <StatCard label="Days completed" value={days} suffix={` / ${totalGoalDays}`} />
+      <StatCard label="Kilometers run" value={km} suffix=" km" />
+      <StatCard label="Amount raised" value={amountRaised} prefix="$" />
+    </div>
+  );
+}
 
 
 
@@ -506,6 +584,10 @@ function TopNav({ tab, setTab }) {
     </div>
   );
 }
+
+
+
+
 
 // --- Interactive SVG Map (pan/zoom + pin placement) ---
 function InteractiveMap({ pins, setPins }) {
@@ -680,6 +762,8 @@ function InteractiveMap({ pins, setPins }) {
   );
 }
 
+
+
 function BlogSummary({ posts, onOpenPost }) {
   const sorted = useMemo(() => [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)), [posts]);
 
@@ -767,23 +851,42 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
 
 
-              <div className="text-3xl font-black uppercase tracking-widest text-yellow-300/90">
+              {/* <div className="text-3xl font-black uppercase tracking-widest text-yellow-300/90">
                 Turning kilometers
               </div>
               <div className="text-3xl font-black uppercase tracking-widest text-yellow-300/90">
                 into scholarships
-              </div>
+              </div> */}
 
               {/* <h1 className="mt-3 text-4xl sm:text-6xl font-black uppercase tracking-tight text-yellow-300/90">
                 James Runs Canada
               </h1> */}
 
+
+              <p className="mt-8 text-4xl sm:text-6xl font-black tracking-tight text-white/90 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
+                100 Days
+              </p>
+              <p className="mt-3 text-4xl sm:text-6xl font-black tracking-tight text-white/90 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
+                7,500 km
+              </p>
+
+
+
+
+              {/* <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white">
+                Follow the run starting May 18th 2026!
+              </p>
+
               <p className="mt-4 max-w-2xl text-base sm:text-xl leading-7 text-white">
                 Join James as he runs across Canada for 100 days, 80km/day, to fund scholarships for youth
                 who’ve also been displaced in childhood — easing financial worry so they can focus on their future.
-              </p>
+              </p> */}
 
-              <div className="mt-6 flex flex-wrap gap-3">
+              
+
+
+
+              <div className="mt-10 flex flex-wrap gap-3">
                 <button
                   onClick={() => document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })}
                   className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
@@ -807,9 +910,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 </button>
               </div>
 
-              <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white">
-                Follow the run starting May 18th 2026!
-              </p>
+              
 
               <div className="mt-7">
                 <img
@@ -894,15 +995,16 @@ function HomeTrackerSection({ pins, setPins }) {
           {/* Mission (RIGHT) — transparent (no card) */}
           <div className="self-center">
             <div className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-neutral-950">
-              Why scholarships for youth?  
+              Pace For Purpose
+            </div>
+            <div className="mt-2 text-3xl sm:text-2xl font-black uppercase tracking-tight text-neutral-950">
+              A scholarship for youth who deserve a fair shot
             </div>
             <div className="mt-3 text-sm sm:text-base leading-7 text-neutral-950/80">
 
 
-              A scholarship can be one of the best ways to support a child after a tragedy. You see, after displacement in childhood, it’s easy to feel the future is incredibly uncertain - especially as you’re still dependent on others. So, having something tangible in the future that points towards independence, and following one’s dreams, provides hope. Hope that may not otherwise be there.  
-
-              Follow along on my journey to run across Canada, raising funds for kids in need. Please consider supporting this mission in any way you can. Every little bit makes a huge difference. 
-              
+              Join James as he runs across Canada in under 100 days—running 80km/day—to fund scholarships for youth who’ve also experienced displacement in childhood. After tragedy, the future can feel uncertain. 
+              A scholarship is something tangible to aim for: a path toward independence, pursuing dreams, and hope for something better. Follow along on the journey and consider supporting in any way you can—every little bit makes a big difference.
 
             </div>
           </div>
@@ -949,12 +1051,24 @@ function HomeTrackerSection({ pins, setPins }) {
             </div>
           </div>
 
+          
+          <RunCounters
+            startDate="2026-05-18"
+            kmPerDay={80}
+            totalGoalDays={100}
+            amountRaised={100} // TODO: wire to real fundraising total
+          />
+
+          
           <div className="mt-8 rounded-[28px] border border-neutral-950/10 bg-neutral-950 p-4 sm:p-6">
             <InteractiveMap pins={pins} setPins={setPins} />
             <div className="mt-3 text-center text-xs font-semibold uppercase tracking-widest text-white/60">
               Live GPS tracker
             </div>
           </div>
+
+          
+
         </div>
       </div>
       </div>
