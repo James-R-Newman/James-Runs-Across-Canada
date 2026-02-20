@@ -863,14 +863,18 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
               </h1> */}
 
 
-              <p className="mt-8 text-4xl sm:text-6xl font-black tracking-tight text-white/90 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
+              <p className="mt-8 text-4xl sm:text-6xl font-black tracking-tight text-white/80 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
                 100 Days
               </p>
-              <p className="mt-3 text-4xl sm:text-6xl font-black tracking-tight text-white/90 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
+              <p className="mt-3 text-4xl sm:text-6xl font-black tracking-tight text-white/80 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
                 7,500 km
               </p>
 
-
+              <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white/80">
+                Follow the run starting{" "}
+                <span className="font-black text-white">May 18th</span>{", "}
+                2026!
+              </p>
 
 
               {/* <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white">
