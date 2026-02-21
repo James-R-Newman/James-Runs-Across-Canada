@@ -488,7 +488,7 @@ function RunCounters({
   startDate = "2026-05-18",
   kmPerDay = 80,
   totalGoalDays = 100,
-  amountRaised = 0, // swap this to real data later
+  amountRaised = 1000, // swap this to real data later
 }) {
   const [tick, setTick] = React.useState(0);
 
@@ -953,7 +953,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 function HomeTrackerSection({ pins, setPins }) {
   return (
     <section className="home-tracker-section bg-white text-neutral-950">
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pt-10 pb-16">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pt-0 pb-16">
         {/* TOP: Video (left) + Mission (right) */}
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Video (LEFT) */}
@@ -1061,7 +1061,7 @@ function HomeTrackerSection({ pins, setPins }) {
             startDate="2026-05-18"
             kmPerDay={80}
             totalGoalDays={100}
-            amountRaised={100} // TODO: wire to real fundraising total
+            amountRaised={0} // TODO: wire to real fundraising total
           />
 
           
