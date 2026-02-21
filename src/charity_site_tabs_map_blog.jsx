@@ -11,7 +11,7 @@ import runningBg from "./assets/jameshome6.png";
 import bikingBg from "./assets/biking-photo.png";
 import ukraineBg from "./assets/ukraine-photo.jpeg";
 import familyBg from "./assets/family-photo.jpg";
-import heroLogo from "./assets/logo.png"; 
+import heroLogo from "./assets/logo3.png"; 
 import map from "./assets/map.png";           
 import waveDivider from "./assets/wave-haikei3.svg";
 import nature from "./assets/nature.avif";
