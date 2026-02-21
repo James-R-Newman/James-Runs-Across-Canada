@@ -878,12 +878,12 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
               {/* <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white">
                 Follow the run starting May 18th 2026!
-              </p>
+              </p>*/}
 
-              <p className="mt-4 max-w-2xl text-base sm:text-xl leading-7 text-white">
+              <p className="mt-4 max-w-2xl text-base sm:text-xl leading-7 text-white/80">
                 Join James as he runs across Canada for 100 days, 80km/day, to fund scholarships for youth
-                who’ve also been displaced in childhood — easing financial worry so they can focus on their future.
-              </p> */}
+                who’ve also been displaced in childhood.
+              </p> 
 
               
 
@@ -1000,15 +1000,17 @@ function HomeTrackerSection({ pins, setPins }) {
             <div className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-neutral-950">
               Pace For Purpose
             </div>
-            <div className="mt-2 text-3xl sm:text-xl font-black uppercase tracking-tight text-neutral-950">
+            <div className="mt-2 text-1xl sm:text-xl font-black uppercase tracking-tight text-neutral-950">
               A scholarship for youth in need
             </div>
             <div className="mt-3 text-sm sm:text-base leading-7 text-neutral-950/80">
 
 
-              Join James as he runs across Canada in under 100 days—running 80km/day—to fund scholarships for youth who’ve also experienced displacement in childhood. After tragedy, the future can feel uncertain. 
-              A scholarship is something tangible to aim for: a path toward independence, pursuing dreams, and hope for something better. Follow along on the journey and consider supporting in any way you can—every little bit makes a big difference.
+              After tragedy, the future can feel uncertain - especially when you’re still dependent on others. 
+              A scholarship is something tangible to aim for: a path toward independence, pursuing dreams once out of reach, and hope for something better. Follow along on the journey and consider supporting in any way you can. Every little bit makes a big difference.
 
+            {/* //A scholarship can be one of the best ways to support a child after a tragedy. You see, after displacement in childhood, it’s easy to feel the future is incredibly uncertain - especially as you’re still dependent on others. 
+            //So, having something tangible in the future that points towards independence, and following one’s dreams, provides hope. Hope that may not otherwise be there. */}
             </div>
           </div>
         </div>
