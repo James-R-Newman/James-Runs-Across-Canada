@@ -1000,8 +1000,8 @@ function HomeTrackerSection({ pins, setPins }) {
             <div className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-neutral-950">
               Pace For Purpose
             </div>
-            <div className="mt-2 text-3xl sm:text-2xl font-black uppercase tracking-tight text-neutral-950">
-              A scholarship for youth who deserve a fair shot
+            <div className="mt-2 text-3xl sm:text-xl font-black uppercase tracking-tight text-neutral-950">
+              A scholarship for youth in need
             </div>
             <div className="mt-3 text-sm sm:text-base leading-7 text-neutral-950/80">
 
