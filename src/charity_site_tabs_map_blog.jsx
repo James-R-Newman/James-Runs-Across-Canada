@@ -919,7 +919,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 <img
                   src={heroLogo}
                   alt="James Runs Canada logo"
-                  className="h-50 w-auto drop-shadow-[0_16px_30px_rgba(0,0,0,0.18)]"
+                  className="h-28 sm:h-36 lg:h-50 w-auto w-auto drop-shadow-[0_16px_30px_rgba(0,0,0,0.18)]"
                   loading="lazy"
                 />
               </div>
