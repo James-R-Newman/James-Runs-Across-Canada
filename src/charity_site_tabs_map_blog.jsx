@@ -555,7 +555,7 @@ function TopNav({ tab, setTab }) {
             <span className="mr-2 inline-block h-2 w-2 rounded-full bg-neutral-950" />
             Live
           </Pill>
-          <div className="min-w-0 pl-2">
+          <div className="hidden lg:block min-w-0 pl-2">
             <div className="truncate text-sm sm:text-base font-black uppercase tracking-tight text-white">
                James Runs Canada
             </div>
