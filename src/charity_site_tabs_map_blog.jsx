@@ -11,10 +11,11 @@ import runningBg from "./assets/jameshome6.png";
 import bikingBg from "./assets/biking-photo.png";
 import ukraineBg from "./assets/ukraine-photo.jpeg";
 import familyBg from "./assets/family-photo.jpg";
-import heroLogo from "./assets/logo3.png"; 
+import heroLogo from "./assets/logo4.png"; 
 import map from "./assets/map.png";           
 import waveDivider from "./assets/wave-haikei3.svg";
 import nature from "./assets/nature.avif";
+import charity from "./assets/charity.png";
 
 
 
@@ -1012,6 +1013,16 @@ function HomeTrackerSection({ pins, setPins }) {
             {/* //A scholarship can be one of the best ways to support a child after a tragedy. You see, after displacement in childhood, it’s easy to feel the future is incredibly uncertain - especially as you’re still dependent on others. 
             //So, having something tangible in the future that points towards independence, and following one’s dreams, provides hope. Hope that may not otherwise be there. */}
             </div>
+
+            {/* <img
+              src={charity}
+              alt="Charity partner"
+              className="mt-6 w-full max-w-md rounded-3xl border border-neutral-950/10 shadow-[0_18px_60px_rgba(0,0,0,0.08)]"
+              loading="lazy"
+              draggable={false}
+            /> */}
+
+
           </div>
         </div>
 
