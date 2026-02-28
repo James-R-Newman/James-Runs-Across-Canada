@@ -997,33 +997,73 @@ function HomeTrackerSection({ pins, setPins }) {
           </div>
 
           {/* Mission (RIGHT) — transparent (no card) */}
-          <div className="self-center">
-            <div className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-neutral-950">
-              Pace For Purpose
-            </div>
-            <div className="mt-2 text-1xl sm:text-xl font-black uppercase tracking-tight text-neutral-950">
-              A scholarship for youth in need
-            </div>
-            <div className="mt-3 text-sm sm:text-base leading-7 text-neutral-950/80">
+<div className="self-center w-full max-w-xl">
+  <div className="text-center">
+    <div className="text-xs font-black uppercase tracking-widest text-neutral-950/60">
+      Scholarship mission
+    </div>
+
+    <div className="mt-2 text-2xl sm:text-3xl font-black uppercase tracking-tight text-neutral-950">
+      A scholarship for youth in need
+    </div>
+
+    
+    {/* <div className="mt-2 text-[11px] font-black uppercase tracking-widest text-neutral-950/50">
+      In support of
+    </div> */}
+  </div>
+
+  <div className="mt-6 text-left">
+    <p className="text-sm sm:text-base leading-7 text-neutral-950/80">
+      After childhood tragedy, the future can feel uncertain—especially when you’re still dependent on others.
+      A scholarship creates something tangible to aim for: independence, education, and hope.
+    </p>
+
+    <ul className="mt-4 space-y-2 text-sm sm:text-base text-neutral-950/80">
+      {[
+        "Supports education and career goals",
+        "Reduces financial stress during transition",
+        "Creates hope and long-term stability",
+      ].map((item) => (
+        <li key={item} className="flex gap-3">
+          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-300" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div className="mt-6 flex flex-wrap justify-center sm:justify-start gap-3">
+      <a className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200">
+        Donate
+      </a>
+      <a className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]">
+        Learn more
+      </a>
+    </div>
+  </div>
+  <div className="mt-4 inline-flex items-center justify-center rounded-3xl  border-neutral-950/10 bg-white px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.08)]">
+      <img
+        src={charity}
+        alt="Charity partner"
+        className="h-18 sm:h-max w-auto object-contain"
+        loading="lazy"
+        draggable={false}
+      />
+    </div>
+</div>
 
 
-              After tragedy, the future can feel uncertain - especially when you’re still dependent on others. 
-              A scholarship is something tangible to aim for: a path toward independence, pursuing dreams once out of reach, and hope for something better. Follow along on the journey and consider supporting in any way you can. Every little bit makes a big difference.
-
-            {/* //A scholarship can be one of the best ways to support a child after a tragedy. You see, after displacement in childhood, it’s easy to feel the future is incredibly uncertain - especially as you’re still dependent on others. 
-            //So, having something tangible in the future that points towards independence, and following one’s dreams, provides hope. Hope that may not otherwise be there. */}
-            </div>
-
-            {/* <img
-              src={charity}
-              alt="Charity partner"
-              className="mt-6 w-full max-w-md rounded-3xl border border-neutral-950/10 shadow-[0_18px_60px_rgba(0,0,0,0.08)]"
-              loading="lazy"
-              draggable={false}
-            /> */}
 
 
-          </div>
+
+
+
+
+
+
+
+
+
         </div>
 
         {/* BOTTOM: GPS Map with background image (pure image) */}
