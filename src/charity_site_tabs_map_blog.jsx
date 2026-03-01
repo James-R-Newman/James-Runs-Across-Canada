@@ -7,7 +7,7 @@ import { client } from "./sanityClient";
 // - biking-photo.png
 // - ukraine-photo.jpeg
 // - family-photo.png   (or change the import extension below to match your file)
-import runningBg from "./assets/jameshome6.png";
+import runningBg from "./assets/jameshome62.webp";
 import bikingBg from "./assets/biking-photo.png";
 import ukraineBg from "./assets/ukraine-photo.jpeg";
 import familyBg from "./assets/family-photo.jpg";
@@ -832,6 +832,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
           alt=""
           className="h-full w-full object-cover grayscale brightness-95 contrast-110 [object-position:45%_100%] -translate-y-20 -translate--7"
           draggable={false}
+          loading="eager"
           
         />
         <div className="absolute inset-0 " />
