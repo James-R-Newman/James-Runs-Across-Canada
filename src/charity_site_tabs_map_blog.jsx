@@ -16,6 +16,9 @@ import map from "./assets/map.png";
 import waveDivider from "./assets/wave-haikei3.svg";
 import nature from "./assets/nature.avif";
 import charity from "./assets/charity.png";
+import janine from "./assets/janine.webp";
+import karley from "./assets/karley.webp";
+
 
 
 
@@ -74,13 +77,80 @@ const SPONSOR_GROUPS = [
   {
     key: "route",
     title: "The Team Behind The Run",
-    subtitle: "People/teams donating time and effort (marketing, planning, community outreach).",
+    subtitle: "The people donating time and effort to make the run possible.",
     items: [
-      { id: "t1", name: "Marketing Team", tier: "Volunteer team", blurb: "Content, outreach, daily updates." },
-      { id: "t2", name: "Community Support", tier: "Volunteers", blurb: "Meetups, route support, local coordination." },
+      {
+        id: "t1",
+        name: "Karley Gittens",
+        tier: "GITTENCREATIVE",
+        blurb: "Karley brings brands to life through standout brand identity, print and web design, social media, and photography for clients in various fields.",
+        href: "https://www.gittencreative.com/", // or external link
+        photo: karley,
+      },
+      {
+        id: "t2",
+        name: "Janine Fisher",
+        tier: "THE NEST MARKETING & COMMUNICATIONS",
+        blurb: "A full-service marketing agency that helps organizations clarify their message, elevate their brand and communicate with impact.",
+        href: "https://www.nestmktg.com/", // or external link
+        photo: janine,
+      },
     ],
   },
 ];
+
+
+
+
+function TeamCard({ person }) {
+  const CardInner = (
+    <Glass className="p-6 h-full">
+      <div className="flex items-start gap-4">
+        <img
+          src={person.photo}
+          alt={person.name}
+          className="h-24 w-24 sm:h-28 sm:w-28 rounded-full object-cover border border-white/15 shadow-[0_12px_30px_rgba(0,0,0,0.45)]"
+          loading="lazy"
+          draggable={false}
+        />
+
+        <div className="min-w-0 flex-1">
+          <div className="text-sm sm:text-base font-black uppercase tracking-wide text-white">
+            {person.name}
+          </div>
+          <div className="mt-1 text-xs font-black uppercase tracking-widest text-yellow-300/90">
+            {person.tier}
+          </div>
+
+          <div className="mt-3 text-sm leading-6 text-white/80">
+            {person.blurb}
+          </div>
+
+          <div className="mt-4 text-xs font-black uppercase tracking-widest text-white/60">
+            View more →
+          </div>
+        </div>
+      </div>
+    </Glass>
+  );
+
+  return person.href ? (
+    <a
+      href={person.href}
+      className="block h-full"
+      target={person.href.startsWith("http") ? "_blank" : undefined}
+      rel={person.href.startsWith("http") ? "noreferrer noopener" : undefined}
+    >
+      {CardInner}
+    </a>
+  ) : (
+    CardInner
+  );
+}
+
+
+
+
 
 
 
@@ -117,39 +187,42 @@ function SponsorsGridSection({ groups = SPONSOR_GROUPS }) {
                     <div className="mt-1 text-sm text-white/70">{g.subtitle}</div>
                   </div>
 
-                  <div className="text-xs font-black uppercase tracking-widest text-white/60">
+                  {/* <div className="text-xs font-black uppercase tracking-widest text-white/60">
                     {g.items?.length || 0} supporters
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="mt-5 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-                  {(g.items?.length ? g.items : Array.from({ length: 2 })).map((s, i) => (
-                    <Glass key={s?.id ?? `${g.key}-${i}`} className="p-6 h-full">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="min-w-0">
-                          <div className="text-sm font-black uppercase tracking-wide text-white">
-                            {s?.name || "Sponsor Name"}
+                  {g.key === "route"
+                    ? (g.items || []).map((person) => <TeamCard key={person.id} person={person} />)
+                    : (g.items?.length ? g.items : Array.from({ length: 2 })).map((s, i) => (
+                        <Glass key={s?.id ?? `${g.key}-${i}`} className="p-6 h-full">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="min-w-0">
+                              <div className="text-sm font-black uppercase tracking-wide text-white">
+                                {s?.name || "Sponsor Name"}
+                              </div>
+                              <div className="mt-1 text-xs font-black uppercase tracking-widest text-yellow-300/90">
+                                {s?.tier || "Sponsor Tier"}
+                              </div>
+                            </div>
+
+                            <div className="h-10 w-10 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-[10px] font-black uppercase tracking-widest text-white/40">
+                              Logo
+                            </div>
                           </div>
-                          <div className="mt-1 text-xs font-black uppercase tracking-widest text-yellow-300/90">
-                            {s?.tier || "Sponsor Tier"}
+
+                          <div className="mt-3 text-sm leading-6 text-white/80">
+                            {s?.blurb || "Short sponsor blurb goes here."}
                           </div>
-                        </div>
 
-                        <div className="h-10 w-10 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-[10px] font-black uppercase tracking-widest text-white/40">
-                          Logo
-                        </div>
-                      </div>
-
-                      <div className="mt-3 text-sm leading-6 text-white/80">
-                        {s?.blurb || "Short sponsor blurb goes here."}
-                      </div>
-
-                      <div className="mt-4 text-xs font-black uppercase tracking-widest text-white/60">
-                        Details soon →
-                      </div>
-                    </Glass>
-                  ))}
+                          <div className="mt-4 text-xs font-black uppercase tracking-widest text-white/60">
+                            Details soon →
+                          </div>
+                        </Glass>
+                      ))}
                 </div>
+
               </div>
             ))}
           </div>
