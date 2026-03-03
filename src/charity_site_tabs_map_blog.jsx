@@ -1119,7 +1119,7 @@ function HomeTrackerSection({ pins, setPins }) {
     <img
       src={charity}
       alt="Charity partner"
-      className="h-max sm:h-max w-auto object-contain"
+      className="h-18 sm:h-max w-auto object-contain"
       loading="lazy"
       draggable={false}
     />
