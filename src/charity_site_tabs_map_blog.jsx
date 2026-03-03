@@ -219,12 +219,12 @@ function SponsorsGridSection({ groups = SPONSOR_GROUPS }) {
   return (
     <ParallaxSection
       bg={nature}
-      minH="min-h-[90vh]"
+      minH="min-h-fit"
       objectPosition="50% 55%"
       strength={60}
       overlay={true}
     >
-      <section className="border-b border-white/10">
+      <section>
         <div className="mx-auto max-w-[1400px] px-4 sm:px-8 py-14">
           <div className="max-w-3xl">
             <div className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
