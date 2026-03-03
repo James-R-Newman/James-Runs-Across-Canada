@@ -1115,15 +1115,15 @@ function HomeTrackerSection({ pins, setPins }) {
       </a>
     </div>
   </div>
-  <div className="mt-4 inline-flex items-center justify-center rounded-3xl  border-neutral-950/10 bg-white px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.08)]">
-      <img
-        src={charity}
-        alt="Charity partner"
-        className="h-18 sm:h-max w-auto object-contain"
-        loading="lazy"
-        draggable={false}
-      />
-    </div>
+  <div className="mt-4 w-full rounded-3xl border border-neutral-950/10 bg-white px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.08)] flex items-center justify-center">
+    <img
+      src={charity}
+      alt="Charity partner"
+      className="h-max sm:h-max w-auto object-contain"
+      loading="lazy"
+      draggable={false}
+    />
+  </div>
 </div>
 
 
