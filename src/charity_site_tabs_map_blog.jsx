@@ -68,7 +68,7 @@ const SPONSOR_GROUPS = [
   {
     key: "run",
     title: "Run Funders",
-    subtitle: "Organizations covering costs to make the run possible (travel, gear, food, etc.).",
+    subtitle: "Organizations, businesses, and community partners making the run finanically possible (travel, gear, food, etc.).",
     items: [
       { id: "r1", name: "Sponsor Name", tier: "Gear partner", blurb: "Shoes, kits, nutrition." },
       { id: "r2", name: "Sponsor Name", tier: "Logistics", blurb: "Helping cover travel + supplies." },
@@ -77,7 +77,7 @@ const SPONSOR_GROUPS = [
   {
     key: "route",
     title: "The Team Behind The Run",
-    subtitle: "The people donating time and effort to make the run possible.",
+    subtitle: "Meet the team behind the run.",
     items: [
       {
         id: "t1",
@@ -151,6 +151,65 @@ function TeamCard({ person }) {
 
 
 
+function LogoPlaceholder({ size = "md" }) {
+  const sizeCls =
+    size === "lg"
+      ? "h-32 w-36 sm:h-40 sm:w-44 md:h-48 md:w-52"
+      : size === "sm"
+      ? "h-18 w-20 sm:h-20 sm:w-22 md:h-22 md:w-24"
+      : "h-24 w-28 sm:h-28 sm:w-32 md:h-32 md:w-36";
+
+  return (
+    <div
+      className={[
+        "shrink-0 rounded-3xl",
+        "border border-white/15 bg-white/10",
+        "backdrop-blur-xl",
+        "shadow-[0_18px_60px_rgba(0,0,0,0.25)]",
+        "flex items-center justify-center",
+        sizeCls,
+      ].join(" ")}
+    >
+      {/* Replace this with a logo later */}
+      <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-white/40">
+        Logo
+      </span>
+    </div>
+  );
+}
+
+function RunFundersLogoRows() {
+  return (
+    <div className="py-4">
+      <div className="space-y-7">
+        {/* Row 1: 2 large squares */}
+        <div className="flex items-center justify-center gap-12 sm:gap-16">
+          <LogoPlaceholder size="lg" />
+          <LogoPlaceholder size="lg" />
+        </div>
+
+        {/* Row 2: 4 medium squares */}
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-7">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <LogoPlaceholder key={`mid-${i}`} size="md" />
+          ))}
+        </div>
+
+        {/* Row 3: 6 small squares */}
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-3.5">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <LogoPlaceholder key={`sm-${i}`} size="sm" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
 
 
 
@@ -192,10 +251,18 @@ function SponsorsGridSection({ groups = SPONSOR_GROUPS }) {
                   </div> */}
                 </div>
 
-                <div className="mt-5 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-                  {g.key === "route"
-                    ? (g.items || []).map((person) => <TeamCard key={person.id} person={person} />)
-                    : (g.items?.length ? g.items : Array.from({ length: 2 })).map((s, i) => (
+                <div className="mt-5">
+                  {g.key === "route" ? (
+                    <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+                      {(g.items || []).map((person) => (
+                        <TeamCard key={person.id} person={person} />
+                      ))}
+                    </div>
+                  ) : g.key === "run" ? (
+                    <RunFundersLogoRows />
+                  ) : (
+                    <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+                      {(g.items?.length ? g.items : Array.from({ length: 2 })).map((s, i) => (
                         <Glass key={s?.id ?? `${g.key}-${i}`} className="p-6 h-full">
                           <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0">
@@ -221,6 +288,8 @@ function SponsorsGridSection({ groups = SPONSOR_GROUPS }) {
                           </div>
                         </Glass>
                       ))}
+                    </div>
+                  )}
                 </div>
 
               </div>
