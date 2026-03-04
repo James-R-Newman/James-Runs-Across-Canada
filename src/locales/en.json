@@ -1,0 +1,134 @@
+{
+  "nav": { "home": "Home", "blog": "Blog", "contact": "Contact" },
+  "common": { "live": "Live", "donate": "Donate", "map": "Map", "feed": "Feed", "learnMore": "Learn more" },
+  "hero": {
+    "followStarting": "Follow the run starting",
+    "joinLine": "Join James as he runs across Canada for 100 days, 80km/day, to fund scholarships for youth who’ve also been displaced in childhood."
+  },
+  "tracker": {
+    "videoTitle": "A video message from James",
+    "videoSubtitle": "Why I’m running, and who it’s for.",
+    "comingSoon": "Coming soon",
+    "videoBody": "Video message coming in a couple days.",
+    "missionEyebrow": "Scholarship mission",
+    "missionTitle": "A scholarship for youth in need",
+    "missionBody": "After childhood tragedy, the future can feel uncertain—especially when you’re still dependent on others. A scholarship creates something tangible to aim for: independence, education, and hope.",
+    "missionBullets": [
+      "Supports education and career goals",
+      "Reduces financial stress during transition",
+      "Creates hope and long-term stability"
+    ],
+    "gpsEyebrow": "GPS tracker",
+    "gpsTitle": "Follow in real-time!",
+    "gpsBody": "The GPS tracker updates continuously as James makes progress each day. At the end of each day the tracker is paused and James will continue his run from there the next morning."
+  },
+  "brand": {
+    "title": "James Runs Canada",
+    "tagline": "Turning kilometers into scholarships"
+  },
+  "sponsors": {
+    "title": "Partners powering the run",
+    "subtitle": "Each of these three ways to support the overarching mission of the run is critical to its success. We’re grateful for every individual and organization that contributes, whether through funding, resources, or time. Thank you."
+  },
+  "stats": {
+    "daysCompleted": "Days completed",
+    "kilometersRun": "Kilometers run",
+    "amountRaised": "Amount raised",
+    "km": "km",
+    "currency": "$"
+  },
+  "map": {
+    "title": "GPS map",
+    "hint": "Scroll to zoom • Drag to pan • Click to drop a pin",
+    "reset": "Reset",
+    "removeLast": "Remove last",
+    "clearPins": "Clear pins",
+    "pinsLabel": "Pins:",
+    "pinsHelp": "Use pins for checkpoints, sponsor spots, or daily highlights."
+  },
+  "blog": {
+    "latestTitle": "Latest blog",
+    "latestSubtitle": "The newest updates from the road",
+    "viewAll": "View all",
+    "readArrow": "Read →",
+    "dailyTitle": "Daily posts",
+    "dailySubtitle": "Updates from the road",
+    "loading": "Loading posts…",
+    "none": "No posts yet.",
+    "defaultTitle": "Daily update",
+    "loadError": "Failed to load blog posts."
+  },
+  "marquee": {
+    "text": " LIVE • TURNING KILOMETERS INTO SCHOLARSHIPS • FOLLOW ALONG • DONATE • "
+  },
+  "footer": {
+    "subtitle": "Live GPS Mapping + Daily Blog",
+    "privacy": "Privacy",
+    "donate": "Donate",
+    "getInTouch": "Get in touch",
+    "end": "Live GPS Mapping + Daily Blog"
+  },
+  "sponsorGroups": {
+  "run": {
+    "title": "Run Funders",
+    "subtitle": "Organizations, businesses, and community partners making the run financially possible (travel, gear, food, etc.)."
+  },
+  "route": {
+    "title": "The Team Behind The Run",
+    "subtitle": "Meet the team behind the run."
+  }
+},
+"team": { "viewMore": "View more" },
+"support": {
+  "title": "How to support the mission",
+  "subtitle": "Donate, share the mission online, or connect if you want to help by partnering or sponsoring.",
+  "subtitle2": "Anything helps!",
+  "cards": {
+    "donate": {
+      "title": "Donate",
+      "body": "A simple way to fund and be a part of the charity goal. Every dollar counts!",
+      "cta": "Donate"
+    },
+    "share": {
+      "title": "Share online",
+      "bodyPrefix": "Sharing daily posts is often more powerful than a one-time donation.",
+      "linkText": "Six degrees of separation",
+      "cta": "Instagram"
+    },
+    "partners": {
+      "title": "Partners wanted",
+      "body": "Charities, sponsors, and anyone interested in being a part of this mission should reach out!",
+      "cta": "Get in touch"
+    }
+    
+}
+},
+ "contact": {
+    "title": "Get in touch",
+    "subtitle": "Use this form, or email us directly here!",
+    "detailsTitle": "Contact details",
+    "emailLabel": "Email",
+    "instagramLabel": "Instagram",
+    "formTitle": "Contact form",
+    "formSubtitle": "Please be specific in your message, and if you’re representing an organization, include this too.",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message"
+    },
+    "submit": "Submit",
+    "errors": {
+      "missingFields": "Please fill out name, email, and message."
+    },
+    "success": "Message ready to send. (Hook this to Formspree/Netlify Forms or a backend.)"
+  },
+  "sponsorsCarousel": {
+    "title": "Sponsors",
+    "subtitle": "Organizations helping power Project Run Canada.",
+    "scroll": "Scroll →",
+    "none": "No sponsors listed yet.",
+    "learnMore": "Learn more"
+  }
+
+
+}

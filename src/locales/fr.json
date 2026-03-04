@@ -1,0 +1,146 @@
+{
+  "nav": { "home": "Accueil", "blog": "Blog", "contact": "Contact" },
+  "common": { "live": " En Direct", "donate": "Donation", "map": "Carte", "feed": "Actus", "learnMore": "En savoir plus" },
+
+  "hero": {
+    "followStarting": "Suivez la course à partir du",
+    "joinLine": "Joignez-vous à James alors qu’il traverse le Canada en courant pendant 100 jours, 80 km/jour, afin de financer des bourses pour des jeunes ayant aussi vécu un déplacement durant l’enfance."
+  },
+
+  "tracker": {
+    "videoTitle": "Un message vidéo de James",
+    "videoSubtitle": "Pourquoi je cours, et pour qui.",
+    "comingSoon": "À venir",
+    "videoBody": "Le message vidéo arrive dans quelques jours.",
+    "missionEyebrow": "Mission bourse",
+    "missionTitle": "Une bourse pour des jeunes qui ont besoin de soutien",
+    "missionBody": "Après un drame durant l’enfance, l’avenir peut sembler incertain — surtout lorsqu’on dépend encore des autres. Une bourse offre un objectif concret : autonomie, éducation et espoir.",
+    "missionBullets": [
+      "Soutient les objectifs d’études et de carrière",
+      "Réduit le stress financier pendant la transition",
+      "Crée de l’espoir et une stabilité à long terme"
+    ],
+    "gpsEyebrow": "GPS",
+    "gpsTitle": "Suivez en temps réel !",
+    "gpsBody": "Le GPS se met à jour en continu pendant la progression de James. À la fin de chaque journée, le GPS est mis en pause, puis reprend au même endroit le lendemain matin."
+  },
+
+  "brand": {
+    "title": "James cours à travers le Canada",
+    "tagline": "Transformer des kilomètres en bourses"
+  },
+
+  "sponsors": {
+    "title": "Partenaires qui soutiennent la course",
+    "subtitle": "Ces trois façons de soutenir la mission globale de la course sont essentielles à sa réussite. Nous sommes reconnaissants envers chaque personne et organisation qui contribue, que ce soit par du financement, des ressources ou du temps. Merci."
+  },
+
+  "stats": {
+    "daysCompleted": "Jours complétés",
+    "kilometersRun": "Kilomètres courus",
+    "amountRaised": "Montant recueilli",
+    "km": "km",
+    "currency": "$"
+  },
+
+  "map": {
+    "title": "Carte GPS",
+    "hint": "Faites défiler pour zoomer • Glissez pour déplacer • Cliquez pour ajouter un pin",
+    "reset": "Réinitialiser",
+    "removeLast": "Retirer le dernier",
+    "clearPins": "Effacer les pins",
+    "pinsLabel": "Pin :",
+    "pinsHelp": "Utilisez les pins pour les étapes, les sponsors ou les faits marquants.",
+    "pin": "pin"
+  },
+
+  "blog": {
+    "latestTitle": "Dernier blog",
+    "latestSubtitle": "Les nouvelles du parcours",
+    "viewAll": "Voir tout",
+    "readArrow": "Lire →",
+    "dailyTitle": "Publications quotidiennes",
+    "dailySubtitle": "Nouvelles du parcours",
+    "loading": "Chargement des publications…",
+    "none": "Aucune publication pour l’instant.",
+    "defaultTitle": "Mise à jour du jour",
+    "loadError": "Impossible de charger les publications."
+  },
+
+  "marquee": {
+    "text": " DIRECT • TRANSFORMER DES KILOMÈTRES EN BOURSES • SUIVEZ L’AVENTURE • DONNEZ • "
+  },
+
+  "footer": {
+    "subtitle": "Carte GPS en direct + blog quotidien",
+    "privacy": "Confidentialité",
+    "donate": "Donner",
+    "getInTouch": "Nous contacter",
+    "end": "Carte GPS en direct + blog quotidien"
+  },
+
+  "sponsorGroups": {
+    "run": {
+      "title": "Partenaires de la course",
+      "subtitle": "Organisations, entreprises et partenaires communautaires qui rendent la course possible (déplacements, équipement, alimentation, etc.)."
+    },
+    "route": {
+      "title": "L’équipe derrière la course",
+      "subtitle": "Rencontrez l’équipe qui soutient la course."
+    }
+  },
+
+  "team": { "viewMore": "Voir plus" },
+
+  "support": {
+    "title": "Comment soutenir la mission",
+    "subtitle": "Donnez, partagez la mission en ligne, ou contactez-nous si vous voulez aider en devenant partenaire ou sponsor.",
+    "subtitle2": "Chaque geste compte !",
+    "cards": {
+      "donate": {
+        "title": "Donner",
+        "body": "Une façon simple de contribuer à l’objectif caritatif. Chaque dollar compte !",
+        "cta": "Donner"
+      },
+      "share": {
+        "title": "Partager en ligne",
+        "bodyPrefix": "Partager les publications quotidiennes est souvent plus puissant qu’un don ponctuel.",
+        "linkText": "Six degrés de séparation",
+        "cta": "Instagram"
+      },
+      "partners": {
+        "title": "Partenaires recherchés",
+        "body": "Organismes, sponsors et toute personne intéressée à soutenir la mission : contactez-nous !",
+        "cta": "Nous contacter"
+      }
+    }
+  },
+
+  "contact": {
+    "title": "Nous contacter",
+    "subtitle": "Utilisez ce formulaire, ou écrivez-nous directement ici !",
+    "detailsTitle": "Coordonnées",
+    "emailLabel": "Courriel",
+    "instagramLabel": "Instagram",
+    "formTitle": "Formulaire de contact",
+    "formSubtitle": "Soyez précis dans votre message et, si vous représentez une organisation, mentionnez-le aussi.",
+    "fields": {
+      "name": "Nom",
+      "email": "Courriel",
+      "message": "Message"
+    },
+    "submit": "Envoyer",
+    "errors": {
+      "missingFields": "Veuillez remplir le nom, le courriel et le message."
+    },
+    "success": "Message prêt à être envoyé. (À connecter à Formspree/Netlify Forms ou à un backend.)"
+  },
+
+  "sponsorsCarousel": {
+    "title": "Sponsors",
+    "subtitle": "Organisations qui soutiennent Project Run Canada.",
+    "scroll": "Défiler",
+    "none": "Aucun sponsor pour le moment.",
+    "learnMore": "En savoir plus"
+  }
+}

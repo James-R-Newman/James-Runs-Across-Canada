@@ -18,7 +18,7 @@ import nature from "./assets/nature.avif";
 import charity from "./assets/charity.png";
 import janine from "./assets/janine.webp";
 import karley from "./assets/karley.webp";
-
+import { useTranslation } from "react-i18next";
 
 
 
@@ -103,6 +103,8 @@ const SPONSOR_GROUPS = [
 
 
 function TeamCard({ person }) {
+  const { t } = useTranslation();
+
   const CardInner = (
     <Glass className="p-6 h-full">
       <div className="flex items-start gap-4">
@@ -127,7 +129,7 @@ function TeamCard({ person }) {
           </div>
 
           <div className="mt-4 text-xs font-black uppercase tracking-widest text-white/60">
-            View more →
+            {t("team.viewMore")} →
           </div>
         </div>
       </div>
@@ -216,6 +218,8 @@ function RunFundersLogoRows() {
 
 
 function SponsorsGridSection({ groups = SPONSOR_GROUPS }) {
+  const { t } = useTranslation();
+
   return (
     <ParallaxSection
       bg={nature}
@@ -228,10 +232,10 @@ function SponsorsGridSection({ groups = SPONSOR_GROUPS }) {
         <div className="mx-auto max-w-[1400px] px-4 sm:px-8 py-14">
           <div className="max-w-3xl">
             <div className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
-              Partners powering the run
+                {t("sponsors.title")}
             </div>
             <div className="mt-2 text-sm sm:text-base text-white/80 leading-7">
-              Each of these three ways to support the overarching mission of the run is critical to its success. We’re grateful for every individual and organization that contributes, whether through funding, resources, or time. Thank you.
+                {t("sponsors.subtitle")}
             </div>
           </div>
 
@@ -241,9 +245,11 @@ function SponsorsGridSection({ groups = SPONSOR_GROUPS }) {
                 <div className="flex flex-wrap items-end justify-between gap-3">
                   <div className="max-w-3xl">
                     <div className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
-                      {g.title}
+                        {t(`sponsorGroups.${g.key}.title`)}
                     </div>
-                    <div className="mt-1 text-sm text-white/70">{g.subtitle}</div>
+                    <div className="mt-1 text-sm text-white/70">
+                      {t(`sponsorGroups.${g.key}.subtitle`)}
+                    </div>
                   </div>
 
                   {/* <div className="text-xs font-black uppercase tracking-widest text-white/60">
@@ -350,6 +356,8 @@ async function fetchSanityPosts() {
 }
 
 function useSanityPosts() {
+  const { t } = useTranslation(); // ✅ add this
+
   const [posts, setPosts] = useState([]);
   const [postsLoading, setPostsLoading] = useState(true);
   const [postsError, setPostsError] = useState(null);
@@ -367,7 +375,7 @@ function useSanityPosts() {
       } catch (e) {
         console.error(e);
         if (!alive) return;
-        setPostsError("Failed to load blog posts.");
+        setPostsError(t("blog.loadError")); // ✅ now works
       } finally {
         if (alive) setPostsLoading(false);
       }
@@ -376,10 +384,11 @@ function useSanityPosts() {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [t]); // ✅ add t as dependency
 
   return { posts, postsLoading, postsError };
 }
+
 
 
 
@@ -634,6 +643,7 @@ function RunCounters({
   amountRaised = 1000, // swap this to real data later
 }) {
   const [tick, setTick] = React.useState(0);
+  const { t } = useTranslation();
 
   // refresh once a minute so "days passed" flips naturally at midnight-ish
   React.useEffect(() => {
@@ -646,9 +656,9 @@ function RunCounters({
 
   return (
     <div className="mt-6 grid gap-4 sm:grid-cols-3">
-      <StatCard label="Days completed" value={days} suffix={` / ${totalGoalDays}`} />
-      <StatCard label="Kilometers run" value={km} suffix=" km" />
-      <StatCard label="Amount raised" value={amountRaised} prefix="$" />
+      <StatCard label={t("stats.daysCompleted")} value={days} suffix={` / ${totalGoalDays}`} />
+      <StatCard label={t("stats.kilometersRun")} value={km} suffix={t("stats.km")} />
+      <StatCard label={t("stats.amountRaised")} value={amountRaised} prefix={t("stats.currency")} />
     </div>
   );
 }
@@ -667,8 +677,11 @@ function SectionTitle({ title, subtitle }) {
   );
 }
 
-function Marquee({ text = " LIVE • TURNING KILOMETERS INTO SCHOLARSHIPS • FOLLOW ALONG • DONATE • " }) {
+function Marquee() {
+  const { t } = useTranslation();
+  const text = t("marquee.text");
   const repeated = useMemo(() => Array.from({ length: 12 }).map(() => text).join(""), [text]);
+
   return (
     <div className="overflow-hidden border-y border-white/15 bg-yellow-300">
       <div
@@ -682,43 +695,83 @@ function Marquee({ text = " LIVE • TURNING KILOMETERS INTO SCHOLARSHIPS • FO
   );
 }
 
+
+
+
 function TopNav({ tab, setTab }) {
+  const { t, i18n } = useTranslation();
+console.log("LANG:", i18n.language, "RES fr?", !!i18n.getResourceBundle?.("fr", "translation"));
+
   const tabs = [
-    { key: "home", label: "Home" },
-    { key: "blog", label: "Blog" },
-    //{ key: "story", label: "My Why" },
-    { key: "contact", label: "Contact" },
+    { key: "home", label: t("nav.home") },
+    { key: "blog", label: t("nav.blog") },
+    { key: "contact", label: t("nav.contact") }
   ];
+
+  const setLang = (lng) => {
+    i18n.changeLanguage(lng);
+    localStorage.setItem("lang", lng);
+  };
 
   return (
     <div className="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/60 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
+      <div className="flex w-full items-center justify-between gap-3 px-4 sm:px-8 py-3">
+
         <div className="flex min-w-0 items-center gap-3">
           <Pill className="hidden sm:inline-flex bg-yellow-300 text-neutral-950 border-yellow-200/40">
             <span className="mr-2 inline-block h-2 w-2 rounded-full bg-neutral-950" />
-            Live
+            {t("common.live")}
           </Pill>
+
           <div className="hidden lg:block min-w-0 pl-2">
             <div className="truncate text-sm sm:text-base font-black uppercase tracking-tight text-white">
-               James Runs Canada
+              {t("brand.title")}
             </div>
-            <div className="hidden sm:block text-xs uppercase text-white/70">Turning kilometers into scholarships</div>
+            <div className="hidden sm:block text-xs uppercase text-white/70">
+              {t("brand.tagline")}
+            </div>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          {tabs.map((t) => (
+          {/* Language toggle */}
+          <div className="mr-2 flex items-center rounded-full border border-white/20 bg-white/5 p-1">
             <button
-              key={t.key}
-              onClick={() => setTab(t.key)}
+              onClick={() => setLang("en")}
+              className={
+                "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wide " +
+                (i18n.language === "en"
+                  ? "bg-yellow-300 text-neutral-950"
+                  : "text-white/80 hover:text-white")
+              }
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLang("fr")}
+              className={
+                "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wide " +
+                (i18n.language === "fr"
+                  ? "bg-yellow-300 text-neutral-950"
+                  : "text-white/80 hover:text-white")
+              }
+            >
+              FR
+            </button>
+          </div>
+
+          {tabs.map((tbtn) => (
+            <button
+              key={tbtn.key}
+              onClick={() => setTab(tbtn.key)}
               className={
                 "rounded-full px-3 py-1.5 text-sm font-black uppercase tracking-wide transition border " +
-                (tab === t.key
+                (tab === tbtn.key
                   ? "border-yellow-300 bg-yellow-300 text-neutral-950"
                   : "border-white/20 bg-white/5 text-white hover:border-yellow-300/60 hover:bg-white/10")
               }
             >
-              {t.label}
+              {tbtn.label}
             </button>
           ))}
         </div>
@@ -731,6 +784,7 @@ function TopNav({ tab, setTab }) {
 
 
 
+
 // --- Interactive SVG Map (pan/zoom + pin placement) ---
 function InteractiveMap({ pins, setPins }) {
   const containerRef = useRef(null);
@@ -738,6 +792,7 @@ function InteractiveMap({ pins, setPins }) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [drag, setDrag] = useState(null);
   const [hoverPinId, setHoverPinId] = useState(null);
+  const { t } = useTranslation();
 
   const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
@@ -779,7 +834,7 @@ function InteractiveMap({ pins, setPins }) {
     const y = (cy - rect.height / 2 - offset.y) / scale + 250;
 
     if (x < 0 || x > 1000 || y < 0 || y > 500) return;
-    setPins((prev) => [...prev, { id: uid(), x, y, label: `Pin ${prev.length + 1}` }]);
+    setPins((prev) => [...prev, { id: uid(), x, y, label: `${t("map.pin")} ${prev.length + 1}` }]);
   };
 
   const resetView = () => {
@@ -793,22 +848,22 @@ function InteractiveMap({ pins, setPins }) {
     <Glass className="overflow-hidden">
       <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
         <div>
-          <div className="text-sm font-black uppercase tracking-widest text-white">GPS map</div>
-          <div className="text-xs text-white/70">Scroll to zoom • Drag to pan • Click to drop a pin</div>
+          <div className="text-sm font-black uppercase tracking-widest text-white">{t("map.title")}</div>
+          <div className="text-xs text-white/70">{t("map.hint")}</div>
         </div>
         <div className="flex items-center gap-2">
-          <button
+          {/* <button
             onClick={resetView}
             className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-white hover:border-yellow-300/60"
           >
-            Reset
+            {t("map.reset")}
           </button>
           <button
             onClick={removeLast}
             className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-white hover:border-yellow-300/60"
           >
-            Remove last
-          </button>
+            {t("map.removeLast")}
+          </button> */}
         </div>
       </div>
 
@@ -825,15 +880,15 @@ function InteractiveMap({ pins, setPins }) {
           resetView();
         }}
       >
-        <button
+        {/* <button
           onClick={(e) => {
             e.stopPropagation();
             setPins([]);
           }}
           className="absolute right-3 top-3 rounded-full border border-white/20 bg-neutral-950/60 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-white backdrop-blur hover:border-yellow-300/60"
         >
-          Clear pins
-        </button>
+          {t("map.clearPins")}
+        </button> */}
 
         <div className="h-full w-full" onClick={onMapClick}>
           <svg viewBox="0 0 1000 500" className="h-full w-full">
@@ -894,10 +949,9 @@ function InteractiveMap({ pins, setPins }) {
 
       <div className="border-t border-white/10 px-4 py-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="text-xs text-white/80">
+          {/* <div className="text-xs text-white/80">
             Pins: <span className="font-black text-white">{pins.length}</span>
-          </div>
-          <div className="text-xs text-white/60">Use pins for checkpoints, sponsor spots, or daily highlights.</div>
+          </div> */}
         </div>
       </div>
     </Glass>
@@ -962,6 +1016,8 @@ function BlogSummary({ posts, onOpenPost }) {
 
 function HomeHeroTop({ latestPostId, onOpenPost }) {
   const clipId = useId();
+  const { t } = useTranslation();
+
 
   return (
     <section className=" hero relative overflow-hidden bg-white">
@@ -1014,10 +1070,10 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
               </p>
 
               <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white/80">
-                Follow the run starting{" "}
-                <span className="font-black text-white">May 18th</span>{", "}
-                2026!
+                {t("hero.followStarting")}{" "}
+                <span className="font-black text-white">May 18th</span>, 2026!
               </p>
+
 
 
               {/* <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white">
@@ -1025,9 +1081,9 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
               </p>*/}
 
               <p className="mt-4 max-w-2xl text-base sm:text-xl leading-7 text-white/80">
-                Join James as he runs across Canada for 100 days, 80km/day, to fund scholarships for youth
-                who’ve also been displaced in childhood.
-              </p> 
+                {t("hero.joinLine")}
+              </p>
+
 
               
 
@@ -1038,7 +1094,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                   onClick={() => document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })}
                   className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
                 >
-                  Map
+                  {t("common.map")}
                 </button>
 
                 <a
@@ -1046,14 +1102,14 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                   onClick={(e) => e.preventDefault()}
                   className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
                 >
-                  Donate
+                  {t("common.donate")}
                 </a>
 
                 <button
                   onClick={() => latestPostId && onOpenPost(latestPostId)}
                   className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
                 >
-                  Feed
+                  {t("common.feed")}
                 </button>
               </div>
 
@@ -1095,7 +1151,13 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
 
 function HomeTrackerSection({ pins, setPins }) {
+  const { t } = useTranslation();
+  const bullets = t("tracker.missionBullets", { returnObjects: true });
+  const safeBullets = Array.isArray(bullets) ? bullets : [];
+
+  
   return (
+    
     <section className="home-tracker-section bg-white text-neutral-950">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pt-0 pb-16">
         {/* TOP: Video (left) + Mission (right) */}
@@ -1105,18 +1167,18 @@ function HomeTrackerSection({ pins, setPins }) {
             <div className="flex items-end justify-between gap-3">
               <div>
                 <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
-                  A Video message from James
+                  {t("tracker.videoTitle")}
                 </div>
-                <div className="mt-1 text-sm text-neutral-950/70">Why I’m running, and who it’s for.</div>
+                <div className="mt-1 text-sm text-neutral-950/70">{t("tracker.videoSubtitle")}</div>
               </div>
               <div className="inline-flex items-center rounded-full border border-neutral-950/15 bg-neutral-950/5 px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-950">
-                Coming soon
+                {t("tracker.comingSoon")}
               </div>
             </div>
 
             <div className="mt-4 rounded-2xl border border-neutral-950/10 bg-neutral-950/[0.03] p-6">
               <div className="text-sm font-semibold text-neutral-950/80">
-                Video message coming in a couple days.
+                {t("tracker.videoBody")}
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
@@ -1125,7 +1187,7 @@ function HomeTrackerSection({ pins, setPins }) {
                   onClick={(e) => e.preventDefault()}
                   className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
                 >
-                  Donate
+                  {t("common.donate")}
                 </a>
                 <button
                   onClick={() =>
@@ -1133,67 +1195,64 @@ function HomeTrackerSection({ pins, setPins }) {
                   }
                   className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]"
                 >
-                  Map
+                  {t("common.map")}
                 </button>
               </div>
             </div>
           </div>
 
           {/* Mission (RIGHT) — transparent (no card) */}
-<div className="self-center w-full max-w-xl">
-  <div className="text-center">
-    <div className="text-xs font-black uppercase tracking-widest text-neutral-950/60">
-      Scholarship mission
-    </div>
+          <div className="self-center w-full max-w-xl">
+            <div className="text-center">
+              <div className="text-xs font-black uppercase tracking-widest text-neutral-950/60">
+                {t("tracker.missionEyebrow")}
+              </div>
 
-    <div className="mt-2 text-2xl sm:text-3xl font-black uppercase tracking-tight text-neutral-950">
-      A scholarship for youth in need
-    </div>
+              <div className="mt-2 text-2xl sm:text-3xl font-black uppercase tracking-tight text-neutral-950">
+                {t("tracker.missionTitle")}
+              </div>
 
-    
-    {/* <div className="mt-2 text-[11px] font-black uppercase tracking-widest text-neutral-950/50">
-      In support of
-    </div> */}
-  </div>
+              
+              {/* <div className="mt-2 text-[11px] font-black uppercase tracking-widest text-neutral-950/50">
+                In support of
+              </div> */}
+            </div>
 
-  <div className="mt-6 text-left">
-    <p className="text-sm sm:text-base leading-7 text-neutral-950/80">
-      After childhood tragedy, the future can feel uncertain—especially when you’re still dependent on others.
-      A scholarship creates something tangible to aim for: independence, education, and hope.
-    </p>
+            <div className="mt-6 text-left">
+              <p className="text-sm sm:text-base leading-7 text-neutral-950/80">
+                {t("tracker.missionBody")}              
+              </p>
 
-    <ul className="mt-4 space-y-2 text-sm sm:text-base text-neutral-950/80">
-      {[
-        "Supports education and career goals",
-        "Reduces financial stress during transition",
-        "Creates hope and long-term stability",
-      ].map((item) => (
-        <li key={item} className="flex gap-3">
-          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-300" />
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
+              <ul className="mt-4 space-y-2 text-sm sm:text-base text-neutral-950/80">
+                {safeBullets.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-300" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
 
-    <div className="mt-6 flex flex-wrap justify-center sm:justify-start gap-3">
-      <a className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200">
-        Donate
-      </a>
-      <a className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]">
-        Learn more
-      </a>
-    </div>
-  </div>
-  <div className="mt-4 w-full rounded-3xl border border-neutral-950/10 bg-white px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.08)] flex items-center justify-center">
-    <img
-      src={charity}
-      alt="Charity partner"
-      className="h-18 sm:h-max w-auto object-contain"
-      loading="lazy"
-      draggable={false}
-    />
-  </div>
-</div>
+
+              <div className="mt-6 flex flex-wrap justify-center sm:justify-start gap-3">
+                <a className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200">
+                  {t("common.donate")}
+                </a>
+                <a className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]">
+                  {t("common.learnMore")}
+                </a>
+              </div>
+            </div>
+            <div className="mt-4 w-full rounded-3xl border border-neutral-950/10 bg-white px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.08)] flex items-center justify-center">
+              <img
+                src={charity}
+                alt="Charity partner"
+                className="h-18 sm:h-max w-auto object-contain"
+                loading="lazy"
+                draggable={false}
+              />
+            </div>
+            
+          </div>
 
 
 
@@ -1234,19 +1293,18 @@ function HomeTrackerSection({ pins, setPins }) {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
               <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
-                GPS tracker
+                {t("tracker.gpsEyebrow")}
               </div>
               <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950">
-                Follow In Real-time!
+                {t("tracker.gpsTitle")}
               </div>
               <div className="mt-2 text-sm text-neutral-950/70">
-                The gps tracker updates continuously as James makes progress each day. At the end of each day the tracker
-                is paused and James will continue his run from there the next morning.
+                 {t("tracker.gpsBody")}
               </div>
             </div>
 
             <div className="inline-flex items-center rounded-full border border-neutral-950/15 bg-neutral-950/5 px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-950">
-              Live
+                {t("common.live")}
             </div>
           </div>
 
@@ -1291,6 +1349,8 @@ function HomeTrackerSection({ pins, setPins }) {
 
 
 function LatestBlogBreakSection({ posts, onOpenPost, onViewAll }) {
+  const { t } = useTranslation();
+  
   const latest = useMemo(() => {
     return [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
   }, [posts]);
@@ -1304,15 +1364,15 @@ function LatestBlogBreakSection({ posts, onOpenPost, onViewAll }) {
       <div className="mx-auto max-w-6xl px-4 py-14">
         <div className="flex items-end justify-between gap-3">
           <div className="text-center sm:text-left">
-            <div className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white">Latest blog</div>
-            <div className="mt-2 text-sm text-white/60">The newest updates from the road</div>
+            <div className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white">{t("blog.latestTitle")}</div>
+            <div className="mt-2 text-sm text-white/60">{t("blog.latestSubtitle")}</div>
           </div>
 
           <button
             onClick={onViewAll}
             className="shrink-0 text-sm font-black uppercase tracking-widest text-white/70 hover:text-white"
           >
-            View all
+            {t("blog.viewAll")}
           </button>
         </div>
 
@@ -1337,7 +1397,7 @@ function LatestBlogBreakSection({ posts, onOpenPost, onViewAll }) {
                   <div className="text-xs font-black uppercase tracking-widest text-white/50">{formatDate(p.date)}</div>
                   <div className="mt-2 text-lg font-black uppercase tracking-tight text-white">{p.title}</div>
                   <div className="mt-2 text-sm leading-6 text-white/70">{startOfDayExcerpt(p.content, 130)}</div>
-                  <div className="mt-4 text-xs font-black uppercase tracking-widest text-yellow-300">Read →</div>
+                  <div className="mt-4 text-xs font-black uppercase tracking-widest text-yellow-300">{t("blog.readArrow")} </div>
                 </div>
               </div>
             </button>
@@ -1348,87 +1408,34 @@ function LatestBlogBreakSection({ posts, onOpenPost, onViewAll }) {
   );
 }
 
-function CharitySection() {
-  return (
-    <ParallaxSection bg={bikingBg} minH="min-h-[88vh]" objectPosition="50% 50%" strength={90}>
-      <div className="mx-auto max-w-6xl px-4 py-16">
-        <div className="grid items-center gap-6 lg:grid-cols-[1fr_420px]">
-          <div className="max-w-2xl">
-            <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">Charity</Pill>
-            <div className="mt-4 text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
-              James' Mission - Turning Kilometers into Scholarships
-            </div>
-            <div className="mt-3 text-sm sm:text-base leading-7 text-white/85">
-              Why a scholarship?  
 
-              A scholarship can be one of the best ways to support a child after a tragedy. You see, after displacement in childhood, it’s easy to feel the future is incredibly uncertain - especially as you’re still dependent on others. So, having something tangible in the future that points towards independence, and following one’s dreams, provides hope. Hope that may not otherwise be there.  
-
-              Follow along on my journey to run across Canada, raising funds for kids in need. Please consider supporting this mission in any way you can. Every little bit makes a huge difference. 
-              
-
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              <a
-                href="#"
-                onClick={(e) => e.preventDefault()}
-                className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
-              >
-                Donate
-              </a>
-              <a
-                href="#"
-                onClick={(e) => e.preventDefault()}
-                className="rounded-full border border-white/20 bg-white/5 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-white hover:border-yellow-300/50 hover:bg-white/10"
-              >
-                Learn more
-              </a>
-            </div>
-          </div>
-
-          <Glass className="p-6">
-            <div className="text-sm font-black uppercase tracking-widest text-white">[Insert Chariry Name]</div>
-            <div className="mt-2 space-y-3 text-sm text-white/85">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="text-xs font-black uppercase tracking-widest text-white/70">What we do</div>
-                <div className="mt-1">___ Chairty supports ____.</div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="text-xs font-black uppercase tracking-widest text-white/70">Who it helps</div>
-                <div className="mt-1">Name the group and what changes for them.</div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="text-xs font-black uppercase tracking-widest text-white/70">Where funds go</div>
-                <div className="mt-1">Be specific: programs, costs, or direct support.</div>
-              </div>
-            </div>
-          </Glass>
-        </div>
-      </div>
-    </ParallaxSection>
-  );
-}
 
 function SupportSection({ setTab }) {
-  return (
+    const { t } = useTranslation();
+  
+    return (
     <section className="relative overflow-hidden bg-neutral-950">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(253,224,71,0.10),transparent_55%)]" />
       <div className="mx-auto max-w-6xl px-4 py-16 relative">
         <div className="max-w-2xl">
           {/* <Pill className="bg-white/10 border-white/20">More</Pill> */}
           <div className="mt-4 text-2xl sm:text-4xl font-black uppercase tracking-tight text-white">
-            How to support the mission
+              {t("support.title")}
           </div>
           <div className="mt-3 text-sm sm:text-base leading-7 text-white/80">
-            Donate, share the mission online, or connect if you want to help by partnering or sponsoring. Anything helps!
+            {t("support.subtitle")}
+            <br />
+            {t("support.subtitle2")}
           </div>
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           <Glass className="p-6">
-            <div className="text-sm font-black uppercase tracking-wide text-white">Donate</div>
+            <div className="text-sm font-black uppercase tracking-wide text-white">
+              {t("support.cards.donate.title")}
+            </div>
             <div className="mt-2 text-sm text-white/80">
-              A simple way to fund and be apart of the charity goal. Every dollar counts!
+              {t("support.cards.donate.body")}
             </div>
             <div className="mt-10 flex flex-wrap gap-2">
             <a
@@ -1436,22 +1443,24 @@ function SupportSection({ setTab }) {
               onClick={(e) => e.preventDefault()}
               className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
             >
-              Donate
+              {t("support.cards.donate.cta")}
             </a>
           
         </div>
           </Glass>
           <Glass className="p-6">
-            <div className="text-sm font-black uppercase tracking-wide text-white">Share Online</div>
+            <div className="text-sm font-black uppercase tracking-wide text-white">
+              {t("support.cards.share.title")}
+            </div>
             <div className="mt-2 text-sm text-white/80">
-              Sharing daily posts is often more powerful than a one-time donation.{" "}
+              {t("support.cards.share.bodyPrefix")}{" "}
               <a
                 href="https://en.wikipedia.org/wiki/Six_degrees_of_separation"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="text-yellow-300 underline underline-offset-4 hover:text-yellow-200"
               >
-                Six degrees of separation
+                {t("support.cards.share.linkText")}
               </a>
               !
 
@@ -1462,51 +1471,39 @@ function SupportSection({ setTab }) {
               onClick={(e) => e.preventDefault()}
               className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
             >
-              Instagram
+              {t("support.cards.share.cta")}
             </a>
             
           </div>
 
           </Glass>
           <Glass className="p-6">
-            <div className="text-sm font-black uppercase tracking-wide text-white">Partners Wanted</div>
-            <div className="mt-2 text-sm text-white/80">Chairties, sponsors, and anyone interest in being apart of this mission should reach out!</div>
+            <div className="text-sm font-black uppercase tracking-wide text-white">{t("support.cards.partners.title")}</div>
+            <div className="mt-2 text-sm text-white/80">{t("support.cards.partners.body")}</div>
             <div className="mt-10 flex flex-wrap gap-2">
           
             <button
               onClick={() => setTab("contact")}
               className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
             >
-              Get in touch
+              {t("support.cards.partners.cta")}
             </button>
           </div>
           </Glass>
         </div>
 
-        {/* <div className="mt-10 flex flex-wrap gap-2">
-          <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
-            className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
-          >
-            Donate
-          </a>
-          <button
-            onClick={() => setTab("contact")}
-            className="rounded-full border border-white/20 bg-white/5 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-white hover:border-yellow-300/50 hover:bg-white/10"
-          >
-            Get in touch
-          </button>
-        </div> */}
+
       </div>
     </section>
   );
 }
 
+
+
 function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
   const sorted = useMemo(() => [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)), [posts]);
   const latestPostId = sorted[0]?._id || sorted[0]?.id;
-
+  const { t } = useTranslation();
 
   return (
     <div className="text-white">
@@ -1517,17 +1514,18 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
       <SupportSection setTab={setTab} />
 
       <footer className="border-t border-white/10 bg-neutral-950">
-        <div className="mx-auto max-w-6xl px-4 py-10">
+        <div className="w-full px-4 sm:px-8 py-10">
+
           <div className="grid gap-6 sm:grid-cols-2 sm:items-end">
             <div>
               <div className="text-base font-black uppercase tracking-tight text-white">James Runs Canada</div>
               <div className="mt-2 max-w-xl text-sm text-white/60">
-                Live GPS Mapping + Daily Blog
+                Live GPS + Daily Blog
               </div>
             </div>
 
             <div className="sm:text-right">
-              <div className="text-sm font-semibold text-white/60">© {new Date().getFullYear()} James Runs Canada</div>
+              <div className="text-sm font-semibold texft-white/60">© {new Date().getFullYear()} James Runs Canada</div>
               <div className="mt-2 flex flex-wrap gap-3 sm:justify-end">
                 <a href="#" onClick={(e) => e.preventDefault()} className="text-sm font-semibold text-white/70 hover:text-white">
                   Privacy
@@ -1536,7 +1534,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
                   Donate
                 </a>
                 <button onClick={() => setTab("contact")} className="text-sm font-semibold text-white/70 hover:text-white">
-                  Get in touch
+                  Get In Touch
                 </button>
               </div>
             </div>
@@ -1553,6 +1551,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
 /** BLOG (read-only) */
 function BlogTab({ posts, focusPostId, onFocused, postsLoading, postsError }) {
   const listRef = useRef(null);
+  const { t } = useTranslation();
 
   const sorted = useMemo(
     () => [...(posts || [])].sort((a, b) => new Date(b.date) - new Date(a.date)),
@@ -1583,14 +1582,14 @@ function BlogTab({ posts, focusPostId, onFocused, postsLoading, postsError }) {
       <div className="mx-auto max-w-6xl px-4 py-10">
         <Glass className="min-h-[calc(100vh-140px)]">
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-            <SectionTitle title="Daily posts" subtitle="Updates from the road" />
+            <SectionTitle title={t("blog.dailyTitle")} subtitle={t("blog.dailySubtitle")} />
             <div className="text-xs text-white/60">{sorted.length} posts</div>
           </div>
 
           <div ref={listRef} className="p-4">
             {postsLoading ? (
               <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
-                Loading posts…
+                {t("blog.loading")}
               </div>
             ) : postsError ? (
               <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200">
@@ -1598,7 +1597,7 @@ function BlogTab({ posts, focusPostId, onFocused, postsLoading, postsError }) {
               </div>
             ) : sorted.length === 0 ? (
               <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
-                No posts yet.
+                {t("blog.none")}
               </div>
             ) : (
               <div className="space-y-4">
@@ -1611,7 +1610,7 @@ function BlogTab({ posts, focusPostId, onFocused, postsLoading, postsError }) {
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="min-w-0">
                         <div className="truncate text-base font-black uppercase tracking-wide text-white">
-                          {p.title || "Daily update"}
+                          {p.title || t("blog.defaultTitle")}
                         </div>
                         <div className="mt-0.5 text-xs text-white/60">{formatDate(p.date)}</div>
                       </div>
@@ -1653,127 +1652,29 @@ function BlogTab({ posts, focusPostId, onFocused, postsLoading, postsError }) {
 
 
 
-/** MY STORY: Ukraine + Family photo backgrounds */
-function StoryTab() {
-  return (
-    <div className="text-white">
-      <ParallaxSection bg={familyBg} minH="min-h-[80vh]" objectPosition="65% 35%" strength={85}>
-        <div className="mx-auto max-w-3xl px-4 py-14">
-          <Glass>
-            <div className="border-b border-white/10 px-6 py-5">
-              <div className="text-base font-black uppercase tracking-widest text-white">My Why</div>
-              <div className="mt-1 text-sm text-white/70">The “why” behind the run — and the charity mission.</div>
-            </div>
-            <div className="space-y-4 px-6 py-6 text-sm leading-7 text-white/85">
-              <p>
-                <span className="font-black text-white">The moment it became personal.</span> 
-                 It is absolutely crazy looking back at my life. 
-                From how low I once felt, after losing my parents at a young age, and so suddenly, to bouncing around homes and schools, and to being treated differently because of it.
-                And now, I have done amazing things (like graduate), have awesome people in my life, and I owe it all to the charities and people that supported me along the way.
-                There were times in life when I didn't beleive in myself. But others did.
-                And that made all the difference.
-                I'm here to pay it forward, and help other youth in care believe in themselves too.
-                I'm here to show those that supported me that their efforts made a difference.
-                And I'm here to honour my parents' memory by making a positive impact in the world.
-                Thank you for your support.
 
-              </p>
-              <p>
-                <span className="font-black text-white">The goal.</span> 
-                These scholarships are for kids in alternative care (foster care, group homes, or kinship care) — kids who’ve lost their caregivers and are now being raised by someone else.
-                They help cover real barriers like tuition, books, housing, and transportation, so students can stay focused on their future instead of being derailed by financial stress.
-                
-                Beyond the money, the program is about mentorship and community. One of the hardest parts of growing up so differently, is feeling isolated and alone.
-                So I care about giving these people someone to relate to, and to foster a community where they can feel supported and understood.
-                Everyone deserves to feel like they belong, and that their voice matters.
-                
-              </p>
-            </div>
-          </Glass>
-        </div>
-      </ParallaxSection>
 
-      <ParallaxSection bg={ukraineBg} minH="min-h-[80vh]" objectPosition="50% 35%" strength={85}>
-  <div className="mx-auto max-w-3xl px-4 py-14">
-    <Glass className="w-full">
-      <div className="border-b border-white/10 px-6 py-5">
-        <div className="text-base font-black uppercase tracking-widest text-white">
-          How Project Run Canada works - and how your support turns kilometers in scholarships
-        </div>
-        <div className="mt-1 text-sm text-white/70">How we plan on acomplishing our goals!</div>
-      </div>
 
-      <div className="px-6 py-6">
-        <div className="grid gap-4 md:grid-cols-2 items-stretch">
-          {/* Card 1 */}
-          <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/80">
-            <div className="text-xs font-black uppercase tracking-widest text-white">
-              Project Run Canada — the plan
-            </div>
-
-            <ul className="mt-3 space-y-2">
-              {[
-                "Daily Instagram + blog updates with photos, stories, and distance.",
-                "Live GPS tracker so anyone can follow in real time. The tracker will be turned off at the end of each day and resumed from that idling spot the next morning.",
-                "Visits with charity partners along the route to show impact first-hand.",
-                "Clear donation and milestone updates so supporters see progress.",
-              ].map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-300" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Card 2 */}
-          <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/80">
-            <div className="text-xs font-black uppercase tracking-widest text-white">How you can support</div>
-
-            <ul className="mt-3 space-y-2">
-              {[
-                ["Donate", "Directly fuels the scholarship fund."],
-                ["Share", "More reach = more supporters (and more impact)."],
-                ["Sponsor", "Any organizations wanting to help fuel the run with their products or services."],
-                ["Partner charities", "Charity organizations are welcome to connect with us along the route!"],
-              ].map(([title, desc]) => (
-                <li key={title} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-300" />
-                  <div>
-                    <div className="font-black text-white">{title}</div>
-                    <div className="text-white/65 text-sm leading-6">{desc}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </Glass>
-  </div>
-</ParallaxSection>
-
-    </div>
-  );
-}
 function SponsorCarousel({ sponsors = [] }) {
+  const { t } = useTranslation();
+
   return (
     <Glass className="mt-6 overflow-hidden">
       <div className="flex items-end justify-between gap-3 border-b border-white/10 px-6 py-5">
         <div>
-          <div className="text-base font-black uppercase tracking-widest text-white">Sponsors</div>
-          <div className="mt-1 text-sm text-white/70">Organizations helping power Project Run Canada.</div>
+          <div className="text-base font-black uppercase tracking-widest text-white">{t("sponsorsCarousel.title")}</div>
+          <div className="mt-1 text-sm text-white/70">{t("sponsorsCarousel.subtitle")}</div>
         </div>
 
         <div className="hidden sm:block text-xs font-black uppercase tracking-widest text-white/60">
-          Scroll →
+          {t("sponsorsCarousel.scroll")} →
         </div>
       </div>
 
       <div className="px-6 py-6">
         {sponsors.length === 0 ? (
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
-            No sponsors listed yet.
+            {t("sponsorsCarousel.none")}
           </div>
         ) : (
           <div className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -1803,7 +1704,7 @@ function SponsorCarousel({ sponsors = [] }) {
 
                   {s.href ? (
                     <div className="mt-4 text-xs font-black uppercase tracking-widest text-white/60">
-                      Learn more →
+                      {t("sponsorsCarousel.learnMore")} →
                     </div>
                   ) : null}
                 </div>
@@ -1832,6 +1733,7 @@ const ALL_SPONSORS = SPONSOR_GROUPS.flatMap(g => g.items || []);
 function ContactTab() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState({ type: "idle", message: "" });
+  const { t } = useTranslation();
 
   const submit = (e) => {
     e.preventDefault();
@@ -1860,22 +1762,28 @@ function ContactTab() {
       <Glass className="w-full">
         {/* Header */}
         <div className="border-b border-white/10 px-6 py-5">
-          <div className="text-base font-black uppercase tracking-widest text-white">Get in touch</div>
-          <div className="mt-1 text-sm text-white/70">Use this form, or email us directly here!</div>
+          <div className="text-base font-black uppercase tracking-widest text-white">
+            {t("contact.title")}
+          </div>
+          <div className="mt-1 text-sm text-white/70">
+            {t("contact.subtitle")}
+          </div>
         </div>
 
         {/* Contact details */}
         <div className="px-6 pt-6">
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <div className="font-black uppercase tracking-widest text-white">Contact details</div>
+            <div className="font-black uppercase tracking-widest text-white">
+              {t("contact.detailsTitle")}
+            </div>
             <div className="mt-2 space-y-1 text-sm text-white/75">
-              <div>✉️ Email: TEAM@jamesrunscanada.ca</div>
-              <div>📷 Instagram: @Jams_Newman</div>
+              <div>✉️ {t("contact.emailLabel")}: TEAM@jamesrunscanada.ca</div>
+              <div>📷 {t("contact.instagramLabel")}: @Jams_Newman</div>
             </div>
           </div>
 
           <div className="mt-3 text-sm text-white/60">
-            
+            {t("contact.subtitle")}
           </div>
         </div>
 
@@ -1883,9 +1791,11 @@ function ContactTab() {
         <div className="px-6 pb-6">
           <div className="mt-6 rounded-2xl border border-white/10 bg-white/5">
             <div className="border-b border-white/10 px-4 py-4">
-              <div className="text-sm font-black uppercase tracking-widest text-white">Contact form</div>
+              <div className="text-sm font-black uppercase tracking-widest text-white">
+                {t("contact.formTitle")}
+              </div>
               <div className="mt-1 text-sm text-white/70">
-                Please be specific in your message, and if you’re representing an organization, include this too.
+                {t("contact.formSubtitle")}
               </div>
             </div>
 
@@ -1895,7 +1805,7 @@ function ContactTab() {
               className="space-y-3 px-4 py-5"
             >
               <label className="block">
-                <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Name</div>
+                <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">{t("contact.fields.name")}</div>
                 <input
                   name="name"
                   required
@@ -1904,7 +1814,7 @@ function ContactTab() {
               </label>
 
               <label className="block">
-                <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Email</div>
+                <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">{t("contact.fields.email")}</div>
                 <input
                   name="email"
                   type="email"
@@ -1914,7 +1824,7 @@ function ContactTab() {
               </label>
 
               <label className="block">
-                <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">Message</div>
+                <div className="mb-1 text-xs font-black uppercase tracking-widest text-white/70">{t("contact.fields.message")}</div>
                 <textarea
                   name="message"
                   rows={7}
@@ -1927,7 +1837,8 @@ function ContactTab() {
                 type="submit"
                 className="w-full rounded-xl border border-yellow-300 bg-yellow-300 px-4 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
               >
-                Submit
+                {t("contact.submit")}
+
               </button>
             </form>
           </div>
