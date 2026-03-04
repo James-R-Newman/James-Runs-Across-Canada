@@ -699,7 +699,7 @@ function Marquee() {
 
 
 function TopNav({ tab, setTab }) {
-  const { t, i18n } = useTranslation();
+const { t, i18n } = useTranslation();
 console.log("LANG:", i18n.language, "RES fr?", !!i18n.getResourceBundle?.("fr", "translation"));
 
   const tabs = [
@@ -733,14 +733,14 @@ console.log("LANG:", i18n.language, "RES fr?", !!i18n.getResourceBundle?.("fr", 
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap justify-end">
           {/* Language toggle */}
           <div className="mr-2 flex items-center rounded-full border border-white/20 bg-white/5 p-1">
             <button
               onClick={() => setLang("en")}
               className={
-                "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wide " +
-                (i18n.language === "en"
+                "rounded-full px-2 py-0.5 text-[11px] font-black uppercase tracking-wide " +
+                (i18n.language?.startsWith("en")
                   ? "bg-yellow-300 text-neutral-950"
                   : "text-white/80 hover:text-white")
               }
@@ -750,8 +750,8 @@ console.log("LANG:", i18n.language, "RES fr?", !!i18n.getResourceBundle?.("fr", 
             <button
               onClick={() => setLang("fr")}
               className={
-                "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wide " +
-                (i18n.language === "fr"
+                "rounded-full px-2 py-0.5 text-[11px] font-black uppercase tracking-wide " +
+                (i18n.language?.startsWith("fr")
                   ? "bg-yellow-300 text-neutral-950"
                   : "text-white/80 hover:text-white")
               }
@@ -765,7 +765,7 @@ console.log("LANG:", i18n.language, "RES fr?", !!i18n.getResourceBundle?.("fr", 
               key={tbtn.key}
               onClick={() => setTab(tbtn.key)}
               className={
-                "rounded-full px-3 py-1.5 text-sm font-black uppercase tracking-wide transition border " +
+                "rounded-full px-2.5 py-1 text-xs sm:text-sm sm:px-3 sm:py-1.5 font-black uppercase tracking-wide transition border " +
                 (tab === tbtn.key
                   ? "border-yellow-300 bg-yellow-300 text-neutral-950"
                   : "border-white/20 bg-white/5 text-white hover:border-yellow-300/60 hover:bg-white/10")
@@ -1269,7 +1269,8 @@ function HomeTrackerSection({ pins, setPins }) {
         </div>
 
         {/* BOTTOM: GPS Map with background image (pure image) */}
-        <div id="gps" className="relative mt-38 left-1/2 -translate-x-1/2 w-[100vw] overflow-hidden">
+        <div id="gps" className="relative mt-38 w-screen overflow-x-hidden">
+
 
           {/* background image */}
           <div className="absolute inset-0">
