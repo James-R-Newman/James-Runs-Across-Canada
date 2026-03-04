@@ -699,13 +699,12 @@ function Marquee() {
 
 
 function TopNav({ tab, setTab }) {
-const { t, i18n } = useTranslation();
-console.log("LANG:", i18n.language, "RES fr?", !!i18n.getResourceBundle?.("fr", "translation"));
+  const { t, i18n } = useTranslation();
 
   const tabs = [
     { key: "home", label: t("nav.home") },
     { key: "blog", label: t("nav.blog") },
-    { key: "contact", label: t("nav.contact") }
+    { key: "contact", label: t("nav.contact") },
   ];
 
   const setLang = (lng) => {
@@ -713,34 +712,25 @@ console.log("LANG:", i18n.language, "RES fr?", !!i18n.getResourceBundle?.("fr", 
     localStorage.setItem("lang", lng);
   };
 
-  return (
-    <div className="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/60 backdrop-blur-xl">
-      <div className="flex w-full items-center justify-between gap-3 px-4 sm:px-8 py-3">
+  const isActive = (k) => tab === k;
 
-        <div className="flex min-w-0 items-center gap-3">
-          <Pill className="hidden sm:inline-flex bg-yellow-300 text-neutral-950 border-yellow-200/40">
+  return (
+    <div className="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/70 backdrop-blur-xl">
+      <div className="w-full px-3 sm:px-8 py-3">
+        {/* Row 1: Live (left) + Language (right) */}
+        <div className="flex items-center justify-between gap-3">
+          <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">
             <span className="mr-2 inline-block h-2 w-2 rounded-full bg-neutral-950" />
             {t("common.live")}
           </Pill>
 
-          <div className="hidden lg:block min-w-0 pl-2">
-            <div className="truncate text-sm sm:text-base font-black uppercase tracking-tight text-white">
-              {t("brand.title")}
-            </div>
-            <div className="hidden sm:block text-xs uppercase text-white/70">
-              {t("brand.tagline")}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 flex-wrap justify-end">
           {/* Language toggle */}
-          <div className="mr-2 flex items-center rounded-full border border-white/20 bg-white/5 p-1">
+          <div className="flex items-center rounded-full border border-white/20 bg-white/5 p-1">
             <button
               onClick={() => setLang("en")}
               className={
-                "rounded-full px-2 py-0.5 text-[11px] font-black uppercase tracking-wide " +
-                (i18n.language?.startsWith("en")
+                "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wide " +
+                (i18n.language === "en"
                   ? "bg-yellow-300 text-neutral-950"
                   : "text-white/80 hover:text-white")
               }
@@ -750,8 +740,8 @@ console.log("LANG:", i18n.language, "RES fr?", !!i18n.getResourceBundle?.("fr", 
             <button
               onClick={() => setLang("fr")}
               className={
-                "rounded-full px-2 py-0.5 text-[11px] font-black uppercase tracking-wide " +
-                (i18n.language?.startsWith("fr")
+                "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wide " +
+                (i18n.language === "fr"
                   ? "bg-yellow-300 text-neutral-950"
                   : "text-white/80 hover:text-white")
               }
@@ -759,26 +749,44 @@ console.log("LANG:", i18n.language, "RES fr?", !!i18n.getResourceBundle?.("fr", 
               FR
             </button>
           </div>
+        </div>
 
-          {tabs.map((tbtn) => (
-            <button
-              key={tbtn.key}
-              onClick={() => setTab(tbtn.key)}
-              className={
-                "rounded-full px-2.5 py-1 text-xs sm:text-sm sm:px-3 sm:py-1.5 font-black uppercase tracking-wide transition border " +
-                (tab === tbtn.key
-                  ? "border-yellow-300 bg-yellow-300 text-neutral-950"
-                  : "border-white/20 bg-white/5 text-white hover:border-yellow-300/60 hover:bg-white/10")
-              }
-            >
-              {tbtn.label}
-            </button>
-          ))}
+        {/* Row 2: Tabs as one segmented control */}
+        <div className="mt-3">
+          <div className="grid grid-cols-3 rounded-full border border-white/15 bg-white/5 p-1">
+            {tabs.map((tbtn) => (
+              <button
+                key={tbtn.key}
+                onClick={() => setTab(tbtn.key)}
+                className={
+                  "rounded-full py-2 text-xs font-black uppercase tracking-wide transition " +
+                  (isActive(tbtn.key)
+                    ? "bg-yellow-300 text-neutral-950"
+                    : "text-white/80 hover:text-white")
+                }
+              >
+                {tbtn.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop brand (optional): keep only on bigger screens */}
+        <div className="hidden lg:flex mt-3 items-center justify-between">
+          <div className="min-w-0">
+            <div className="truncate text-sm sm:text-base font-black uppercase tracking-tight text-white">
+              {t("brand.title")}
+            </div>
+            <div className="text-xs uppercase text-white/70">
+              {t("brand.tagline")}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
 
 
 
