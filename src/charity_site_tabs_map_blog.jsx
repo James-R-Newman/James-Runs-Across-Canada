@@ -1269,7 +1269,7 @@ function HomeTrackerSection({ pins, setPins }) {
         </div>
 
         {/* BOTTOM: GPS Map with background image (pure image) */}
-        <div id="gps" className="relative mt-38 w-screen overflow-x-hidden">
+        <div id="gps" className="relative mt-38 w-full overflow-x-hidden">
 
 
           {/* background image */}
@@ -1871,7 +1871,7 @@ export default function CharitySiteApp() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white">
+    <div className="min-h-screen bg-neutral-950 text-white overflow-x-hidden">
       <TopNav
         tab={tab}
         setTab={(t) => {
