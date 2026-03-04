@@ -4,7 +4,8 @@
 
   "hero": {
     "followStarting": "Suivez la course à partir du",
-    "joinLine": "Joignez-vous à James alors qu’il traverse le Canada en courant pendant 100 jours, 80 km/jour, afin de financer des bourses pour des jeunes ayant aussi vécu un déplacement durant l’enfance."
+    "joinLine": "Rejoignez James alors qu’il traverse le Canada à pied pendant 100 jour, 80 km/jour, afin de financer des bourses pour des jeunes ayant aussi vécu un déplacement durant l’enfance.",
+    "date": "18 Mai 2026"
   },
 
   "tracker": {
@@ -32,7 +33,7 @@
 
   "sponsors": {
     "title": "Partenaires qui soutiennent la course",
-    "subtitle": "Ces trois façons de soutenir la mission globale de la course sont essentielles à sa réussite. Nous sommes reconnaissants envers chaque personne et organisation qui contribue, que ce soit par du financement, des ressources ou du temps. Merci."
+    "subtitle": "Un immense merci à toutes les personnes et organisations qui appuient cet effort — par du financement, des ressources ou du temps. Chaque geste compte et contribue directement au succès de la mission. Merci."
   },
 
   "stats": {

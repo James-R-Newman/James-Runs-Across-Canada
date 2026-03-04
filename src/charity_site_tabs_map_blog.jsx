@@ -1070,8 +1070,8 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
               </p>
 
               <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white/80">
-                {t("hero.followStarting")}{" "}
-                <span className="font-black text-white">May 18th</span>, 2026!
+                {t("hero.followStarting")} 
+                <span className="font-black text-white"> {t("hero.date")}</span>
               </p>
 
 
