@@ -702,8 +702,8 @@ function TopNav({ tab, setTab }) {
   const { t, i18n } = useTranslation();
 
   const tabs = [
-    { key: "home", label: t("nav.home") },
     { key: "blog", label: t("nav.blog") },
+    { key: "home", label: t("nav.home") },
     { key: "contact", label: t("nav.contact") },
   ];
 
@@ -774,12 +774,12 @@ function TopNav({ tab, setTab }) {
         {/* Desktop brand (optional): keep only on bigger screens */}
         <div className="hidden lg:flex mt-3 items-center justify-between">
           <div className="min-w-0">
-            <div className="truncate text-sm sm:text-base font-black uppercase tracking-tight text-white">
+            {/* <div className="truncate text-sm sm:text-base font-black uppercase tracking-tight text-white">
               {t("brand.title")}
             </div>
             <div className="text-xs uppercase text-white/70">
               {t("brand.tagline")}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
