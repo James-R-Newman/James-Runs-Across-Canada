@@ -717,39 +717,54 @@ function TopNav({ tab, setTab }) {
   return (
     <div className="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/70 backdrop-blur-xl">
       <div className="w-full px-3 sm:px-8 py-3">
-        {/* Row 1: Live (left) + Language (right) */}
-        <div className="flex items-center justify-between gap-3">
-          <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">
-            <span className="mr-2 inline-block h-2 w-2 rounded-full bg-neutral-950" />
-            {t("common.live")}
-          </Pill>
 
-          {/* Language toggle */}
-          <div className="flex items-center rounded-full border border-white/20 bg-white/5 p-1">
-            <button
-              onClick={() => setLang("en")}
-              className={
-                "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wide " +
-                (i18n.language === "en"
-                  ? "bg-yellow-300 text-neutral-950"
-                  : "text-white/80 hover:text-white")
-              }
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLang("fr")}
-              className={
-                "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wide " +
-                (i18n.language === "fr"
-                  ? "bg-yellow-300 text-neutral-950"
-                  : "text-white/80 hover:text-white")
-              }
-            >
-              FR
-            </button>
+
+       {/* Row 1: Live (left) + Brand (center on lg+) + Language (right) */}
+      <div className="flex items-center justify-between gap-3">
+        <Pill className="bg-yellow-300 text-neutral-950 border-yellow-200/40">
+          <span className="mr-2 inline-block h-2 w-2 rounded-full bg-neutral-950" />
+          {t("common.live")}
+        </Pill>
+
+        {/* Brand in the middle (only on laptop+) */}
+        <div className="hidden lg:flex min-w-0 flex-1 justify-center px-4">
+          <div className="min-w-0 text-center">
+            <div className="truncate text-sm font-black uppercase tracking-tight text-white">
+              {t("brand.title")}
+            </div>
+            <div className="truncate text-xs uppercase tracking-widest text-white/60">
+              {t("brand.tagline")}
+            </div>
           </div>
         </div>
+
+        {/* Language toggle */}
+        <div className="flex items-center rounded-full border border-white/20 bg-white/5 p-1">
+          <button
+            onClick={() => setLang("en")}
+            className={
+              "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wide " +
+              (i18n.language === "en"
+                ? "bg-yellow-300 text-neutral-950"
+                : "text-white/80 hover:text-white")
+            }
+          >
+            EN
+          </button>
+          <button
+            onClick={() => setLang("fr")}
+            className={
+              "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wide " +
+              (i18n.language === "fr"
+                ? "bg-yellow-300 text-neutral-950"
+                : "text-white/80 hover:text-white")
+            }
+          >
+            FR
+          </button>
+        </div>
+      </div>
+
 
         {/* Row 2: Tabs as one segmented control */}
         <div className="mt-3">
