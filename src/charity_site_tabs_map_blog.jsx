@@ -759,7 +759,7 @@ function TopNav({ tab, setTab }) {
                 key={tbtn.key}
                 onClick={() => setTab(tbtn.key)}
                 className={
-                  "rounded-full py-2 text-xs font-black uppercase tracking-wide transition " +
+                 "rounded-full py-2 text-xs sm:text-sm md:text-sm lg:text-base font-black uppercase tracking-wide transition " +
                   (isActive(tbtn.key)
                     ? "bg-yellow-300 text-neutral-950"
                     : "text-white/80 hover:text-white")
