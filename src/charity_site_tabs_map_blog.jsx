@@ -1277,7 +1277,7 @@ function HomeTrackerSection({ pins, setPins }) {
         </div>
 
         {/* BOTTOM: GPS Map with background image (pure image) */}
-        <div id="gps" className="relative mt-38 w-full overflow-x-hidden">
+        <div id="gps"   className="relative mt-38 left-1/2 -translate-x-1/2 w-screen overflow-hidden" >
 
 
           {/* background image */}
@@ -1285,7 +1285,7 @@ function HomeTrackerSection({ pins, setPins }) {
             <img
               src={map}
               alt=""
-              className="h-full w-full object-cover transform-gpu scale-110 [object-position:40%_70%]"
+              className="h-full w-full object-cover"
               draggable={false}
             />
             
