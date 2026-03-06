@@ -983,53 +983,6 @@ function InteractiveMap({ pins, setPins }) {
 
 
 
-function BlogSummary({ posts, onOpenPost }) {
-  const sorted = useMemo(() => [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)), [posts]);
-
-  return (
-    <Glass className="h-full">
-      <div className="border-b border-white/10 px-4 py-3">
-        <SectionTitle title="Latest blog" subtitle="The beginning of each day’s post" />
-      </div>
-      <div className="max-h-[560px] overflow-y-auto p-4">
-        {sorted.length === 0 ? (
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">No posts yet.</div>
-        ) : (
-          <div className="space-y-3">
-            {sorted.map((p) => (
-              <button
-                key={p._id || p.id}
-                onClick={() => onOpenPost(p._id || p.id)}
-                className="w-full rounded-2xl border border-white/10 bg-white/5 p-3 text-left transition hover:border-yellow-300/40 hover:bg-white/10"
-              >
-                <div className="flex gap-3">
-                  <div className="h-14 w-14 overflow-hidden rounded-xl border border-white/10 bg-neutral-950/40">
-                    {p.photos?.[0] ? (
-                      <img src={p.photos[0]} alt="" className="h-full w-full object-contain bg-neutral-950/40" loading="lazy" />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center text-[11px] text-white/60">
-                        No photo
-                      </div>
-                    )}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="truncate text-sm font-black uppercase tracking-wide text-white">{p.title || "Daily update"}</div>
-                      <div className="shrink-0 text-xs text-white/60">{formatDate(p.date)}</div>
-                    </div>
-                    <div className="mt-1 text-sm text-white/80">{startOfDayExcerpt(p.content, 140)}</div>
-                    <div className="mt-2 text-xs font-black uppercase tracking-widest text-yellow-300">Read →</div>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    </Glass>
-  );
-}
-
 
  
 
@@ -1072,7 +1025,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
               <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white/80">
                 {t("hero.followStarting")}
-                <span className="font-black text-white"> {t("hero.date")}</span>
+                <span className="font-black text-yellow-300"> {t("hero.date")}</span>
               </p>
 
               <p className="mt-4 max-w-2xl text-base sm:text-xl leading-7 text-white/80">
@@ -1112,7 +1065,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 <img
                   src={heroLogo}
                   alt="James Runs Canada logo"
-                  className="h-20 sm:h-28 lg:h-40 w-auto max-w-[78%] sm:max-w-[70%] object-contain drop-shadow-[0_16px_30px_rgba(0,0,0,0.28)]"
+                  className="h-28 sm:h-28 lg:h-40 w-auto max-w-[78%] sm:max-w-[70%] object-contain drop-shadow-[0_16px_30px_rgba(0,0,0,0.28)]"
                   loading="lazy"
                 />
               </div>
