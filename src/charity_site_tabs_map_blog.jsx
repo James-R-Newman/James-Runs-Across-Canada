@@ -1035,15 +1035,12 @@ function BlogSummary({ posts, onOpenPost }) {
 
 
 
-
-
 function HomeHeroTop({ latestPostId, onOpenPost }) {
   const clipId = useId();
   const { t } = useTranslation();
 
-
   return (
-    <section className=" hero relative overflow-hidden bg-white">
+    <section className="hero relative overflow-hidden bg-white">
       <TrailClipDefs id={clipId} />
 
       {/* FULL-BLEED BACKGROUND PHOTO */}
@@ -1051,70 +1048,45 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
         <img
           src={runningBg}
           alt=""
-          className="h-full w-full object-cover grayscale brightness-95 contrast-110 [object-position:45%_100%] -translate-y-20 -translate--7"
+          className="h-full w-full object-cover grayscale brightness-95 contrast-110 [object-position:45%_100%] -translate-y-20"
           draggable={false}
           loading="eager"
-          
         />
-        <div className="absolute inset-0 " />
         <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/22 to-transparent" />
       </div>
 
-
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-8 sm:pt-12 lg:pt-16 pb-20 sm:pb-28 lg:pb-36">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-12 pb-32 sm:pb-36 lg:pb-40">
         <div className="grid gap-10 lg:grid-cols-2 items-start">
-          {/* optional: keep your cropped runner or remove it */}
           <div className="hidden lg:block" />
 
-          {/* Right side panel */}
           <div className="lg:justify-self-end w-full max-w-[720px]">
-            <div className="p-6 sm:p-10">
-
-
-
-              {/* <div className="text-3xl font-black uppercase tracking-widest text-yellow-300/90">
-                Turning kilometers
-              </div>
-              <div className="text-3xl font-black uppercase tracking-widest text-yellow-300/90">
-                into scholarships
-              </div> */}
-
-              {/* <h1 className="mt-3 text-4xl sm:text-6xl font-black uppercase tracking-tight text-yellow-300/90">
-                James Runs Canada
-              </h1> */}
-
-
-              <p className="mt-8 text-4xl sm:text-6xl font-black tracking-tight text-white/80 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
+            <div className="px-6 pt-2 pb-6 sm:px-10 sm:pt-4 sm:pb-8">
+              <p className="mt-0 text-4xl sm:text-6xl font-black tracking-tight text-white/80 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
                 100 Days
               </p>
+
               <p className="mt-3 text-4xl sm:text-6xl font-black tracking-tight text-white/80 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
                 7,500 km
               </p>
 
               <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white/80">
-                {t("hero.followStarting")} 
+                {t("hero.followStarting")}
                 <span className="font-black text-white"> {t("hero.date")}</span>
               </p>
-
-
-
-              {/* <p className="mt-8 max-w-xl text-base sm:text-xl leading-7 text-white">
-                Follow the run starting May 18th 2026!
-              </p>*/}
 
               <p className="mt-4 max-w-2xl text-base sm:text-xl leading-7 text-white/80">
                 {t("hero.joinLine")}
               </p>
 
-
-              
-
-
-
-              <div className="mt-10 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <button
-                  onClick={() => document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                  onClick={() =>
+                    document.getElementById("gps")?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    })
+                  }
                   className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
                 >
                   {t("common.map")}
@@ -1136,13 +1108,11 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 </button>
               </div>
 
-              
-
-              <div className="mt-7">
+              <div className="mt-6">
                 <img
                   src={heroLogo}
                   alt="James Runs Canada logo"
-                  className="h-28 sm:h-36 lg:h-50 w-auto w-auto drop-shadow-[0_16px_30px_rgba(0,0,0,0.18)]"
+                  className="h-20 sm:h-28 lg:h-40 w-auto max-w-[78%] sm:max-w-[70%] object-contain drop-shadow-[0_16px_30px_rgba(0,0,0,0.28)]"
                   loading="lazy"
                 />
               </div>
@@ -1150,20 +1120,6 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
           </div>
         </div>
       </div>
-
-      {/* Curvy divider */}
-      {/* <div className="hero-divider" aria-hidden="true">
-        <img src={waveDivider} alt="" className="hero-divider__img" draggable={false} />
-      </div> */}
-
-
-
-
-      
-
-          
-
-
     </section>
   );
 }
