@@ -1009,12 +1009,12 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-12 pb-32 sm:pb-36 lg:pb-40">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-10 xl:pt-12 pb-36 sm:pb-40 lg:pb-48 xl:pb-56">
         <div className="grid gap-10 lg:grid-cols-2 items-start">
           <div className="hidden lg:block" />
 
           <div className="lg:justify-self-end w-full max-w-[720px]">
-            <div className="px-6 pt-2 pb-6 sm:px-10 sm:pt-4 sm:pb-8">
+            <div className="px-6 pt-2 pb-6 sm:px-10 sm:pt-4 sm:pb-8 lg:pt-0 lg:pb-4">
               <p className="mt-0 text-4xl sm:text-6xl font-black tracking-tight text-white/80 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
                 100 Days
               </p>
@@ -1061,11 +1061,11 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 </button>
               </div>
 
-              <div className="mt-6">
+              <div className="mt-8 lg:mt-10">
                 <img
                   src={heroLogo}
                   alt="James Runs Canada logo"
-                  className="h-28 sm:h-28 lg:h-40 w-auto max-w-[78%] sm:max-w-[70%] object-contain drop-shadow-[0_16px_30px_rgba(0,0,0,0.28)]"
+                  className="h-32 sm:h-32 lg:h-40 w-auto max-w-[78%] sm:max-w-[70%] object-contain drop-shadow-[0_16px_30px_rgba(0,0,0,0.28)]"
                   loading="lazy"
                 />
               </div>
