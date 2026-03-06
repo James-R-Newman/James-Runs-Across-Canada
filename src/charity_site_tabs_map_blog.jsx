@@ -1062,7 +1062,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
 
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-27 pb-50">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-8 sm:pt-12 lg:pt-16 pb-20 sm:pb-28 lg:pb-36">
         <div className="grid gap-10 lg:grid-cols-2 items-start">
           {/* optional: keep your cropped runner or remove it */}
           <div className="hidden lg:block" />
