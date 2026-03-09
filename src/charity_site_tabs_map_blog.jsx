@@ -1072,7 +1072,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-10 xl:pt-12 pb-14 sm:pb-24 lg:pb-48 xl:pb-56">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-10 xl:pt-12 pb-36 sm:pb-40 lg:pb-48 xl:pb-56">
         <div className="grid gap-10 lg:grid-cols-2 items-start">
           <div className="hidden lg:block" />
 
