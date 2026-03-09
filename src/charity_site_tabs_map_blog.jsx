@@ -1095,43 +1095,28 @@ function HomeTrackerSection({ pins, setPins }) {
         {/* TOP: Video (left) + Mission (right) */}
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Video (LEFT) */}
-          <div className="rounded-3xl border border-neutral-950/10 bg-white shadow-[0_18px_60px_rgba(0,0,0,0.08)] p-4 sm:p-6">
-            <div className="flex items-end justify-between gap-3">
-              <div>
-                <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
-                  {t("tracker.videoTitle")}
-                </div>
-                <div className="mt-1 text-sm text-neutral-950/70">{t("tracker.videoSubtitle")}</div>
-              </div>
-              <div className="inline-flex items-center rounded-full border border-neutral-950/15 bg-neutral-950/5 px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-950">
-                {t("tracker.comingSoon")}
-              </div>
-            </div>
 
-            <div className="mt-4 rounded-2xl border border-neutral-950/10 bg-neutral-950/[0.03] p-6">
+          <div className="mt-4 overflow-hidden rounded-2xl border border-neutral-950/10 bg-neutral-950/[0.03]">
+            <video
+              className="block w-full h-auto"
+              controls
+              playsInline
+              preload="metadata"
+            >
+              <source src="public/JamesWhyVideo.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* <div className="p-6">
               <div className="text-sm font-semibold text-neutral-950/80">
                 {t("tracker.videoBody")}
               </div>
 
-              <div className="mt-4 flex flex-wrap gap-2">
-                <a
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                  className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
-                >
-                  {t("common.donate")}
-                </a>
-                <button
-                  onClick={() =>
-                    document.getElementById("gps")?.scrollIntoView({ behavior: "smooth", block: "start" })
-                  }
-                  className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]"
-                >
-                  {t("common.map")}
-                </button>
-              </div>
-            </div>
+              
+            </div> */}
           </div>
+
+
 
           {/* Mission (RIGHT) — transparent (no card) */}
           <div className="self-center w-full max-w-xl">
