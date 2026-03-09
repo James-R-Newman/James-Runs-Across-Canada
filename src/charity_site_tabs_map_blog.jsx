@@ -238,7 +238,7 @@ function VideoWithCenterPlay() {
           className="block w-full h-auto bg-black"
           controls={isPlaying}
           playsInline
-          poster="/video-poster.png"
+          poster="/video-poster2.png"
           preload="metadata"
           onPause={handlePause}
           onPlay={handlePlay}
