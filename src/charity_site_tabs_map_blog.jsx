@@ -1103,7 +1103,7 @@ function HomeTrackerSection({ pins, setPins }) {
               playsInline
               preload="metadata"
             >
-              <source src="public/james-why-video.mp4" type="video/mp4" />
+              <source src="/james-why-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
