@@ -17,7 +17,7 @@ import waveDivider from "./assets/wave-haikei3.svg";
 import nature from "./assets/nature.avif";
 import charity from "./assets/charity.png";
 import janine from "./assets/janine.webp";
-import karley from "./assets/karley.webp";
+import karley from "./assets/karley3.webp";
 import { useTranslation } from "react-i18next";
 
 
