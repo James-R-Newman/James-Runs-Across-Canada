@@ -206,8 +206,71 @@ function RunFundersLogoRows() {
       </div>
     </div>
   );
-}
 
+
+
+}
+function VideoWithCenterPlay() {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlayClick = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    try {
+      await video.play();
+      setIsPlaying(true);
+    } catch (err) {
+      console.error("Video play failed:", err);
+    }
+  };
+
+  const handlePause = () => setIsPlaying(false);
+  const handlePlay = () => setIsPlaying(true);
+  const handleEnded = () => setIsPlaying(false);
+
+  return (
+    <div className="mt-4 overflow-hidden rounded-2xl border border-neutral-950/10 bg-neutral-950/[0.03]">
+      <div className="relative">
+        <video
+          ref={videoRef}
+          className="block w-full h-auto bg-black"
+          controls={isPlaying}
+          playsInline
+          poster="/video-poster.png"
+          preload="metadata"
+          onPause={handlePause}
+          onPlay={handlePlay}
+          onEnded={handleEnded}
+        >
+          <source src="/james-why-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        {!isPlaying && (
+          <button
+            type="button"
+            onClick={handlePlayClick}
+            aria-label="Play video"
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-white/88 shadow-[0_12px_40px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:scale-105">
+              <span
+                className="ml-1 block h-0 w-0"
+                style={{
+                  borderTop: "14px solid transparent",
+                  borderBottom: "14px solid transparent",
+                  borderLeft: "22px solid black",
+                }}
+              />
+            </span>
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
 
 
 
@@ -1096,24 +1159,14 @@ function HomeTrackerSection({ pins, setPins }) {
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Video (LEFT) */}
 
-          <div className="mt-4 overflow-hidden rounded-2xl border border-neutral-950/10 bg-neutral-950/[0.03]">
-            <video
-              className="block w-full h-auto"
-              controls
-              playsInline
-              preload="metadata"
-            >
-              <source src="/james-why-video.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-
-            {/* <div className="p-6">
-              <div className="text-sm font-semibold text-neutral-950/80">
-                {t("tracker.videoBody")}
+          <div>
+            <div className="mb-4 text-center sm:text-left">
+              <div className="text-sm sm:text-base font-black uppercase tracking-wide text-neutral-950">
+                "This is me, and this is my why"
               </div>
+            </div>
 
-              
-            </div> */}
+            <VideoWithCenterPlay />
           </div>
 
 
