@@ -1072,7 +1072,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-10 xl:pt-12 pb-36 sm:pb-40 lg:pb-48 xl:pb-56">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-10 xl:pt-12 pb-14 sm:pb-24 lg:pb-48 xl:pb-56">
         <div className="grid gap-10 lg:grid-cols-2 items-start">
           <div className="hidden lg:block" />
 
@@ -1212,14 +1212,17 @@ function HomeTrackerSection({ pins, setPins }) {
                 </a>
               </div>
             </div>
-            <div className="mt-4 w-full rounded-3xl border border-neutral-950/10 bg-white px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.08)] flex items-center justify-center">
-              <img
-                src={charity}
-                alt="Charity partner"
-                className="h-18 sm:h-max w-auto object-contain"
-                loading="lazy"
-                draggable={false}
-              />
+
+            <div className="mt-4 w-full rounded-3xl border border-neutral-950/10 bg-white px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.08)]">
+              <div className="flex h-[140px] sm:h-[160px] items-center justify-center">
+                <img
+                  src={charity}
+                  alt="Charity partner"
+                  className="max-h-full w-auto max-w-[90%] object-contain"
+                  loading="lazy"
+                  draggable={false}
+                />
+              </div>
             </div>
             
           </div>
