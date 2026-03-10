@@ -1057,14 +1057,13 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
     <section className="hero relative overflow-hidden bg-white">
       <TrailClipDefs id={clipId} />
 
-      {/* FULL-BLEED BACKGROUND PHOTO */}
+     {/* FULL-BLEED BACKGROUND PHOTO */}
       <div className="absolute inset-0 bg-white" id="photo">
         <img
           src={runningBg}
           alt=""
-          // ✅ FIX 1: Changed positioning so the runner is higher up on mobile (center 30%) 
-          // but retains your original bottom-left alignment on larger screens (md+)
-          className="h-full w-full object-cover grayscale brightness-95 contrast-110 object-[center_30%] md:object-[15%_100%] md:-translate-y-20"
+          // ✅ FIX 1: Anchored the focus slightly higher on mobile (20% 85%) so the runner isn't cut off 
+          className="h-full w-full object-cover grayscale brightness-95 contrast-110 object-[20%_85%] md:object-[15%_100%] md:-translate-y-20"
           draggable={false}
           loading="eager"
         />
@@ -1072,10 +1071,11 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
       </div>
 
       {/* CONTENT */}
-      {/* ✅ FIX 2: Reduced the bottom padding on mobile (pb-24 instead of pb-56) 
-          to pull the "This is me..." section much closer to the wave */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-10 xl:pt-12 pb-24 sm:pb-32 md:pb-56 lg:pb-56 xl:pb-64">
+      {/* ✅ FIX 2: Upped mobile padding from pb-24 to pb-40 to give the runner physical room below the logo */}
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-10 xl:pt-12 pb-40 sm:pb-48 md:pb-56 lg:pb-56 xl:pb-64">
         <div className="grid gap-10 lg:grid-cols-2 items-start">
+
+
           <div className="hidden lg:block" />
 
           <div className="lg:justify-self-end w-full max-w-[720px]">
