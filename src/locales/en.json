@@ -1,6 +1,6 @@
 {
   "nav": { "home": "Home", "blog": "Blog", "contact": "Contact" },
-  "common": { "live": "Live", "donate": "Donate", "map": "Map", "feed": "Feed", "learnMore": "Learn more" },
+  "common": { "live": "Live", "donate": "Donate", "map": "Map", "feed": "Blog", "learnMore": "Learn more" },
   "hero": {
     "followStarting": "Follow the run starting",
     "joinLine": "Join James as he runs across Canada for 100 days, 80km/day, to fund scholarships for youth who’ve also been displaced in childhood.",
@@ -29,7 +29,7 @@
   },
   "sponsors": {
     "title": "Partners powering the run",
-    "subtitle": "We’re grateful for every individual and organization that supports this effort, whether through funding, resources, or time. Each contribution plays a critical role in making the mission successful.. Thank you."
+    "subtitle": "We’re grateful for every individual and organization that supports this effort, whether through funding, resources, or time. Each contribution plays a critical role in making the mission successful. Thank you."
   },
   "stats": {
     "daysCompleted": "Days completed",
