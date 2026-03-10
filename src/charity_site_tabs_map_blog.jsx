@@ -1080,11 +1080,11 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
           <div className="lg:justify-self-end w-full max-w-[720px]">
             <div className="px-6 pt-2 pb-6 sm:px-10 sm:pt-4 sm:pb-8 lg:pt-0 lg:pb-4">
-              <p className="mt-0 text-4xl sm:text-6xl font-black tracking-tight text-white/80 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
+              <p className="text-center lg:text-left mt-0 text-4xl sm:text-6xl font-black tracking-tight text-white/80 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
                 100 Days
               </p>
 
-              <p className="mt-3 text-4xl sm:text-6xl font-black tracking-tight text-white/80 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
+              <p className="text-center lg:text-left mt-3 text-4xl sm:text-6xl font-black tracking-tight text-white/80 drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
                 7,500 km
               </p>
 
@@ -1097,7 +1097,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 {t("hero.joinLine")}
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap gap-3 right-align">
                 <button
                   onClick={() =>
                     document.getElementById("gps")?.scrollIntoView({
@@ -1126,7 +1126,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 </button>
               </div>
 
-              <div className="mt-8 lg:mt-10">
+              <div className="mt-8 lg:mt-10 flex justify-center lg:justify-start">
                 <img
                   src={heroLogo}
                   alt="James Runs Canada logo"
