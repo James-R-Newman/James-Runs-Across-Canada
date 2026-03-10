@@ -1097,7 +1097,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 {t("hero.joinLine")}
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-3 right-align">
+              <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-3 ">
                 <button
                   onClick={() =>
                     document.getElementById("gps")?.scrollIntoView({
