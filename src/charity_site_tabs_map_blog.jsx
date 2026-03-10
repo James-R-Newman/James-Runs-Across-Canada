@@ -7,7 +7,7 @@ import { client } from "./sanityClient";
 // - biking-photo.png
 // - ukraine-photo.jpeg
 // - family-photo.png   (or change the import extension below to match your file)
-import runningBg from "./assets/jameshomenew.png";
+import runningBg from "./assets/jameshomenew2.webp";
 import bikingBg from "./assets/biking-photo.png";
 import ukraineBg from "./assets/ukraine-photo.jpeg";
 import familyBg from "./assets/family-photo.jpg";
@@ -1049,8 +1049,6 @@ function InteractiveMap({ pins, setPins }) {
 
  
 
-
-
 function HomeHeroTop({ latestPostId, onOpenPost }) {
   const clipId = useId();
   const { t } = useTranslation();
@@ -1064,7 +1062,9 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
         <img
           src={runningBg}
           alt=""
-          className="h-full w-full object-cover grayscale brightness-95 contrast-110 [object-position:15%_100%] -translate-y-20"
+          // ✅ FIX 1: Changed positioning so the runner is higher up on mobile (center 30%) 
+          // but retains your original bottom-left alignment on larger screens (md+)
+          className="h-full w-full object-cover grayscale brightness-95 contrast-110 object-[center_30%] md:object-[15%_100%] md:-translate-y-20"
           draggable={false}
           loading="eager"
         />
@@ -1072,7 +1072,9 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-10 xl:pt-12 pb-56 sm:pb-64 lg:pb-56 xl:pb-64">
+      {/* ✅ FIX 2: Reduced the bottom padding on mobile (pb-24 instead of pb-56) 
+          to pull the "This is me..." section much closer to the wave */}
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 pt-2 sm:pt-8 lg:pt-10 xl:pt-12 pb-24 sm:pb-32 md:pb-56 lg:pb-56 xl:pb-64">
         <div className="grid gap-10 lg:grid-cols-2 items-start">
           <div className="hidden lg:block" />
 
@@ -1139,8 +1141,6 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
     </section>
   );
 }
-
-
 
 
 
