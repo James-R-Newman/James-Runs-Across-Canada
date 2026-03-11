@@ -11,11 +11,13 @@ import runningBg from "./assets/jameshomenew3.webp";
 import bikingBg from "./assets/biking-photo.png";
 import ukraineBg from "./assets/ukraine-photo.jpeg";
 import familyBg from "./assets/family-photo.jpg";
-import heroLogo from "./assets/logo4.png"; 
+import heroLogoen from "./assets/logo4.png"; 
+import heroLogofr from "./assets/logo4fr.png";
 import map from "./assets/map.png";           
 import waveDivider from "./assets/wave-haikei3.svg";
 import nature from "./assets/nature.avif";
-import charity from "./assets/charity.png";
+import charityen from "./assets/charity.png";
+import charityfr from "./assets/charityfr.png";
 import janine from "./assets/janine.webp";
 import karley from "./assets/karley3.webp";
 import { useTranslation } from "react-i18next";
@@ -89,7 +91,7 @@ const SPONSOR_GROUPS = [
       },
       {
         id: "t2",
-        name: "Janine Fisher",
+        name: "Janine Fischer",
         tier: "THE NEST MARKETING & COMMUNICATIONS",
         blurb: "A full-service marketing agency that helps organizations clarify their message, elevate their brand and communicate with impact.",
         href: "https://www.nestmktg.com/", // or external link
@@ -1051,7 +1053,9 @@ function InteractiveMap({ pins, setPins }) {
 
 function HomeHeroTop({ latestPostId, onOpenPost }) {
   const clipId = useId();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const heroLogo = i18n.language === "fr" ? heroLogofr : heroLogoen;
+
 
   return (
     <section className="hero relative overflow-hidden bg-white">
@@ -1146,7 +1150,8 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
 
 function HomeTrackerSection({ pins, setPins }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const charityLogo = i18n.language === "fr" ? charityfr : charityen;
   const bullets = t("tracker.missionBullets", { returnObjects: true });
   const safeBullets = Array.isArray(bullets) ? bullets : [];
 
@@ -1162,7 +1167,7 @@ function HomeTrackerSection({ pins, setPins }) {
           <div>
             <div className="mb-4 text-center sm:text-left">
               <div className="text-sm sm:text-base font-black uppercase tracking-wide text-neutral-950">
-                "This is me, and this is my why"
+                "{t("tracker.videoSubtitle")}"
               </div>
             </div>
 
@@ -1183,15 +1188,17 @@ function HomeTrackerSection({ pins, setPins }) {
               </div>
 
               
-              {/* <div className="mt-2 text-[11px] font-black uppercase tracking-widest text-neutral-950/50">
-                In support of
-              </div> */}
+          
             </div>
 
             <div className="mt-6 text-left">
               <p className="text-sm sm:text-base leading-7 text-neutral-950/80">
                 {t("tracker.missionBody")}              
               </p>
+              <p className="mt-4 text-sm sm:text-base leading-7 text-neutral-950/80">
+                {t("tracker.missionBody2")}              
+              </p>
+              
 
               <ul className="mt-4 space-y-2 text-sm sm:text-base text-neutral-950/80">
                 {safeBullets.map((item) => (
@@ -1201,6 +1208,10 @@ function HomeTrackerSection({ pins, setPins }) {
                   </li>
                 ))}
               </ul>
+
+              <p className="mt-4 text-sm sm:text-base leading-7 text-neutral-950/80">
+                {t("tracker.missionCTA")}              
+              </p>
 
 
               <div className="mt-6 flex flex-wrap justify-center sm:justify-start gap-3">
@@ -1216,7 +1227,7 @@ function HomeTrackerSection({ pins, setPins }) {
             <div className="mt-4 w-full rounded-3xl border border-neutral-950/10 bg-white px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.08)]">
               <div className="flex h-[140px] sm:h-[160px] items-center justify-center">
                 <img
-                  src={charity}
+                  src={charityLogo}
                   alt="Charity partner"
                   className="max-h-full w-auto max-w-[90%] object-contain"
                   loading="lazy"

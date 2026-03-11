@@ -3,22 +3,24 @@
   "common": { "live": "Live", "donate": "Donate", "map": "Map", "feed": "Blog", "learnMore": "Learn more" },
   "hero": {
     "followStarting": "Follow the run starting",
-    "joinLine": "Join James as he runs across Canada for 100 days, 80km/day, to fund scholarships for youth who’ve also been displaced in childhood.",
+    "joinLine": "Join James as he runs across Canada in under 100 days, 75+ km/day, to fund scholarships for youth who’ve also been displaced in childhood.",
     "date": "May 18th, 2026."
   },
   "tracker": {
     "videoTitle": "A video message from James",
-    "videoSubtitle": "Why I’m running, and who it’s for.",
+    "videoSubtitle": "This is me, and this is my why.",
     "comingSoon": "Coming soon",
     "videoBody": "Video message coming in a couple days.",
-    "missionEyebrow": "Scholarship mission",
-    "missionTitle": "A scholarship for youth in need",
-    "missionBody": "After childhood tragedy, the future can feel uncertain—especially when you’re still dependent on others. A scholarship creates something tangible to aim for: independence, education, and hope.",
+    "missionEyebrow": "Fundraising mission",
+    "missionTitle": "Creating Brighter Futures Through Education",
+    "missionBody": "After childhood instability, the future can feel uncertain. Access to post-secondary education empowers young people with child welfare lived experience to pursue their dreams and build successful futures.",
+    "missionBody2": "Donate today to support scholarships for youth through Children’s Aid Foundation of Canada’s Post-Secondary Education Program. Your support will create a profound impact:",
     "missionBullets": [
-      "Supports education and career goals",
-      "Reduces financial stress during transition",
-      "Creates hope and long-term stability"
+      "Advancing education and career goals",
+      "Reducing financial stress during transition",
+      "Creating hope and long-term stability"
     ],
+    "missionCTA": "Together, we can help young people reach their potential.",
     "gpsEyebrow": "GPS tracker",
     "gpsTitle": "Follow in real-time!",
     "gpsBody": "The GPS tracker updates continuously as James makes progress each day. At the end of each day the tracker is paused and James will continue his run from there the next morning."

@@ -4,23 +4,25 @@
 
   "hero": {
     "followStarting": "Suivez la course à partir du",
-    "joinLine": "Rejoignez James alors qu’il traverse le Canada à pied pendant 100 jour, 80 km/jour, afin de financer des bourses pour les jeunes ayant aussi vécu un déplacement durant l’enfance.",
+    "joinLine": "Rejoignez James alors qu’il traverse le Canada à pied pendant 100 jour, 75+ km/jour, afin de financer des bourses pour les jeunes ayant aussi vécu un déplacement durant l’enfance.",
     "date": "18 Mai 2026."
   },
 
   "tracker": {
     "videoTitle": "Un message vidéo de James",
-    "videoSubtitle": "Pourquoi je cours, et pour qui.",
+    "videoSubtitle": "C’est moi, et voici pourquoi je fais tout ça.",
     "comingSoon": "À venir",
     "videoBody": "Le message vidéo arrive dans quelques jours.",
     "missionEyebrow": "Mission bourse",
     "missionTitle": "Une bourse pour des jeunes qui ont besoin de soutien",
     "missionBody": "Après une tragédie durant l’enfance, l’avenir peut sembler incertain — surtout lorsqu’on dépend encore des autres. Une bourse offre un objectif concret : autonomie, éducation et espoir.",
+    "missionBody2": "Faites un don dès aujourd’hui pour soutenir les bourses destinées aux jeunes grâce au Programme d’éducation postsecondaire de la Fondation de l’aide à l’enfance du Canada. Votre soutien aura un impact réel et durable:",
     "missionBullets": [
       "Soutient les objectifs d’études et de carrière",
       "Réduit le stress financier pendant la transition",
       "Crée de l’espoir et une stabilité à long terme"
     ],
+    "missionCTA": "Ensemble, nous pouvons aider les jeunes à atteindre leur plein potentiel.",
     "gpsEyebrow": "GPS",
     "gpsTitle": "Suivez en temps réel !",
     "gpsBody": "Le GPS se met à jour en continu pendant la progression de James. À la fin de chaque journée, le GPS est mis en pause, puis reprend au même endroit le lendemain matin."
