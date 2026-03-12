@@ -12,7 +12,7 @@ import bikingBg from "./assets/biking-photo.png";
 import ukraineBg from "./assets/ukraine-photo.jpeg";
 import familyBg from "./assets/family-photo.jpg";
 import heroLogoen from "./assets/logo4.png"; 
-import heroLogofr from "./assets/logo4fr.png";
+import heroLogofr from "./assets/logo4fr2.png";
 import map from "./assets/map.png";           
 import waveDivider from "./assets/wave-haikei3.svg";
 import nature from "./assets/nature.avif";
