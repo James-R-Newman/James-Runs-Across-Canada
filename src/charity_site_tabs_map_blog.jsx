@@ -34,6 +34,7 @@ import { useTranslation } from "react-i18next";
  */
 
 const STORAGE_KEY = "james_runs_across_canada_blog_posts_v1";
+const DONATE_URL = "https://fundraise.cafdn.org/25905/cafd/198058/james-runs-canada";
 
 function formatDate(dateStr) {
   const d = new Date(dateStr);
@@ -70,7 +71,7 @@ const SPONSOR_GROUPS = [
   {
     key: "run",
     title: "Run Funders",
-    subtitle: "Organizations, businesses, and community partners making the run finanically possible (travel, gear, food, etc.).",
+    subtitle: "Organizations, businesses, and community partners making the run financially possible (travel, gear, food, etc.).",
     items: [
       { id: "r1", name: "Sponsor Name", tier: "Gear partner", blurb: "Shoes, kits, nutrition." },
       { id: "r2", name: "Sponsor Name", tier: "Logistics", blurb: "Helping cover travel + supplies." },
@@ -1124,8 +1125,9 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 </button>
 
                 <a
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
+                  href={DONATE_URL}
+                  target="_blank"
+                  rel="noreferrer noopener"
                   className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
                 >
                   {t("common.donate")}
@@ -1224,7 +1226,7 @@ function HomeTrackerSection({ pins, setPins }) {
 
 
               <div className="mt-6 flex flex-wrap justify-center sm:justify-start gap-3">
-                <a className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200">
+                <a href={DONATE_URL} target="_blank" rel="noreferrer noopener" className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200">
                   {t("common.donate")}
                 </a>
                 <a className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]">
@@ -1433,8 +1435,9 @@ function SupportSection({ setTab }) {
             </div>
             <div className="mt-10 flex flex-wrap gap-2">
             <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
+              href={DONATE_URL}
+              target="_blank"
+              rel="noreferrer noopener"
               className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
             >
               {t("support.cards.donate.cta")}
@@ -1524,7 +1527,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
                 <a href="#" onClick={(e) => e.preventDefault()} className="text-sm font-semibold text-white/70 hover:text-white">
                   Privacy
                 </a>
-                <a href="#" onClick={(e) => e.preventDefault()} className="text-sm font-semibold text-white/70 hover:text-white">
+                <a href={DONATE_URL} target="_blank" rel="noreferrer noopener" className="text-sm font-semibold text-white/70 hover:text-white">
                   Donate
                 </a>
                 <button onClick={() => setTab("contact")} className="text-sm font-semibold text-white/70 hover:text-white">
