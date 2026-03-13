@@ -210,10 +210,15 @@ function RunFundersLogoRows() {
   );
 
 
-
 }
+
+
+
+
+
 function VideoWithCenterPlay() {
   const videoRef = useRef(null);
+  const [hasStarted, setHasStarted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayClick = async () => {
@@ -222,6 +227,7 @@ function VideoWithCenterPlay() {
 
     try {
       await video.play();
+      setHasStarted(true);
       setIsPlaying(true);
     } catch (err) {
       console.error("Video play failed:", err);
@@ -229,7 +235,10 @@ function VideoWithCenterPlay() {
   };
 
   const handlePause = () => setIsPlaying(false);
-  const handlePlay = () => setIsPlaying(true);
+  const handlePlay = () => {
+    setHasStarted(true);
+    setIsPlaying(true);
+  };
   const handleEnded = () => setIsPlaying(false);
 
   return (
@@ -238,7 +247,7 @@ function VideoWithCenterPlay() {
         <video
           ref={videoRef}
           className="block w-full h-auto bg-black"
-          controls={isPlaying}
+          controls
           playsInline
           poster="/video-poster2.png"
           preload="metadata"
@@ -246,11 +255,11 @@ function VideoWithCenterPlay() {
           onPlay={handlePlay}
           onEnded={handleEnded}
         >
-          <source src="/james-why-video.mp4" type="video/mp4" />
+          <source src="/JimmyFINAL.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
-        {!isPlaying && (
+        {!hasStarted && (
           <button
             type="button"
             onClick={handlePlayClick}
