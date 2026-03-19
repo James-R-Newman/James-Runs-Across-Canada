@@ -248,7 +248,7 @@ function RunFundersLogoRows() {
             size="sm"
             src={sponsorBronze1}
             alt="Record Press"
-            href="https://theirwebsite.com"
+            href="https://www.recordxpress.ca/"
           />
           <LogoPlaceholder size="sm" />
           <LogoPlaceholder size="sm" />
