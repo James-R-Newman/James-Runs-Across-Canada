@@ -20,6 +20,7 @@ import charityen from "./assets/charity.png";
 import charityfr from "./assets/charityfr.png";
 import janine from "./assets/janine.webp";
 import karley from "./assets/karley3.webp";
+import sponsorBronze1 from "./assets/sponsor-bronze1.png";
 import { useTranslation } from "react-i18next";
 
 
@@ -156,32 +157,70 @@ function TeamCard({ person }) {
 
 
 
-function LogoPlaceholder({ size = "md" }) {
+function LogoPlaceholder({
+  size = "md",
+  src = null,
+  alt = "Sponsor logo",
+  href = null,
+}) {
   const sizeCls =
     size === "lg"
       ? "h-32 w-36 sm:h-40 sm:w-44 md:h-48 md:w-52"
       : size === "sm"
-      ? "h-18 w-20 sm:h-20 sm:w-22 md:h-22 md:w-24"
+      ? "h-20 w-24 sm:h-24 sm:w-28 md:h-24 md:w-28"
       : "h-24 w-28 sm:h-28 sm:w-32 md:h-32 md:w-36";
 
-  return (
+  const filledCls = src
+    ? "border-white/35 bg-white/90 shadow-[0_18px_60px_rgba(0,0,0,0.35)]"
+    : "border-white/10 bg-white/5 shadow-[0_12px_30px_rgba(0,0,0,0.18)]";
+
+  const inner = (
     <div
       className={[
-        "shrink-0 rounded-3xl",
-        "border border-white/15 bg-white/10",
+        "shrink-0 rounded-3xl border",
         "backdrop-blur-xl",
-        "shadow-[0_18px_60px_rgba(0,0,0,0.25)]",
         "flex items-center justify-center",
+        "overflow-hidden transition",
+        href ? "hover:scale-[1.03] hover:border-yellow-300/70" : "",
         sizeCls,
+        filledCls,
       ].join(" ")}
     >
-      {/* Replace this with a logo later */}
-      <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-white/40">
-        Logo
-      </span>
+      {src ? (
+        <img
+          src={src}
+          alt={alt}
+          className="h-full w-full object-contain p-2"
+          loading="lazy"
+          draggable={false}
+        />
+      ) : (
+        <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-white/25">
+          Logo
+        </span>
+      )}
     </div>
   );
+
+  return href ? (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      aria-label={alt}
+      className="block"
+    >
+      {inner}
+    </a>
+  ) : (
+    inner
+  );
 }
+
+
+
+
+
 
 function RunFundersLogoRows() {
   return (
@@ -202,16 +241,25 @@ function RunFundersLogoRows() {
 
         {/* Row 3: 6 small squares */}
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-3.5">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <LogoPlaceholder key={`sm-${i}`} size="sm" />
-          ))}
+          <LogoPlaceholder size="sm" />
+          <LogoPlaceholder size="sm" />
+          <LogoPlaceholder size="sm" />
+          <LogoPlaceholder
+            size="sm"
+            src={sponsorBronze1}
+            alt="Record Press"
+            href="https://theirwebsite.com"
+          />
+          <LogoPlaceholder size="sm" />
+          <LogoPlaceholder size="sm" />
         </div>
       </div>
     </div>
   );
-
-
 }
+
+
+
 
 
 
