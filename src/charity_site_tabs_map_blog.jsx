@@ -8,13 +8,9 @@ import { client } from "./sanityClient";
 // - ukraine-photo.jpeg
 // - family-photo.png   (or change the import extension below to match your file)
 import runningBg from "./assets/jameshomenew3.webp";
-import bikingBg from "./assets/biking-photo.png";
-import ukraineBg from "./assets/ukraine-photo.jpeg";
-import familyBg from "./assets/family-photo.jpg";
 import heroLogoen from "./assets/logo4.png"; 
 import heroLogofr from "./assets/logo4fr2.png";
 import map from "./assets/map.png";           
-import waveDivider from "./assets/wave-haikei3.svg";
 import nature from "./assets/nature.avif";
 import charityen from "./assets/charity.png";
 import charityfr from "./assets/charityfr.png";
@@ -22,6 +18,7 @@ import janine from "./assets/janine.webp";
 import karley from "./assets/karley3.webp";
 import sponsorBronze1 from "./assets/sponsor-bronze1.png";
 import { useTranslation } from "react-i18next";
+import sponsorSilver1 from "./assets/canadian_tire.png";
 
 
 
@@ -234,9 +231,15 @@ function RunFundersLogoRows() {
 
         {/* Row 2: 4 medium squares */}
         <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-7">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <LogoPlaceholder key={`mid-${i}`} size="md" />
-          ))}
+          <LogoPlaceholder size="md" />
+          <LogoPlaceholder
+            size="md"
+            src={sponsorSilver1}
+            alt="Canadian Tire"
+            href="https://www.canadiantire.ca/"
+          />
+          <LogoPlaceholder size="md" />
+          <LogoPlaceholder size="md" />
         </div>
 
         {/* Row 3: 6 small squares */}
