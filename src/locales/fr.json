@@ -118,6 +118,30 @@
       }
     }
   },
+  "funFacts": {
+  "title": "Quelques faits amusants sur la course",
+  "items": [
+    {
+      "title": "Seulement 3 personnes",
+      "body": "ont traversé le Canada à la course en moins de 100 jours. À 22 ans, James tentera d’en devenir le plus jeune.""
+    },
+    {
+      "suffix": "calories",
+      "title": "Énergie quotidienne",
+      "body": "James devra consommer environ 10 000 calories par jour."
+    },
+    {
+      "suffix": "km",
+      "title": "Distance totale",
+      "body": "L’équivalent de près de 170 marathons, dos à dos."
+    },
+    {
+      "suffix": "millions de pas",
+      "title": "Nombre approximatif de pas",
+      "body": "C’est plus de pas que beaucoup de gens en font en 7 à 10 ans."
+    }
+  ]
+},
 
   "contact": {
     "title": "Nous contacter",
@@ -138,6 +162,7 @@
     },
     "success": "Message prêt à être envoyé. (À connecter à Formspree/Netlify Forms ou à un backend.)"
   },
+
 
   "sponsorsCarousel": {
     "title": "Sponsors",

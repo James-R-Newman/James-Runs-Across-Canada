@@ -106,6 +106,30 @@
     
 }
 },
+"funFacts": {
+  "title": "Some Fun Facts About the Run",
+  "items": [
+    {
+      "title": "Only 3 people",
+      "body": "have run across Canada in under 100 days. James will attempt to be the youngest at 22 years old."
+    },
+    {
+      "suffix": "calories",
+      "title": "Daily fuel",
+      "body": "James will need to consume around 10,000 calories a day."
+    },
+    {
+      "suffix": "km",
+      "title": "Total Distance",
+      "body": "The equivalent of nearly 170 marathons, back-to-back."
+    },
+    {
+      "suffix": "million steps",
+      "title": "Approximate steps",
+      "body": "That’s more steps than many people take in 7–10 years."
+    }
+  ]
+},
  "contact": {
     "title": "Get in touch",
     "subtitle": "Use this form, or email us directly here!",

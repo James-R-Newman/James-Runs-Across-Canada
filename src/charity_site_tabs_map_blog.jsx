@@ -103,6 +103,104 @@ const SPONSOR_GROUPS = [
 
 
 
+
+
+function FunFactsSection() {
+  const { t } = useTranslation();
+
+  const funFacts = [
+    {
+      stat: "3",
+      title: t("funFacts.items.0.title"),
+      body: t("funFacts.items.0.body"),
+      featured: true,
+    },
+    {
+      stat: "10,000",
+      suffix: t("funFacts.items.1.suffix"),
+      title: t("funFacts.items.1.title"),
+      body: t("funFacts.items.1.body"),
+    },
+    {
+      stat: "7,500",
+      suffix: t("funFacts.items.2.suffix"),
+      title: t("funFacts.items.2.title"),
+      body: t("funFacts.items.2.body"),
+    },
+    {
+      stat: "10",
+      suffix: t("funFacts.items.3.suffix"),
+      title: t("funFacts.items.3.title"),
+      body: t("funFacts.items.3.body"),
+    },
+  ];
+
+  return (
+    <section className="w-full bg-yellow-300 py-6 sm:py-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1700px]">
+          <div className="text-center">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-neutral-950 uppercase whitespace-nowrap">
+              {t("funFacts.title")}
+            </h2>
+
+            <div className="mx-auto mt-3 h-[2px] w-24 sm:w-32 rounded-full bg-neutral-950/70" />
+          </div>
+
+          <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {funFacts.map((item, i) => (
+              <div
+                key={i}
+                className="rounded-[22px] bg-stone-100 px-4 py-5 text-center shadow-[0_10px_24px_rgba(0,0,0,0.10)] border border-black/5"
+              >
+                {item.featured ? (
+                  <>
+                    <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 text-2xl font-black text-yellow-300">
+                      {item.stat}
+                    </div>
+
+                    <div className="mt-4 text-xl font-black text-neutral-950">
+                      {item.title}
+                    </div>
+
+                    <div className="mt-2 text-sm sm:text-base leading-6 text-neutral-800">
+                      {item.body}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="text-2xl sm:text-3xl font-black uppercase leading-none text-neutral-950">
+                      {item.stat}
+                      {item.suffix ? (
+                        <span className="block mt-1 text-base sm:text-lg">
+                          {item.suffix}
+                        </span>
+                      ) : null}
+                    </div>
+
+                    <div className="mt-3 text-lg font-black text-neutral-950">
+                      {item.title}
+                    </div>
+
+                    <div className="mt-2 text-sm sm:text-base leading-6 text-neutral-800">
+                      {item.body}
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+
+
+
 function TeamCard({ person }) {
   const { t } = useTranslation();
 
@@ -1559,6 +1657,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
       <HomeTrackerSection pins={pins} setPins={setPins} />
       <LatestBlogBreakSection posts={posts} onOpenPost={onOpenPost} onViewAll={() => setTab("blog")} />
       <SponsorsGridSection groups={SPONSOR_GROUPS} />
+      <FunFactsSection />
       <SupportSection setTab={setTab} />
 
       <footer className="border-t border-white/10 bg-neutral-950">
