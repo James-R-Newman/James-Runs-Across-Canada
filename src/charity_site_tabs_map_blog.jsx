@@ -252,12 +252,12 @@ function TeamCard({ person }) {
 
 
 
-
 function LogoPlaceholder({
   size = "md",
   src = null,
   alt = "Sponsor logo",
   href = null,
+  imgClassName = "",
 }) {
   const sizeCls =
     size === "lg"
@@ -286,7 +286,7 @@ function LogoPlaceholder({
         <img
           src={src}
           alt={alt}
-          className="h-full w-full object-contain p-2"
+          className={`h-full w-full object-contain p-2 ${imgClassName}`}
           loading="lazy"
           draggable={false}
         />
@@ -312,7 +312,6 @@ function LogoPlaceholder({
     inner
   );
 }
-
 
 
 
@@ -347,6 +346,7 @@ function RunFundersLogoRows() {
           <LogoPlaceholder size="sm" />
           <LogoPlaceholder
             size="sm"
+            imgClassName="scale-[1.25]"
             src={sponsorBronze2}
             alt="Predictive Success"
             href="https://www.predictivesuccess.com/"
