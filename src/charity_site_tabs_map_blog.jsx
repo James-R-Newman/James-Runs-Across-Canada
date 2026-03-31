@@ -19,6 +19,7 @@ import karley from "./assets/karley3.webp";
 import sponsorBronze1 from "./assets/sponsor-bronze1.png";
 import { useTranslation } from "react-i18next";
 import sponsorSilver1 from "./assets/canadian_tire.png";
+import sponsorBronze2 from "./assets/sponsor-bronze2.png";
 
 
 
@@ -344,7 +345,12 @@ function RunFundersLogoRows() {
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-3.5">
           <LogoPlaceholder size="sm" />
           <LogoPlaceholder size="sm" />
-          <LogoPlaceholder size="sm" />
+          <LogoPlaceholder
+            size="sm"
+            src={sponsorBronze2}
+            alt="Predictive Success"
+            href="https://www.predictivesuccess.com/"
+          />
           <LogoPlaceholder
             size="sm"
             src={sponsorBronze1}
@@ -1416,9 +1422,9 @@ function HomeTrackerSection({ pins, setPins }) {
         {/* BOTTOM: GPS Map with background image (pure image) */}
         <div id="gps"   className="relative mt-38 left-1/2 -translate-x-1/2 w-screen overflow-hidden" >
         {/* Marquee under hero */}
-      <div className="relative z-10">
-        <Marquee />
-      </div>
+        <div className="relative z-10">
+          <Marquee />
+        </div>
 
           {/* background image */}
           <div className="absolute inset-0">
