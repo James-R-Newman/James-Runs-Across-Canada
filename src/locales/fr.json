@@ -48,7 +48,7 @@
 
   "map": {
     "title": "Carte GPS",
-    "hint": "Faites défiler pour zoomer • Glissez pour déplacer • Cliquez pour ajouter un pin",
+    "hint": "Faites défiler pour zoomer • Glissez pour déplacer",
     "reset": "Réinitialiser",
     "removeLast": "Retirer le dernier",
     "clearPins": "Effacer les pins",

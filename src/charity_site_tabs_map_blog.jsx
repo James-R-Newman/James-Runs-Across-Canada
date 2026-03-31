@@ -1411,10 +1411,14 @@ function HomeTrackerSection({ pins, setPins }) {
 
 
         </div>
+        
 
         {/* BOTTOM: GPS Map with background image (pure image) */}
         <div id="gps"   className="relative mt-38 left-1/2 -translate-x-1/2 w-screen overflow-hidden" >
-
+        {/* Marquee under hero */}
+      <div className="relative z-10">
+        <Marquee />
+      </div>
 
           {/* background image */}
           <div className="absolute inset-0">
@@ -1502,10 +1506,7 @@ function LatestBlogBreakSection({ posts, onOpenPost, onViewAll }) {
 
   return (
     <section className="bg-neutral-950 -mt-px border-b border-white/10">
-      {/* Marquee under hero */}
-      <div className="relative z-10">
-        <Marquee />
-      </div>
+      
       <div className="mx-auto max-w-6xl px-4 py-14">
         <div className="flex items-end justify-between gap-3">
           <div className="text-center sm:text-left">

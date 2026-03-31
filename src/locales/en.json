@@ -27,7 +27,7 @@
   },
   "brand": {
     "title": "James Runs Canada",
-    "tagline": "Turning kilometers into scholarships"
+    "tagline": "Turning kilometres into scholarships"
   },
   "sponsors": {
     "title": "Partners powering the run",
@@ -35,14 +35,14 @@
   },
   "stats": {
     "daysCompleted": "Days completed",
-    "kilometersRun": "Kilometers run",
+    "kilometersRun": "Kilometres run",
     "amountRaised": "Amount raised",
     "km": "km",
     "currency": "$"
   },
   "map": {
     "title": "GPS map",
-    "hint": "Scroll to zoom • Drag to pan • Click to drop a pin",
+    "hint": "Scroll to zoom • Drag to pan",
     "reset": "Reset",
     "removeLast": "Remove last",
     "clearPins": "Clear pins",
@@ -62,7 +62,7 @@
     "loadError": "Failed to load blog posts."
   },
   "marquee": {
-    "text": " LIVE • TURNING KILOMETERS INTO SCHOLARSHIPS • FOLLOW ALONG • DONATE • "
+    "text": " LIVE • TURNING KILOMETRES INTO SCHOLARSHIPS • FOLLOW ALONG • DONATE • "
   },
   "footer": {
     "subtitle": "Live GPS Mapping + Daily Blog",
