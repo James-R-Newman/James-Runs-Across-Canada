@@ -20,7 +20,9 @@ import sponsorBronze1 from "./assets/sponsor-bronze1.png";
 import { useTranslation } from "react-i18next";
 import sponsorSilver1 from "./assets/canadian_tire.png";
 import sponsorBronze2 from "./assets/sponsor-bronze2.png";
-
+import insta from "./assets/insta.png";
+import facebook from "./assets/facebook.webp";
+import tictok from "./assets/tictok.webp";
 
 
 /**
@@ -1027,6 +1029,10 @@ function TopNav({ tab, setTab }) {
             </div> */}
           </div>
         </div>
+
+
+
+        
       </div>
     </div>
   );
@@ -1296,15 +1302,56 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                 </button>
               </div>
 
-              <div className="mt-8 lg:mt-10 flex justify-center lg:justify-start">
-                <img
-                  src={heroLogo}
-                  alt="James Runs Canada logo"
-                  className="h-32 sm:h-32 lg:h-40 w-auto max-w-[78%] sm:max-w-[70%] object-contain drop-shadow-[0_16px_30px_rgba(0,0,0,0.28)]"
-                  loading="lazy"
-                />
-              </div>
+
+
+
+              <div className="mt-8 lg:mt-10 flex flex-col items-center lg:items-start">
+  <img
+    src={heroLogo}
+    alt="James Runs Canada logo"
+    className="h-32 sm:h-32 lg:h-40 w-auto max-w-[78%] sm:max-w-[70%] object-contain drop-shadow-[0_16px_30px_rgba(0,0,0,0.28)]"
+    loading="lazy"
+  />
+
+  {/* <div className="mt-8 flex items-center justify-center gap-8">
+    <a
+      href="https://instagram.com/jamesrunscanada"
+      target="_blank"
+      rel="noreferrer noopener"
+      aria-label="Instagram"
+      className="transition duration-200 hover:scale-120"
+    >
+      <img src={insta} alt="Instagram" className="h-12 w-12 object-contain" />
+    </a>
+
+    <a
+      href="https://facebook.com/jamesrunscanada"
+      target="_blank"
+      rel="noreferrer noopener"
+      aria-label="Facebook"
+      className="transition duration-200 hover:scale-120"
+    >
+      <img src={facebook} alt="Facebook" className="h-12 w-12 object-contain" />
+    </a>
+
+    <a
+      href="https://tiktok.com/@jamesrunscanada"
+      target="_blank"
+      rel="noreferrer noopener"
+      aria-label="TikTok"
+      className="transition duration-200 hover:scale-120"
+    >
+      <img src={tictok} alt="TikTok" className="h-12 w-12 object-contain" />
+    </a>
+  </div> */}
+</div>
+
+
+
+
             </div>
+
+
           </div>
         </div>
       </div>
@@ -1384,7 +1431,7 @@ function HomeTrackerSection({ pins, setPins }) {
                 <a href={DONATE_URL} target="_blank" rel="noreferrer noopener" className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200">
                   {t("common.donate")}
                 </a>
-                <a className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]">
+                <a href="https://fundraise.cafdn.org/25905/cafd/about" target="_blank" rel="noreferrer noopener" className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]">
                   {t("common.learnMore")}
                 </a>
               </div>
@@ -1448,7 +1495,7 @@ function HomeTrackerSection({ pins, setPins }) {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
               <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
-                {t("tracker.gpsEyebrow")}
+                {/* {t("tracker.gpsEyebrow")} */}
               </div>
               <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950">
                 {t("tracker.gpsTitle")}
@@ -1458,9 +1505,46 @@ function HomeTrackerSection({ pins, setPins }) {
               </div>
             </div>
 
-            <div className="inline-flex items-center rounded-full border border-neutral-950/15 bg-neutral-950/5 px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-950">
+            <div className="flex flex-col items-end gap-3">
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://instagram.com/jamesrunscanada"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label="Instagram"
+                  className="transition duration-200 hover:scale-110"
+                >
+                  <img src={insta} alt="Instagram" className="h-11 w-11 object-contain" />
+                </a>
+
+                <a
+                  // href="https://facebook.com/jamesrunscanada"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label="Facebook"
+                  className="transition duration-200 hover:scale-110"
+                >
+                  <img src={facebook} alt="Facebook" className="h-11 w-11 object-contain" />
+                </a>
+
+                <a
+                  // href="https://tiktok.com/@jamesrunscanada"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label="TikTok"
+                  className="transition duration-200 hover:scale-110"
+                >
+                  <img src={tictok} alt="TikTok" className="h-11 w-11 object-contain" />
+                </a>
+              </div>
+
+              <div className="inline-flex items-center rounded-full border border-neutral-950/15 bg-neutral-950/5 px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-950">
                 {t("common.live")}
+              </div>
             </div>
+
+
+
           </div>
 
           
