@@ -1620,8 +1620,9 @@ function SupportSection({ setTab }) {
             </div>
             <div className="mt-10 flex flex-wrap gap-2">
             <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
+              href="https://www.instagram.com/jamesrunscanada/"
+              target="_blank"
+              rel="noreferrer noopener"
               className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
             >
               {t("support.cards.share.cta")}
@@ -1932,7 +1933,7 @@ function ContactTab() {
             </div>
             <div className="mt-2 space-y-1 text-sm text-white/75">
               <div>✉️ {t("contact.emailLabel")}: TEAM@jamesrunscanada.ca</div>
-              <div>📷 {t("contact.instagramLabel")}: @Jams_Newman</div>
+              <div>📷 {t("contact.instagramLabel")}: @jamesrunscanada</div>
             </div>
           </div>
 
