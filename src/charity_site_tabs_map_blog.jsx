@@ -1552,7 +1552,7 @@ function HomeTrackerSection({ pins, setPins }) {
             startDate="2026-05-18"
             kmPerDay={80}
             totalGoalDays={100}
-            amountRaised={0} // TODO: wire to real fundraising total
+            amountRaised={4379} // TODO: wire to real fundraising total
           />
 
           
