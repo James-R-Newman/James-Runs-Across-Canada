@@ -1505,43 +1505,43 @@ function HomeTrackerSection({ pins, setPins }) {
               </div>
             </div>
 
-            <div className="flex flex-col items-end gap-3">
-              <div className="flex items-center gap-3">
-                <a
-                  href="https://instagram.com/jamesrunscanada"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  aria-label="Instagram"
-                  className="transition duration-200 hover:scale-110"
-                >
-                  <img src={insta} alt="Instagram" className="h-11 w-11 object-contain" />
-                </a>
+            <div className="w-full sm:w-auto flex flex-col items-center sm:items-end gap-2 sm:gap-3 mt-4 sm:mt-0">
+  <div className="flex items-center justify-center gap-4">
+    <a
+      href="https://instagram.com/jamesrunscanada"
+      target="_blank"
+      rel="noreferrer noopener"
+      aria-label="Instagram"
+      className="transition duration-200 hover:scale-110"
+    >
+      <img src={insta} alt="Instagram" className="h-12 w-12 object-contain" />
+    </a>
 
-                <a
-                  // href="https://facebook.com/jamesrunscanada"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  aria-label="Facebook"
-                  className="transition duration-200 hover:scale-110"
-                >
-                  <img src={facebook} alt="Facebook" className="h-11 w-11 object-contain" />
-                </a>
+    <a
+      href="https://facebook.com/jamesrunscanada"
+      target="_blank"
+      rel="noreferrer noopener"
+      aria-label="Facebook"
+      className="transition duration-200 hover:scale-110"
+    >
+      <img src={facebook} alt="Facebook" className="h-12 w-12 object-contain" />
+    </a>
 
-                <a
-                  // href="https://tiktok.com/@jamesrunscanada"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  aria-label="TikTok"
-                  className="transition duration-200 hover:scale-110"
-                >
-                  <img src={tictok} alt="TikTok" className="h-11 w-11 object-contain" />
-                </a>
-              </div>
+    <a
+      href="https://tiktok.com/@jamesrunscanada"
+      target="_blank"
+      rel="noreferrer noopener"
+      aria-label="TikTok"
+      className="transition duration-200 hover:scale-110"
+    >
+      <img src={tictok} alt="TikTok" className="h-12 w-12 object-contain" />
+    </a>
+  </div>
 
-              <div className="inline-flex items-center rounded-full border border-neutral-950/15 bg-neutral-950/5 px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-950">
-                {t("common.live")}
-              </div>
-            </div>
+  <div className="inline-flex items-center rounded-full border border-neutral-950/15 bg-white/35 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-neutral-950">
+    {t("common.live")}
+  </div>
+</div>
 
 
 
