@@ -1530,60 +1530,58 @@ function HomeTrackerSection({ pins, setPins }) {
 
         
           <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8 py-10">
+          
+          
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <div className="max-w-2xl">
-              <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
-                {/* {t("tracker.gpsEyebrow")} */}
-              </div>
-              <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950">
-                {t("tracker.gpsTitle")}
-              </div>
-              <div className="mt-2 text-sm text-neutral-950/70">
-                 {t("tracker.gpsBody")}
-              </div>
-            </div>
+  <div className="max-w-2xl">
+    <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
+      {/* {t("tracker.gpsEyebrow")} */}
+    </div>
 
-            <div className="w-full sm:w-auto flex flex-col items-center sm:items-end gap-2 sm:gap-3 mt-4 sm:mt-0">
-  <div className="flex items-center justify-center gap-4">
-    <a
-      href="https://instagram.com/jamesrunscanada"
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label="Instagram"
-      className="transition duration-200 hover:scale-110"
-    >
-      <img src={insta} alt="Instagram" className="h-12 w-12 object-contain" />
-    </a>
+    <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950">
+      {t("tracker.gpsTitle")}
+    </div>
 
-    <a
-      href="https://facebook.com/jamesrunscanada"
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label="Facebook"
-      className="transition duration-200 hover:scale-110"
-    >
-      <img src={facebook} alt="Facebook" className="h-12 w-12 object-contain" />
-    </a>
+    <div className="mt-2 text-sm text-neutral-950/70">
+      {t("tracker.gpsBody")}
+    </div>
 
-    <a
-      href="https://tiktok.com/@jamesrunscanada"
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label="TikTok"
-      className="transition duration-200 hover:scale-110"
-    >
-      <img src={tictok} alt="TikTok" className="h-12 w-12 object-contain" />
-    </a>
-  </div>
+    <div className="mt-5 flex flex-wrap justify-start gap-3">
+      <a
+        href="https://instagram.com/jamesrunscanada"
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label="Instagram"
+        className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
+      >
+        <img src={insta} alt="" className="h-5 w-5 object-contain" />
+        <span>Instagram</span>
+      </a>
 
-  <div className="inline-flex items-center rounded-full border border-neutral-950/15 bg-white/35 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-neutral-950">
-    {t("common.live")}
+      <a
+        href="https://facebook.com/jamesrunscanada"
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label="Facebook"
+        className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
+      >
+        <img src={facebook} alt="" className="h-5 w-5 object-contain" />
+        <span>Facebook</span>
+      </a>
+
+      <a
+        href="https://tiktok.com/@jamesrunscanada"
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label="TikTok"
+        className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
+      >
+        <img src={tictok} alt="" className="h-5 w-5 object-contain" />
+        <span>TikTok</span>
+      </a>
+    </div>
   </div>
 </div>
-
-
-
-          </div>
 
           
           <RunCounters
