@@ -852,6 +852,44 @@ function useCountUp(value, durationMs = 900) {
   return display;
 }
 
+function useFundraiserTotal() {
+  const [amountRaised, setAmountRaised] = useState(0);
+  const [loadingRaised, setLoadingRaised] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const load = async () => {
+      try {
+        const res = await fetch("/api/fundraiser-total");
+        const data = await res.json();
+
+        if (!cancelled && data?.ok && typeof data.amountRaised === "number") {
+          setAmountRaised(data.amountRaised);
+        }
+      } catch (err) {
+        console.error("Failed to load fundraiser total:", err);
+      } finally {
+        if (!cancelled) setLoadingRaised(false);
+      }
+    };
+
+    load();
+
+    // refresh every 5 minutes
+    const id = setInterval(load, 5 * 60 * 1000);
+
+    return () => {
+      cancelled = true;
+      clearInterval(id);
+    };
+  }, []);
+
+  return { amountRaised, loadingRaised };
+}
+
+
+
 function StatCard({ label, value, suffix = "", prefix = "" }) {
   const animated = useCountUp(value);
   const formatted = new Intl.NumberFormat(undefined).format(animated);
@@ -1367,7 +1405,7 @@ function HomeTrackerSection({ pins, setPins }) {
   const charityLogo = i18n.language === "fr" ? charityfr : charityen;
   const bullets = t("tracker.missionBullets", { returnObjects: true });
   const safeBullets = Array.isArray(bullets) ? bullets : [];
-
+  const { amountRaised } = useFundraiserTotal();
   
   return (
     
@@ -1552,7 +1590,7 @@ function HomeTrackerSection({ pins, setPins }) {
             startDate="2026-05-18"
             kmPerDay={80}
             totalGoalDays={100}
-            amountRaised={3479} // TODO: wire to real fundraising total
+            amountRaised={amountRaised} // TODO: wire to real fundraising total
           />
 
           
