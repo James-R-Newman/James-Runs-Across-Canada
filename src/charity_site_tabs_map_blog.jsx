@@ -1784,8 +1784,9 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
       <HomeHeroTop latestPostId={latestPostId} onOpenPost={onOpenPost} />
       <HomeTrackerSection pins={pins} setPins={setPins} />
       <LatestBlogBreakSection posts={posts} onOpenPost={onOpenPost} onViewAll={() => setTab("blog")} />
-      <SponsorsGridSection groups={SPONSOR_GROUPS} />
       <FunFactsSection />
+      <SponsorsGridSection groups={SPONSOR_GROUPS} />
+      
       <SupportSection setTab={setTab} />
 
       <footer className="border-t border-white/10 bg-neutral-950">
