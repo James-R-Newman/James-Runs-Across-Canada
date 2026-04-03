@@ -3,11 +3,12 @@ const FUNDRAISER_URL =
   "https://fundraise.cafdn.org/25905/cafd/198058/james-runs-canada";
 
 function extractRaisedAmount(html) {
-  // best case: page JS contains para.raised = 3479.4
   const jsMatch = html.match(/para\.raised\s*=\s*([0-9.]+)/i);
   if (jsMatch) return Number(jsMatch[1]);
 
-  // fallback: visible page text like CA$3,479.40
+  const pageMatch = html.match(/<div class="page-raised">CA\$([0-9,]+(?:\.[0-9]{1,2})?)<\/div>/i);
+  if (pageMatch) return Number(pageMatch[1].replace(/,/g, ""));
+
   const textMatch = html.match(/CA\$\s*([0-9,]+(?:\.[0-9]{1,2})?)/i);
   if (textMatch) return Number(textMatch[1].replace(/,/g, ""));
 
@@ -22,22 +23,16 @@ export async function GET() {
       },
     });
 
-    if (!res.ok) {
-      return new Response(
-        JSON.stringify({ ok: false, error: `Upstream ${res.status}` }),
-        {
-          status: 502,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-    }
-
     const html = await res.text();
     const amountRaised = extractRaisedAmount(html);
 
-    if (amountRaised == null) {
+    if (!res.ok || amountRaised == null) {
       return new Response(
-        JSON.stringify({ ok: false, error: "Could not parse raised total" }),
+        JSON.stringify({
+          ok: false,
+          error: "Could not fetch or parse fundraiser total",
+          status: res.status,
+        }),
         {
           status: 500,
           headers: { "Content-Type": "application/json" },
@@ -49,8 +44,6 @@ export async function GET() {
       JSON.stringify({
         ok: true,
         amountRaised,
-        source: FUNDRAISER_URL,
-        fetchedAt: new Date().toISOString(),
       }),
       {
         status: 200,
