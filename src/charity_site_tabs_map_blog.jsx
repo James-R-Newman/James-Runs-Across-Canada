@@ -1569,7 +1569,7 @@ function HomeTrackerSection({ pins, setPins }) {
         <span>Facebook</span>
       </a>
 
-      <a
+      {/* <a
         href="https://tiktok.com/@jamesrunscanada"
         target="_blank"
         rel="noreferrer noopener"
@@ -1578,7 +1578,7 @@ function HomeTrackerSection({ pins, setPins }) {
       >
         <img src={tictok} alt="" className="h-5 w-5 object-contain" />
         <span>TikTok</span>
-      </a>
+      </a> */}
     </div>
   </div>
 </div>
