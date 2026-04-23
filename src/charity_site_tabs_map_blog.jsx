@@ -23,6 +23,9 @@ import sponsorBronze2 from "./assets/sponsor-bronze2.png";
 import insta from "./assets/insta.png";
 import facebook from "./assets/facebook.webp";
 import tictok from "./assets/tictok.webp";
+import sponsorBronze3 from "./assets/organika3.png";
+import sponsorSilver2 from "./assets/alwm.png";
+
 
 
 /**
@@ -334,18 +337,30 @@ function RunFundersLogoRows() {
           <LogoPlaceholder size="md" />
           <LogoPlaceholder
             size="md"
+            imgClassName="scale-[1.18]"
             src={sponsorSilver1}
             alt="Canadian Tire"
             href="https://www.canadiantire.ca/"
           />
-          <LogoPlaceholder size="md" />
+          <LogoPlaceholder
+            size="md"
+            imgClassName="scale-[1.25]"
+            src={sponsorSilver2}
+            alt="Canadian Tire"
+            href="http://abundant.ca/"
+          />
           <LogoPlaceholder size="md" />
         </div>
 
         {/* Row 3: 6 small squares */}
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-3.5">
           <LogoPlaceholder size="sm" />
-          <LogoPlaceholder size="sm" />
+          <LogoPlaceholder
+            size="sm"
+            src={sponsorBronze3}
+            alt="Record Press"
+            href="https://www.https://organika.com/"
+          />
           <LogoPlaceholder
             size="sm"
             imgClassName="scale-[1.25]"
