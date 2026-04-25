@@ -421,10 +421,35 @@ function useFundraiserDonors() {
 }
 
 
+
+function formatDonationAgo(dateValue) {
+  if (!dateValue) return "";
+
+  const date = new Date(dateValue);
+  if (Number.isNaN(date.getTime())) return "";
+
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffDays = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "1 day ago";
+  if (diffDays < 7) return `${diffDays} days ago`;
+
+  const weeks = Math.floor(diffDays / 7);
+  if (weeks === 1) return "1 week ago";
+  if (weeks < 52) return `${weeks} weeks ago`;
+
+  const years = Math.floor(diffDays / 365);
+  if (years === 1) return "1 year ago";
+  return `${years} years ago`;
+}
+
 function DonorWallSection() {
   const { donors, loadingDonors } = useFundraiserDonors();
-  const INITIAL_COUNT = 12;
-  const LOAD_MORE_COUNT = 12;
+
+  const INITIAL_COUNT = 16;
+  const LOAD_MORE_COUNT = 20;
 
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
@@ -438,8 +463,18 @@ function DonorWallSection() {
 
   if (!donors.length) return null;
 
-  const visibleDonors = donors.slice(0, visibleCount);
-  const hasMore = visibleCount < donors.length;
+  const sortedDonors = [...donors].sort((a, b) => {
+    const aDate = a.date ? new Date(a.date).getTime() : 0;
+    const bDate = b.date ? new Date(b.date).getTime() : 0;
+
+    if (aDate && bDate) return bDate - aDate;
+
+    // Fallback: CAFDN donor IDs appear to increase over time.
+    return Number(b.id || 0) - Number(a.id || 0);
+  });
+
+  const visibleDonors = sortedDonors.slice(0, visibleCount);
+  const hasMore = visibleCount < sortedDonors.length;
 
   return (
     <section className="bg-white px-5 sm:px-8 lg:px-12 py-20 text-neutral-950 overflow-hidden">
@@ -462,6 +497,8 @@ function DonorWallSection() {
               ? donor.amount.replace("CA", "")
               : "Thank You";
 
+            const donationAgo = formatDonationAgo(donor.date);
+
             return (
               <div
                 key={donor.id}
@@ -476,6 +513,12 @@ function DonorWallSection() {
                     {donor.name || "Anonymous"}
                   </div>
 
+                  {donationAgo ? (
+                    <div className="mt-4 text-sm tracking-wide text-white/70">
+                      {donationAgo}
+                    </div>
+                  ) : null}
+
                   {donor.comment ? (
                     <p className="mx-auto mt-6 max-w-[260px] text-lg leading-8 tracking-wide text-white/90">
                       {donor.comment}
@@ -487,22 +530,20 @@ function DonorWallSection() {
           })}
         </div>
 
-        {hasMore ? (
-          <div className="mt-10 text-center">
+        <div className="mt-10 text-center">
+          {hasMore ? (
             <button
               type="button"
               onClick={() =>
                 setVisibleCount((current) =>
-                  Math.min(current + LOAD_MORE_COUNT, donors.length)
+                  Math.min(current + LOAD_MORE_COUNT, sortedDonors.length)
                 )
               }
               className="rounded-full border-2 border-black bg-black px-8 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-black"
             >
               Show More
             </button>
-          </div>
-        ) : (
-          <div className="mt-10 text-center">
+          ) : (
             <button
               type="button"
               onClick={() => setVisibleCount(INITIAL_COUNT)}
@@ -510,12 +551,15 @@ function DonorWallSection() {
             >
               Show Less
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </section>
   );
 }
+
+
+
 
 
 

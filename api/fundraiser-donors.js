@@ -39,10 +39,11 @@ export default async function handler(req, res) {
     const rawDonors = JSON.parse(match[1]);
 
     const donors = rawDonors.map((donor) => ({
-      id: donor.id,
-      name: decodeHtmlEntities(donor.name || "Anonymous"),
-      amount: donor.amount || "",
-      comment: decodeHtmlEntities(donor.comments || ""),
+        id: donor.id,
+        date: donor.date || "",
+        name: decodeHtmlEntities(donor.name || "Anonymous"),
+        amount: donor.amount || "",
+        comment: decodeHtmlEntities(donor.comments || ""),
     }));
 
     res.status(200).json({
