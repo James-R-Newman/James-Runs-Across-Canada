@@ -1733,9 +1733,7 @@ function HomeTrackerSection({ pins, setPins }) {
             />
           </div>
               
-        <div className="relative z-10">
-          <DonorWallSection />
-        </div>
+  
           
 
           
@@ -1809,6 +1807,9 @@ function HomeTrackerSection({ pins, setPins }) {
 
         </div>
       </div>
+        <div className="relative z-10">
+          <DonorWallSection />
+        </div>
       </div>
     </section>
   );
