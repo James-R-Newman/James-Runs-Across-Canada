@@ -527,7 +527,7 @@ function DonorWallSection() {
   const hasMore = visibleCount < sortedDonors.length;
 
   return (
-    <section className="bg-white px-5 sm:px-8 lg:px-12 py-20 text-neutral-950 overflow-hidden">
+    <section className="bg-transparent px-5 sm:px-8 lg:px-12 pt-28 pb-20 text-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
         <div className="text-center">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight">
@@ -1731,8 +1731,12 @@ function HomeTrackerSection({ pins, setPins }) {
               className="h-full w-full object-cover"
               draggable={false}
             />
-            
           </div>
+              
+        <div className="relative z-10">
+          <DonorWallSection />
+        </div>
+          
 
           
 
@@ -1745,55 +1749,45 @@ function HomeTrackerSection({ pins, setPins }) {
           
           
           <div className="flex flex-wrap items-end justify-between gap-4">
-  <div className="max-w-2xl">
-    <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
-      {/* {t("tracker.gpsEyebrow")} */}
-    </div>
+            <div className="max-w-2xl">
+              <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
+                {/* {t("tracker.gpsEyebrow")} */}
+              </div>
 
-    <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950">
-      {t("tracker.gpsTitle")}
-    </div>
+              <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950">
+                {t("tracker.gpsTitle")}
+              </div>
 
-    <div className="mt-2 text-sm text-neutral-950/70">
-      {t("tracker.gpsBody")}
-    </div>
+              <div className="mt-2 text-sm text-neutral-950/70">
+                {t("tracker.gpsBody")}
+              </div>
 
-    <div className="mt-5 flex flex-wrap justify-start gap-3">
-      <a
-        href="https://instagram.com/jamesrunscanada"
-        target="_blank"
-        rel="noreferrer noopener"
-        aria-label="Instagram"
-        className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
-      >
-        <img src={insta} alt="" className="h-5 w-5 object-contain" />
-        <span>Instagram</span>
-      </a>
+              <div className="mt-5 flex flex-wrap justify-start gap-3">
+                <a
+                  href="https://instagram.com/jamesrunscanada"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label="Instagram"
+                  className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
+                >
+                  <img src={insta} alt="" className="h-5 w-5 object-contain" />
+                  <span>Instagram</span>
+                </a>
 
-      <a
-        href="https://facebook.com/jamesrunscanada"
-        target="_blank"
-        rel="noreferrer noopener"
-        aria-label="Facebook"
-        className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
-      >
-        <img src={facebook} alt="" className="h-5 w-5 object-contain" />
-        <span>Facebook</span>
-      </a>
+                <a
+                  href="https://facebook.com/jamesrunscanada"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label="Facebook"
+                  className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
+                >
+                  <img src={facebook} alt="" className="h-5 w-5 object-contain" />
+                  <span>Facebook</span>
+                </a>
 
-      {/* <a
-        href="https://tiktok.com/@jamesrunscanada"
-        target="_blank"
-        rel="noreferrer noopener"
-        aria-label="TikTok"
-        className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
-      >
-        <img src={tictok} alt="" className="h-5 w-5 object-contain" />
-        <span>TikTok</span>
-      </a> */}
-    </div>
-  </div>
-</div>
+              </div>
+            </div>
+          </div>
 
           
           <RunCounters
@@ -1995,7 +1989,6 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
     <div className="text-white">
       <HomeHeroTop latestPostId={latestPostId} onOpenPost={onOpenPost} />
       <HomeTrackerSection pins={pins} setPins={setPins} />
-      <DonorWallSection />
       <LatestBlogBreakSection posts={posts} onOpenPost={onOpenPost} onViewAll={() => setTab("blog")} />
       <FunFactsSection />
       <SponsorsGridSection groups={SPONSOR_GROUPS} />
