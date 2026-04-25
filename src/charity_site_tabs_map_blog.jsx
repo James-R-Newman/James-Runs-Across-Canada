@@ -491,7 +491,7 @@ function DonorWallSection() {
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-[24px]">
           {visibleDonors.map((donor) => {
             const amountText = donor.amount
               ? donor.amount.replace("CA", "")
@@ -499,16 +499,25 @@ function DonorWallSection() {
 
             const donationAgo = formatDonationAgo(donor.date);
 
+            const hasLongComment = donor.comment && donor.comment.length > 120;
+            const hasComment = Boolean(donor.comment);
+
+            const rowSpan = hasLongComment
+              ? "row-span-[14]"
+              : hasComment
+                ? "row-span-[10]"
+                : "row-span-[7]";
+
             return (
               <div
                 key={donor.id}
-                className="relative w-full pt-8 pl-4 sm:pl-5"
+                className={`relative w-full pt-8 pl-4 sm:pl-5 ${rowSpan}`}
               >
                 <div className="absolute left-0 top-0 z-10 flex h-24 w-24 items-center justify-center rounded-full bg-[#efb3ad] px-3 text-center text-base font-black leading-tight text-black shadow-sm">
                   {amountText}
                 </div>
 
-                <div className="rounded-md bg-black px-7 pb-8 pt-16 text-center text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)]">
+                <div className="flex h-full flex-col items-center justify-center rounded-md bg-black px-7 pb-8 pt-16 text-center text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)]">
                   <div className="text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight">
                     {donor.name || "Anonymous"}
                   </div>
