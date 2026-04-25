@@ -527,7 +527,7 @@ function DonorWallSection() {
   const hasMore = visibleCount < sortedDonors.length;
 
   return (
-    <section className="bg-transparent px-5 sm:px-8 lg:px-12 pt-28 pb-20 text-neutral-950 overflow-hidden">
+    <section className="bg-transparent px-5 sm:px-8 lg:px-12 pt-20 pb-20 text-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
         <div className="text-center">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight">
@@ -1618,15 +1618,12 @@ function HomeTrackerSection({ pins, setPins }) {
   const bullets = t("tracker.missionBullets", { returnObjects: true });
   const safeBullets = Array.isArray(bullets) ? bullets : [];
   const { amountRaised } = useFundraiserTotal();
-  
+
   return (
-    
     <section className="home-tracker-section bg-white text-neutral-950">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-8 pt-0 pb-16">
         {/* TOP: Video (left) + Mission (right) */}
         <div className="grid gap-8 lg:grid-cols-2">
-          {/* Video (LEFT) */}
-
           <div>
             <div className="mb-4 text-center sm:text-left">
               <div className="text-sm sm:text-base font-black uppercase tracking-wide text-neutral-950">
@@ -1637,9 +1634,6 @@ function HomeTrackerSection({ pins, setPins }) {
             <VideoWithCenterPlay />
           </div>
 
-
-
-          {/* Mission (RIGHT) — transparent (no card) */}
           <div className="self-center w-full max-w-xl">
             <div className="text-center">
               <div className="text-xs font-black uppercase tracking-widest text-neutral-950/60">
@@ -1649,19 +1643,16 @@ function HomeTrackerSection({ pins, setPins }) {
               <div className="mt-2 text-2xl sm:text-3xl font-black uppercase tracking-tight text-neutral-950">
                 {t("tracker.missionTitle")}
               </div>
-
-              
-          
             </div>
 
             <div className="mt-6 text-left">
               <p className="text-sm sm:text-base leading-7 text-neutral-950/80">
-                {t("tracker.missionBody")}              
+                {t("tracker.missionBody")}
               </p>
+
               <p className="mt-4 text-sm sm:text-base leading-7 text-neutral-950/80">
-                {t("tracker.missionBody2")}              
+                {t("tracker.missionBody2")}
               </p>
-              
 
               <ul className="mt-4 space-y-2 text-sm sm:text-base text-neutral-950/80">
                 {safeBullets.map((item) => (
@@ -1673,15 +1664,25 @@ function HomeTrackerSection({ pins, setPins }) {
               </ul>
 
               <p className="mt-4 text-sm sm:text-base leading-7 text-neutral-950/80">
-                {t("tracker.missionCTA")}              
+                {t("tracker.missionCTA")}
               </p>
 
-
               <div className="mt-6 flex flex-wrap justify-center sm:justify-start gap-3">
-                <a href={DONATE_URL} target="_blank" rel="noreferrer noopener" className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200">
+                <a
+                  href={DONATE_URL}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+                >
                   {t("common.donate")}
                 </a>
-                <a href="https://fundraise.cafdn.org/25905/cafd/about" target="_blank" rel="noreferrer noopener" className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]">
+
+                <a
+                  href="https://fundraise.cafdn.org/25905/cafd/about"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="rounded-full border border-neutral-950/20 bg-white px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-neutral-950/[0.03]"
+                >
                   {t("common.learnMore")}
                 </a>
               </div>
@@ -1698,117 +1699,87 @@ function HomeTrackerSection({ pins, setPins }) {
                 />
               </div>
             </div>
-            
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-        
-
-        {/* BOTTOM: GPS Map with background image (pure image) */}
-        <div id="gps"   className="relative mt-20 left-1/2 -translate-x-1/2 w-screen overflow-hidden" >
-        {/* Marquee under hero */}
-        <div className="relative z-10">
-          <Marquee />
         </div>
 
-          {/* background image */}
-          <div className="absolute inset-0">
+        {/* BOTTOM: GPS + DONOR WALL share one map background */}
+        <div
+          id="gps"
+          className="relative mt-20 left-1/2 -translate-x-1/2 w-screen overflow-hidden bg-white"
+        >
+          {/* Shared map background */}
+          <div className="absolute inset-0 z-0">
             <img
               src={map}
               alt=""
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-[50%_65%]"
               draggable={false}
             />
+            <div className="absolute inset-0 bg-white/45" />
           </div>
-              
-  
-          
 
-          
+          {/* Marquee */}
+          <div className="relative z-10">
+            <Marquee />
+          </div>
 
+          {/* GPS content */}
+          <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 py-10">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div className="max-w-2xl">
+                <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950">
+                  {t("tracker.gpsTitle")}
+                </div>
 
-      {/* <section className="relative overflow-hidden text-neutral-950"> */}
-      {/* <div className="absolute inset-0"> */}
+                <div className="mt-2 text-sm text-neutral-950/70">
+                  {t("tracker.gpsBody")}
+                </div>
 
-        
-          <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8 py-10">
-          
-          
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div className="max-w-2xl">
-              <div className="text-sm font-black uppercase tracking-widest text-neutral-950">
-                {/* {t("tracker.gpsEyebrow")} */}
+                <div className="mt-5 flex flex-wrap justify-start gap-3">
+                  <a
+                    href="https://instagram.com/jamesrunscanada"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label="Instagram"
+                    className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
+                  >
+                    <img src={insta} alt="" className="h-5 w-5 object-contain" />
+                    <span>Instagram</span>
+                  </a>
+
+                  <a
+                    href="https://facebook.com/jamesrunscanada"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label="Facebook"
+                    className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
+                  >
+                    <img src={facebook} alt="" className="h-5 w-5 object-contain" />
+                    <span>Facebook</span>
+                  </a>
+                </div>
               </div>
+            </div>
 
-              <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950">
-                {t("tracker.gpsTitle")}
-              </div>
+            <RunCounters
+              startDate="2026-05-18"
+              kmPerDay={80}
+              totalGoalDays={100}
+              amountRaised={amountRaised}
+            />
 
-              <div className="mt-2 text-sm text-neutral-950/70">
-                {t("tracker.gpsBody")}
-              </div>
-
-              <div className="mt-5 flex flex-wrap justify-start gap-3">
-                <a
-                  href="https://instagram.com/jamesrunscanada"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  aria-label="Instagram"
-                  className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
-                >
-                  <img src={insta} alt="" className="h-5 w-5 object-contain" />
-                  <span>Instagram</span>
-                </a>
-
-                <a
-                  href="https://facebook.com/jamesrunscanada"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  aria-label="Facebook"
-                  className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
-                >
-                  <img src={facebook} alt="" className="h-5 w-5 object-contain" />
-                  <span>Facebook</span>
-                </a>
-
+            <div className="mt-8 rounded-[28px] border border-neutral-950/10 bg-neutral-950 p-4 sm:p-6">
+              <InteractiveMap pins={pins} setPins={setPins} />
+              <div className="mt-3 text-center text-xs font-semibold uppercase tracking-widest text-white/60">
+                Live GPS tracker
               </div>
             </div>
           </div>
 
-          
-          <RunCounters
-            startDate="2026-05-18"
-            kmPerDay={80}
-            totalGoalDays={100}
-            amountRaised={amountRaised} // TODO: wire to real fundraising total
-          />
-
-          
-          <div className="mt-8 rounded-[28px] border border-neutral-950/10 bg-neutral-950 p-4 sm:p-6">
-            <InteractiveMap pins={pins} setPins={setPins} />
-            <div className="mt-3 text-center text-xs font-semibold uppercase tracking-widest text-white/60">
-              Live GPS tracker
-            </div>
+          {/* Donor wall INSIDE the map background */}
+          <div className="relative z-10">
+            <DonorWallSection />
           </div>
-
-          
-
-        </div>
-      </div>
-        <div className="relative z-10">
-          <DonorWallSection />
         </div>
       </div>
     </section>
