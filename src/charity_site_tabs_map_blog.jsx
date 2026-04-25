@@ -445,15 +445,38 @@ function formatDonationAgo(dateValue) {
   return `${years} years ago`;
 }
 
-function chunkArray(items, size) {
-  const chunks = [];
+function useDonorColumnCount() {
+  const getCount = () => {
+    if (typeof window === "undefined") return 4;
+    if (window.innerWidth >= 1280) return 4;
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 640) return 2;
+    return 1;
+  };
 
-  for (let i = 0; i < items.length; i += size) {
-    chunks.push(items.slice(i, i + size));
-  }
+  const [columnCount, setColumnCount] = useState(getCount);
 
-  return chunks;
+  useEffect(() => {
+    const onResize = () => setColumnCount(getCount());
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  return columnCount;
 }
+
+function distributeIntoColumns(items, columnCount) {
+  const columns = Array.from({ length: columnCount }, () => []);
+
+  items.forEach((item, index) => {
+    columns[index % columnCount].push(item);
+  });
+
+  return columns;
+}
+
+
+
 
 function DonorWallSection() {
   const { donors, loadingDonors } = useFundraiserDonors();
@@ -462,6 +485,8 @@ function DonorWallSection() {
   const LOAD_MORE_COUNT = 20;
 
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+
+  const columnCount = useDonorColumnCount();
 
   if (loadingDonors) {
     return (
@@ -483,10 +508,7 @@ function DonorWallSection() {
   });
 
   const visibleDonors = sortedDonors.slice(0, visibleCount);
-  const donorBatches = [
-    visibleDonors.slice(0, INITIAL_COUNT),
-    ...chunkArray(visibleDonors.slice(INITIAL_COUNT), LOAD_MORE_COUNT),
-  ].filter((batch) => batch.length > 0);
+  const donorColumns = distributeIntoColumns(visibleDonors, columnCount);
 
   const hasMore = visibleCount < sortedDonors.length;
 
@@ -505,13 +527,10 @@ function DonorWallSection() {
           </p>
         </div>
 
-        <div className="mt-16 space-y-12">
-          {donorBatches.map((batch, batchIndex) => (
-            <div
-              key={batchIndex}
-              className="columns-1 gap-8 sm:columns-2 lg:columns-3 xl:columns-4"
-            >
-              {batch.map((donor) => {
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {donorColumns.map((column, columnIndex) => (
+            <div key={columnIndex} className="space-y-10">
+              {column.map((donor) => {
                 const amountText = donor.amount
                   ? donor.amount.replace("CA", "")
                   : "Thank You";
@@ -521,7 +540,7 @@ function DonorWallSection() {
                 return (
                   <div
                     key={donor.id}
-                    className="relative mb-10 inline-block w-full break-inside-avoid pt-8 pl-4 sm:pl-5"
+                    className="relative w-full pt-8 pl-4 sm:pl-5"
                   >
                     <div className="absolute left-0 top-0 z-10 flex h-24 w-24 items-center justify-center rounded-full bg-[#efb3ad] px-3 text-center text-base font-black leading-tight text-black shadow-sm">
                       {amountText}
