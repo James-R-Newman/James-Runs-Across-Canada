@@ -491,7 +491,7 @@ function DonorWallSection() {
           </p>
         </div>
 
-        <div className="mt-16 columns-1 gap-8 sm:columns-2 lg:columns-3 xl:columns-4">
+        <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {visibleDonors.map((donor) => {
             const amountText = donor.amount
               ? donor.amount.replace("CA", "")
@@ -502,7 +502,7 @@ function DonorWallSection() {
             return (
               <div
                 key={donor.id}
-                className="relative mb-10 inline-block w-full break-inside-avoid pt-8 pl-4 sm:pl-5"
+                className="relative w-full pt-8 pl-4 sm:pl-5"
               >
                 <div className="absolute left-0 top-0 z-10 flex h-24 w-24 items-center justify-center rounded-full bg-[#efb3ad] px-3 text-center text-base font-black leading-tight text-black shadow-sm">
                   {amountText}
