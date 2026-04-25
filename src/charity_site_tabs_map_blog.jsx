@@ -1708,15 +1708,15 @@ function HomeTrackerSection({ pins, setPins }) {
           className="relative mt-20 left-1/2 -translate-x-1/2 w-screen overflow-hidden bg-white"
         >
           {/* Shared map background */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src={map}
-              alt=""
-              className="h-full w-full object-cover object-[50%_30%]"
-              draggable={false}
-            />
-            <div className="absolute inset-0 bg-white/45" />
-          </div>
+          <div className="absolute inset-0 z-0 overflow-hidden">
+  <img
+    src={map}
+    alt=""
+    className="absolute left-1/2 top-0 w-[1200px] max-w-none -translate-x-1/2 opacity-100"
+    draggable={false}
+  />
+  <div className="absolute inset-0 bg-white/45" />
+</div>
 
           {/* Marquee */}
           <div className="relative z-10">
