@@ -445,6 +445,16 @@ function formatDonationAgo(dateValue) {
   return `${years} years ago`;
 }
 
+function chunkArray(items, size) {
+  const chunks = [];
+
+  for (let i = 0; i < items.length; i += size) {
+    chunks.push(items.slice(i, i + size));
+  }
+
+  return chunks;
+}
+
 function DonorWallSection() {
   const { donors, loadingDonors } = useFundraiserDonors();
 
@@ -469,11 +479,15 @@ function DonorWallSection() {
 
     if (aDate && bDate) return bDate - aDate;
 
-    // Fallback: CAFDN donor IDs appear to increase over time.
     return Number(b.id || 0) - Number(a.id || 0);
   });
 
   const visibleDonors = sortedDonors.slice(0, visibleCount);
+  const donorBatches = [
+    visibleDonors.slice(0, INITIAL_COUNT),
+    ...chunkArray(visibleDonors.slice(INITIAL_COUNT), LOAD_MORE_COUNT),
+  ].filter((batch) => batch.length > 0);
+
   const hasMore = visibleCount < sortedDonors.length;
 
   return (
@@ -491,43 +505,50 @@ function DonorWallSection() {
           </p>
         </div>
 
-        <div className="mt-16 columns-1 gap-8 sm:columns-2 lg:columns-3 xl:columns-4">
-          {visibleDonors.map((donor) => {
-            const amountText = donor.amount
-              ? donor.amount.replace("CA", "")
-              : "Thank You";
+        <div className="mt-16 space-y-12">
+          {donorBatches.map((batch, batchIndex) => (
+            <div
+              key={batchIndex}
+              className="columns-1 gap-8 sm:columns-2 lg:columns-3 xl:columns-4"
+            >
+              {batch.map((donor) => {
+                const amountText = donor.amount
+                  ? donor.amount.replace("CA", "")
+                  : "Thank You";
 
-            const donationAgo = formatDonationAgo(donor.date);
+                const donationAgo = formatDonationAgo(donor.date);
 
-            return (
-              <div
-                key={donor.id}
-                className="relative mb-10 inline-block w-full break-inside-avoid pt-8 pl-4 sm:pl-5"
-              >
-                <div className="absolute left-0 top-0 z-10 flex h-24 w-24 items-center justify-center rounded-full bg-[#efb3ad] px-3 text-center text-base font-black leading-tight text-black shadow-sm">
-                  {amountText}
-                </div>
-
-                <div className="rounded-md bg-black px-7 pb-8 pt-16 text-center text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)]">
-                  <div className="text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight">
-                    {donor.name || "Anonymous"}
-                  </div>
-
-                  {donationAgo ? (
-                    <div className="mt-4 text-sm tracking-wide text-white/70">
-                      {donationAgo}
+                return (
+                  <div
+                    key={donor.id}
+                    className="relative mb-10 inline-block w-full break-inside-avoid pt-8 pl-4 sm:pl-5"
+                  >
+                    <div className="absolute left-0 top-0 z-10 flex h-24 w-24 items-center justify-center rounded-full bg-[#efb3ad] px-3 text-center text-base font-black leading-tight text-black shadow-sm">
+                      {amountText}
                     </div>
-                  ) : null}
 
-                  {donor.comment ? (
-                    <p className="mx-auto mt-6 max-w-[260px] text-lg leading-8 tracking-wide text-white/90">
-                      {donor.comment}
-                    </p>
-                  ) : null}
-                </div>
-              </div>
-            );
-          })}
+                    <div className="rounded-md bg-black px-7 pb-8 pt-16 text-center text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)]">
+                      <div className="text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight">
+                        {donor.name || "Anonymous"}
+                      </div>
+
+                      {donationAgo ? (
+                        <div className="mt-4 text-sm tracking-wide text-white/70">
+                          {donationAgo}
+                        </div>
+                      ) : null}
+
+                      {donor.comment ? (
+                        <p className="mx-auto mt-6 max-w-[260px] text-lg leading-8 tracking-wide text-white/90">
+                          {donor.comment}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
         </div>
 
         <div className="mt-10 text-center">
