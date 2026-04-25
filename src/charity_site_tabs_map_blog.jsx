@@ -359,7 +359,7 @@ function RunFundersLogoRows() {
             size="sm"
             src={sponsorBronze3}
             alt="Record Press"
-            href="https://www.https://organika.com/"
+            href="https://www.organika.com/"
           />
           <LogoPlaceholder
             size="sm"
@@ -385,6 +385,116 @@ function RunFundersLogoRows() {
 
 
 
+function useFundraiserDonors() {
+  const [donors, setDonors] = useState([]);
+  const [loadingDonors, setLoadingDonors] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const load = async () => {
+      try {
+        const res = await fetch("/api/fundraiser-donors");
+        const data = await res.json();
+
+        if (!cancelled && data?.ok) {
+          setDonors(data.donors || []);
+        }
+      } catch (err) {
+        console.error("Failed to load fundraiser donors:", err);
+      } finally {
+        if (!cancelled) setLoadingDonors(false);
+      }
+    };
+
+    load();
+
+    const id = setInterval(load, 5 * 60 * 1000);
+
+    return () => {
+      cancelled = true;
+      clearInterval(id);
+    };
+  }, []);
+
+  return { donors, loadingDonors };
+}
+
+function DonorWallSection() {
+  const { donors, loadingDonors } = useFundraiserDonors();
+  const [showAll, setShowAll] = useState(false);
+
+  if (loadingDonors) {
+    return (
+      <section className="bg-white px-4 py-20 text-center text-neutral-600">
+        Loading supporters...
+      </section>
+    );
+  }
+
+  if (!donors.length) return null;
+
+  const INITIAL_COUNT = 12;
+  const visibleDonors = showAll ? donors : donors.slice(0, INITIAL_COUNT);
+  const hasMore = donors.length > INITIAL_COUNT;
+
+  return (
+    <section className="bg-white px-4 py-20 text-neutral-950">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="text-center">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight">
+            Leave a Message for James
+          </h2>
+
+          <p className="mx-auto mt-8 max-w-4xl text-sm sm:text-base lg:text-lg font-black uppercase leading-8 tracking-wide text-neutral-950">
+            Leave your mark. When you make a donation, you can send a personal
+            message of support to James. Every message will be displayed here.
+            Show him you’re behind him!
+          </p>
+        </div>
+
+        <div className="mt-16 columns-1 gap-8 sm:columns-2 lg:columns-3 xl:columns-4">
+          {visibleDonors.map((donor) => (
+            <div
+              key={donor.id}
+              className="relative mb-10 inline-block w-full break-inside-avoid pt-8"
+            >
+              {donor.amount ? (
+                <div className="absolute left-[-10px] top-0 z-10 flex h-24 w-24 items-center justify-center rounded-full bg-[#efb3ad] text-lg font-black text-black shadow-sm">
+                  {donor.amount.replace("CA", "")}
+                </div>
+              ) : null}
+
+              <div className="rounded-md bg-black px-7 pb-8 pt-16 text-center text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)]">
+                <div className="text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight">
+                  {donor.name || "Anonymous"}
+                </div>
+
+                {donor.comment ? (
+                  <p className="mx-auto mt-6 max-w-[260px] text-lg leading-8 tracking-wide text-white/90">
+                    {donor.comment}
+                  </p>
+                ) : null}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {hasMore ? (
+          <div className="mt-10 text-center">
+            <button
+              type="button"
+              onClick={() => setShowAll((v) => !v)}
+              className="rounded-full border-2 border-black bg-black px-8 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-black"
+            >
+              {showAll ? "Show Less" : "Show More"}
+            </button>
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
 
 
 
@@ -1798,6 +1908,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
     <div className="text-white">
       <HomeHeroTop latestPostId={latestPostId} onOpenPost={onOpenPost} />
       <HomeTrackerSection pins={pins} setPins={setPins} />
+      <DonorWallSection />
       <LatestBlogBreakSection posts={posts} onOpenPost={onOpenPost} onViewAll={() => setTab("blog")} />
       <FunFactsSection />
       <SponsorsGridSection groups={SPONSOR_GROUPS} />
