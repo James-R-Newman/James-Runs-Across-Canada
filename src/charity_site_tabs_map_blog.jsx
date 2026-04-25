@@ -465,11 +465,25 @@ function useDonorColumnCount() {
   return columnCount;
 }
 
+function estimateDonorCardHeight(donor) {
+  const nameLength = (donor.name || "").length;
+  const commentLength = (donor.comment || "").length;
+
+  const nameHeight = nameLength > 22 ? 120 : 80;
+  const commentHeight = commentLength ? Math.ceil(commentLength / 28) * 32 + 40 : 0;
+
+  return 150 + nameHeight + commentHeight;
+}
+
 function distributeIntoColumns(items, columnCount) {
   const columns = Array.from({ length: columnCount }, () => []);
+  const columnHeights = Array.from({ length: columnCount }, () => 0);
 
-  items.forEach((item, index) => {
-    columns[index % columnCount].push(item);
+  items.forEach((item) => {
+    const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+
+    columns[shortestColumnIndex].push(item);
+    columnHeights[shortestColumnIndex] += estimateDonorCardHeight(item);
   });
 
   return columns;
