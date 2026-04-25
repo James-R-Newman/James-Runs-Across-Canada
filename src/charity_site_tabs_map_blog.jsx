@@ -420,13 +420,17 @@ function useFundraiserDonors() {
   return { donors, loadingDonors };
 }
 
+
 function DonorWallSection() {
   const { donors, loadingDonors } = useFundraiserDonors();
-  const [showAll, setShowAll] = useState(false);
+  const INITIAL_COUNT = 12;
+  const LOAD_MORE_COUNT = 12;
+
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
   if (loadingDonors) {
     return (
-      <section className="bg-white px-4 py-20 text-center text-neutral-600">
+      <section className="bg-white px-5 sm:px-8 py-20 text-center text-neutral-600">
         Loading supporters...
       </section>
     );
@@ -434,12 +438,11 @@ function DonorWallSection() {
 
   if (!donors.length) return null;
 
-  const INITIAL_COUNT = 12;
-  const visibleDonors = showAll ? donors : donors.slice(0, INITIAL_COUNT);
-  const hasMore = donors.length > INITIAL_COUNT;
+  const visibleDonors = donors.slice(0, visibleCount);
+  const hasMore = visibleCount < donors.length;
 
   return (
-    <section className="bg-white px-4 py-20 text-neutral-950">
+    <section className="bg-white px-5 sm:px-8 lg:px-12 py-20 text-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
         <div className="text-center">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight">
@@ -454,48 +457,65 @@ function DonorWallSection() {
         </div>
 
         <div className="mt-16 columns-1 gap-8 sm:columns-2 lg:columns-3 xl:columns-4">
-          {visibleDonors.map((donor) => (
-            <div
-              key={donor.id}
-              className="relative mb-10 inline-block w-full break-inside-avoid pt-8"
-            >
-              {donor.amount ? (
-                <div className="absolute left-[-10px] top-0 z-10 flex h-24 w-24 items-center justify-center rounded-full bg-[#efb3ad] text-lg font-black text-black shadow-sm">
-                  {donor.amount.replace("CA", "")}
-                </div>
-              ) : null}
+          {visibleDonors.map((donor) => {
+            const amountText = donor.amount
+              ? donor.amount.replace("CA", "")
+              : "Thank You";
 
-              <div className="rounded-md bg-black px-7 pb-8 pt-16 text-center text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)]">
-                <div className="text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight">
-                  {donor.name || "Anonymous"}
+            return (
+              <div
+                key={donor.id}
+                className="relative mb-10 inline-block w-full break-inside-avoid pt-8 pl-4 sm:pl-5"
+              >
+                <div className="absolute left-0 top-0 z-10 flex h-24 w-24 items-center justify-center rounded-full bg-[#efb3ad] px-3 text-center text-base font-black leading-tight text-black shadow-sm">
+                  {amountText}
                 </div>
 
-                {donor.comment ? (
-                  <p className="mx-auto mt-6 max-w-[260px] text-lg leading-8 tracking-wide text-white/90">
-                    {donor.comment}
-                  </p>
-                ) : null}
+                <div className="rounded-md bg-black px-7 pb-8 pt-16 text-center text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)]">
+                  <div className="text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight">
+                    {donor.name || "Anonymous"}
+                  </div>
+
+                  {donor.comment ? (
+                    <p className="mx-auto mt-6 max-w-[260px] text-lg leading-8 tracking-wide text-white/90">
+                      {donor.comment}
+                    </p>
+                  ) : null}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {hasMore ? (
           <div className="mt-10 text-center">
             <button
               type="button"
-              onClick={() => setShowAll((v) => !v)}
+              onClick={() =>
+                setVisibleCount((current) =>
+                  Math.min(current + LOAD_MORE_COUNT, donors.length)
+                )
+              }
               className="rounded-full border-2 border-black bg-black px-8 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-black"
             >
-              {showAll ? "Show Less" : "Show More"}
+              Show More
             </button>
           </div>
-        ) : null}
+        ) : (
+          <div className="mt-10 text-center">
+            <button
+              type="button"
+              onClick={() => setVisibleCount(INITIAL_COUNT)}
+              className="rounded-full border-2 border-black bg-white px-8 py-3 text-sm font-black uppercase tracking-widest text-black transition hover:bg-black hover:text-white"
+            >
+              Show Less
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
 }
-
 
 
 
@@ -1476,37 +1496,6 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
     loading="lazy"
   />
 
-  {/* <div className="mt-8 flex items-center justify-center gap-8">
-    <a
-      href="https://instagram.com/jamesrunscanada"
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label="Instagram"
-      className="transition duration-200 hover:scale-120"
-    >
-      <img src={insta} alt="Instagram" className="h-12 w-12 object-contain" />
-    </a>
-
-    <a
-      href="https://facebook.com/jamesrunscanada"
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label="Facebook"
-      className="transition duration-200 hover:scale-120"
-    >
-      <img src={facebook} alt="Facebook" className="h-12 w-12 object-contain" />
-    </a>
-
-    <a
-      href="https://tiktok.com/@jamesrunscanada"
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label="TikTok"
-      className="transition duration-200 hover:scale-120"
-    >
-      <img src={tictok} alt="TikTok" className="h-12 w-12 object-contain" />
-    </a>
-  </div> */}
 </div>
 
 
