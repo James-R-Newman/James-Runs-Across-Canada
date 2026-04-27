@@ -1712,7 +1712,7 @@ function HomeTrackerSection({ pins, setPins }) {
             <img
               src={map}
               alt=""
-              className="absolute left-1/2 top-16 w-[850px] sm:w-[1050px] lg:w-[1700px] max-w-none -translate-x-1/2 opacity-100"
+              className="absolute left-1/2 top-0 w-[850px] sm:w-[1050px] lg:w-[1700px] max-w-none -translate-x-1/2 opacity-100"
               draggable={false}
             />
             <div className="absolute inset-0 bg-white/45" />
