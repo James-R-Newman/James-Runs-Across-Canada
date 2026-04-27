@@ -10,7 +10,7 @@ import { client } from "./sanityClient";
 import runningBg from "./assets/jameshomenew3.webp";
 import heroLogoen from "./assets/logo4.png"; 
 import heroLogofr from "./assets/logo4fr2.png";
-import map from "./assets/map.png";           
+import map from "./assets/map2.png";           
 import nature from "./assets/nature.avif";
 import charityen from "./assets/charity.png";
 import charityfr from "./assets/charityfr.png";
@@ -1712,7 +1712,7 @@ function HomeTrackerSection({ pins, setPins }) {
             <img
               src={map}
               alt=""
-              className="absolute left-1/2 top-16 w-[950px] sm:w-[1150px] lg:w-[2000px] max-w-none -translate-x-1/2 opacity-100"
+              className="absolute left-1/2 top-16 w-[850px] sm:w-[1050px] lg:w-[1700px] max-w-none -translate-x-1/2 opacity-100"
               draggable={false}
             />
             <div className="absolute inset-0 bg-white/45" />
