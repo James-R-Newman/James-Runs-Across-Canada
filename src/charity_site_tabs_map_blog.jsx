@@ -25,6 +25,9 @@ import facebook from "./assets/facebook.webp";
 import tictok from "./assets/tictok.webp";
 import sponsorBronze3 from "./assets/organika3.png";
 import sponsorSilver2 from "./assets/alwm.png";
+import sponsorBronze4 from "./assets/cambridge.png";
+
+
 
 
 
@@ -363,7 +366,7 @@ function RunFundersLogoRows() {
           />
           <LogoPlaceholder
             size="sm"
-            imgClassName="scale-[1.25]"
+            imgClassName="scale-[1.35]"
             src={sponsorBronze2}
             alt="Predictive Success"
             href="https://www.predictivesuccess.com/"
@@ -374,7 +377,13 @@ function RunFundersLogoRows() {
             alt="Record Press"
             href="https://www.recordxpress.ca/"
           />
-          <LogoPlaceholder size="sm" />
+          <LogoPlaceholder
+            size="sm"
+            imgClassName="scale-[1.1]"
+            src={sponsorBronze4}
+            alt="Record Press"
+            href="https://www.cambridgellp.com/"
+          />
           <LogoPlaceholder size="sm" />
         </div>
       </div>
