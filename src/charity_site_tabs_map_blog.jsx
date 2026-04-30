@@ -26,6 +26,9 @@ import tictok from "./assets/tictok.webp";
 import sponsorBronze3 from "./assets/organika3.png";
 import sponsorSilver2 from "./assets/alwm.png";
 import sponsorBronze4 from "./assets/cambridge.png";
+import sponsorGold from "./assets/cibc2.png";
+import sponsorSilver3 from "./assets/Burnbrae.png";
+import sponsorBronze5 from "./assets/corsa.png";
 
 
 
@@ -331,13 +334,25 @@ function RunFundersLogoRows() {
       <div className="space-y-7">
         {/* Row 1: 2 large squares */}
         <div className="flex items-center justify-center gap-12 sm:gap-16">
-          <LogoPlaceholder size="lg" />
+          <LogoPlaceholder
+            size="lg"
+            imgClassName="scale-[1.0]"
+            src={sponsorGold}
+            alt="CIBC"
+            href="https://www.cibc.com/en/about-cibc/corporate-responsibility/community-and-sponsorship.html"
+          />
           <LogoPlaceholder size="lg" />
         </div>
 
         {/* Row 2: 4 medium squares */}
         <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-7">
-          <LogoPlaceholder size="md" />
+          <LogoPlaceholder
+            size="md"
+            imgClassName="scale-[1.48]"
+            src={sponsorSilver3}
+            alt="Burnbrae"
+            href="https://www.burnbraefarms.com/en/"
+          />
           <LogoPlaceholder
             size="md"
             imgClassName="scale-[1.18]"
@@ -349,7 +364,7 @@ function RunFundersLogoRows() {
             size="md"
             imgClassName="scale-[1.25]"
             src={sponsorSilver2}
-            alt="Canadian Tire"
+            alt="Abundant"
             href="http://abundant.ca/"
           />
           <LogoPlaceholder size="md" />
@@ -361,7 +376,7 @@ function RunFundersLogoRows() {
           <LogoPlaceholder
             size="sm"
             src={sponsorBronze3}
-            alt="Record Press"
+            alt="Organika"
             href="https://www.organika.com/"
           />
           <LogoPlaceholder
@@ -381,10 +396,16 @@ function RunFundersLogoRows() {
             size="sm"
             imgClassName="scale-[1.1]"
             src={sponsorBronze4}
-            alt="Record Press"
+            alt="Cambridge LLP"
             href="https://www.cambridgellp.com/"
           />
-          <LogoPlaceholder size="sm" />
+          <LogoPlaceholder
+            size="sm"
+            imgClassName="scale-[1.1]"
+            src={sponsorBronze5}
+            alt="Corsa"
+            href="https://www.corsa.run/"
+          />
         </div>
       </div>
     </div>
