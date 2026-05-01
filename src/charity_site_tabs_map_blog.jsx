@@ -1600,7 +1600,7 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
                   href={DONATE_URL}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="rounded-full border border-yellow-300 bg-yellow-300 px-5 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
+                  className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
                 >
                   {t("common.donate")}
                 </a>
@@ -1774,11 +1774,11 @@ function HomeTrackerSection({ pins, setPins }) {
                     aria-label="Instagram"
                     className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
                   >
-                    <img src={insta} alt="" className="h-5 w-5 object-contain" />
+                    <img src={insta} alt="" className="h-8 w-8 object-contain" />
                     <span>Instagram</span>
                   </a>
 
-                  <a
+                  {/* <a
                     href="https://facebook.com/jamesrunscanada"
                     target="_blank"
                     rel="noreferrer noopener"
@@ -1787,7 +1787,7 @@ function HomeTrackerSection({ pins, setPins }) {
                   >
                     <img src={facebook} alt="" className="h-5 w-5 object-contain" />
                     <span>Facebook</span>
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>
