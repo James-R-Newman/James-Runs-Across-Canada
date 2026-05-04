@@ -25,11 +25,11 @@ import facebook from "./assets/facebook.webp";
 import tictok from "./assets/tictok.webp";
 import sponsorBronze3 from "./assets/organika3.png";
 import sponsorSilver2 from "./assets/alwm.png";
-import sponsorBronze4 from "./assets/cambridge.png";
+import sponsorBronze4 from "./assets/cambridge2.png";
 import sponsorGold from "./assets/cibc2.png";
 import sponsorSilver3 from "./assets/Burnbrae.png";
 import sponsorBronze5 from "./assets/corsa.png";
-
+import sponsorBronze6 from "./assets/rv.png";
 
 
 
@@ -367,7 +367,13 @@ function RunFundersLogoRows() {
             alt="Abundant"
             href="http://abundant.ca/"
           />
-          <LogoPlaceholder size="md" />
+          <LogoPlaceholder
+            size="md"
+            imgClassName="scale-[1.05]"
+            src={sponsorBronze6}
+            alt="RV"
+            href="http://www.rvcanadaottawa.ca//"
+          />
         </div>
 
         {/* Row 3: 6 small squares */}
