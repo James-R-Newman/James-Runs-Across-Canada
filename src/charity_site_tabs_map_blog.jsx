@@ -2278,9 +2278,7 @@ function ContactTab() {
             </div>
           </div>
 
-          <div className="mt-3 text-sm text-white/60">
-            {t("contact.subtitle")}
-          </div>
+          
         </div>
 
         {/* Form (same outer box) */}
