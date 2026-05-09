@@ -2337,7 +2337,7 @@ function ContactTab() {
       </Glass>
 
       {/* Sponsors stays full width right under it */}
-      <SponsorCarousel sponsors={ALL_SPONSORS} />
+      {/* <SponsorCarousel sponsors={ALL_SPONSORS} /> */}
     </div>
 
     </div>
