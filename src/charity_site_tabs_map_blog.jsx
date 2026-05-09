@@ -30,7 +30,7 @@ import sponsorGold from "./assets/cibc2.png";
 import sponsorSilver3 from "./assets/Burnbrae.png";
 import sponsorBronze5 from "./assets/corsa.png";
 import sponsorBronze6 from "./assets/rv.png";
-
+import sponsorBronze7 from "./assets/sponsor-bronze3.png";
 
 
 
@@ -378,7 +378,12 @@ function RunFundersLogoRows() {
 
         {/* Row 3: 6 small squares */}
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-3.5">
-          <LogoPlaceholder size="sm" />
+          <LogoPlaceholder
+            size="sm"
+            src={sponsorBronze7}
+            alt="RunEasi"
+            href="https://runeasi.ai/"
+          />
           <LogoPlaceholder
             size="sm"
             src={sponsorBronze3}
