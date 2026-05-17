@@ -1717,7 +1717,7 @@ function CorsaTrackerEmbed() {
         /* iPhone / small screens: move Corsa page upward more */
         @media (max-width: 640px) {
           .corsa-frame {
-            height: 330px;
+            height: 320px;
           }
 
           .corsa-iframe {
@@ -1891,7 +1891,7 @@ function HomeTrackerSection({ pins, setPins }) {
       amountRaised={amountRaised}
     />
 
-    <div className="mt-8 overflow-hidden rounded-[28px] border border-neutral-950/10 bg-neutral-950 p-4 sm:p- shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
+    <div className="mx-auto mt-8 w-full max-w-[700px] overflow-hidden rounded-[28px] border border-neutral-950/10 bg-neutral-950 p-4 sm:p-6 shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
       
       
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-white">
