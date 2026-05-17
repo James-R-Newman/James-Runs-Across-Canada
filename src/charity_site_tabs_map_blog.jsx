@@ -1717,7 +1717,7 @@ function CorsaTrackerEmbed() {
         /* iPhone / small screens: move Corsa page upward more */
         @media (max-width: 640px) {
           .corsa-frame {
-            height: 390px;
+            height: 350px;
           }
 
           .corsa-iframe {
