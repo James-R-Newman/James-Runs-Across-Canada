@@ -1723,7 +1723,7 @@ function CorsaTrackerEmbed() {
           .corsa-iframe {
           width: 220%;
           height: 900px;
-          transform: translate(-50%, -420px);
+          transform: translate(-50%, -460px);
         }
         }
 
@@ -1731,7 +1731,7 @@ function CorsaTrackerEmbed() {
         @media (max-width: 390px) {
           .corsa-iframe {
             width: 260%;
-            transform: translate(-50%, -410px);
+            transform: translate(-50%, -510px);
           }
         }
       `}</style>
