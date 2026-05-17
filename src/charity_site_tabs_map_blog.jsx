@@ -1698,7 +1698,7 @@ function CorsaTrackerEmbed() {
 
       <style>{`
         .corsa-frame {
-          height: 340px;
+          height: 330px;
           width: 100%;
           overflow: hidden;
           background: #000;
