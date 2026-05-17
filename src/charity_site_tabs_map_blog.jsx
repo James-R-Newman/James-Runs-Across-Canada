@@ -1717,14 +1717,14 @@ function CorsaTrackerEmbed() {
         /* iPhone / small screens: move Corsa page upward more */
         @media (max-width: 640px) {
           .corsa-frame {
-            height: 360px;
+            height: 390px;
           }
 
           .corsa-iframe {
-            width: 240%;
-            height: 900px;
-            transform: translate(-50%, -390px);
-          }
+          width: 220%;
+          height: 900px;
+          transform: translate(-50%, -420px);
+        }
         }
 
         /* Very small phones */
