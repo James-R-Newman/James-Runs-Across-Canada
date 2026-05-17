@@ -1717,13 +1717,13 @@ function CorsaTrackerEmbed() {
         /* iPhone / small screens: move Corsa page upward more */
         @media (max-width: 640px) {
           .corsa-frame {
-            height: 350px;
+            height: 330px;
           }
 
           .corsa-iframe {
           width: 220%;
           height: 900px;
-          transform: translate(-50%, -260px);
+          transform: translate(-50%, -275px);
         }
         }
 
@@ -1731,7 +1731,7 @@ function CorsaTrackerEmbed() {
         @media (max-width: 390px) {
           .corsa-iframe {
             width: 260%;
-            transform: translate(-50%, -260px);
+            transform: translate(-50%, -275px);
           }
         }
       `}</style>
