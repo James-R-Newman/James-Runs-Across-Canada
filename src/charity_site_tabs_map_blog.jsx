@@ -1686,23 +1686,55 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 }
 
 
-
 function CorsaTrackerEmbed() {
   return (
-    <div className="h-[520px] sm:h-[340px] w-full overflow-hidden bg-black">
+    <div className="corsa-frame">
       <iframe
         title="Live tracker map"
         src="https://www.corsa.run/profile/jamesrunscanada/stream/4a13f902-6ddf-4062-9ae0-c572234c9f54"
-        className="block border-0"
-        style={{
-          width: "160%",
-          height: "710px",
-          transform: "translate(-50%, -260px)",
-          marginLeft: "50%",
-          transformOrigin: "top center",
-        }}
+        className="corsa-iframe"
         loading="lazy"
       />
+
+      <style>{`
+        .corsa-frame {
+          height: 340px;
+          width: 100%;
+          overflow: hidden;
+          background: #000;
+        }
+
+        .corsa-iframe {
+          display: block;
+          border: 0;
+          width: 160%;
+          height: 710px;
+          margin-left: 50%;
+          transform: translate(-50%, -260px);
+          transform-origin: top center;
+        }
+
+        /* iPhone / small screens: move Corsa page upward more */
+        @media (max-width: 640px) {
+          .corsa-frame {
+            height: 360px;
+          }
+
+          .corsa-iframe {
+            width: 240%;
+            height: 900px;
+            transform: translate(-50%, -390px);
+          }
+        }
+
+        /* Very small phones */
+        @media (max-width: 390px) {
+          .corsa-iframe {
+            width: 260%;
+            transform: translate(-50%, -410px);
+          }
+        }
+      `}</style>
     </div>
   );
 }
