@@ -43,6 +43,11 @@ import sponsorBronze7 from "./assets/sponsor-bronze3.png";
  * - Contact: contact form (UI-only)
  */
 
+
+
+
+
+
 const STORAGE_KEY = "james_runs_across_canada_blog_posts_v1";
 const DONATE_URL = "https://fundraise.cafdn.org/25905/cafd/198058/james-runs-canada";
 
@@ -69,15 +74,7 @@ function uid() {
 
 
 const SPONSOR_GROUPS = [
-  // {
-  //   key: "charity",
-  //   title: "Charity Supporters",
-  //   subtitle: "Organizations funding the scholarship / charity target.",
-  //   items: [
-  //     { id: "c1", name: "Sponsor Name", tier: "Title sponsor", blurb: "Helping fuel the scholarship fund." },
-  //     { id: "c2", name: "Sponsor Name", tier: "Partner", blurb: "Supporting youth scholarships directly." },
-  //   ],
-  // },
+
   {
     key: "run",
     title: "Run Funders",
@@ -111,6 +108,33 @@ const SPONSOR_GROUPS = [
     ],
   },
 ];
+
+
+
+
+const ALONG_THE_WAY_SUPPORTERS = [
+  {
+    id: "helper-1",
+    title: "Community Helper",
+    subtitle: "Thank you for supporting James along the way.",
+  },
+  {
+    id: "helper-2",
+    title: "Local Supporter",
+    subtitle: "Helping with encouragement, meals, places to rest, and community connection.",
+  },
+  {
+    id: "helper-3",
+    title: "Route Friend",
+    subtitle: "Supporting the run one stop, one message, and one kind gesture at a time.",
+  },
+  {
+    id: "helper-4",
+    title: "Road Crew Support",
+    subtitle: "Thank you for helping keep the mission moving forward.",
+  },
+];
+
 
 
 
@@ -1104,12 +1128,23 @@ function clamp(n, min, max) {
 }
 
 function daysSince(startDateStr) {
-  const start = new Date(startDateStr + "T00:00:00");
   const now = new Date();
-  const ms = now.getTime() - start.getTime();
-  const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+
+  // Use local calendar dates, not exact milliseconds from the current time.
+  const [year, month, day] = startDateStr.split("-").map(Number);
+
+  const startDate = new Date(year, month - 1, day);
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  const diffMs = today.getTime() - startDate.getTime();
+  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
   return Math.max(0, days);
 }
+
+
+
+
 
 function useCountUp(value, durationMs = 900) {
   const [display, setDisplay] = React.useState(0);
@@ -1652,6 +1687,32 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 
 
 
+function CorsaTrackerEmbed() {
+  return (
+    <div className="h-[520px] sm:h-[340px] w-full overflow-hidden bg-black">
+      <iframe
+        title="Live tracker map"
+        src="https://www.corsa.run/profile/jamesrunscanada/stream/4a13f902-6ddf-4062-9ae0-c572234c9f54"
+        className="block border-0"
+        style={{
+          width: "160%",
+          height: "710px",
+          transform: "translate(-50%, -260px)",
+          marginLeft: "50%",
+          transformOrigin: "top center",
+        }}
+        loading="lazy"
+      />
+    </div>
+  );
+}
+
+
+
+
+
+
+
 
 function HomeTrackerSection({ pins, setPins }) {
   const { t, i18n } = useTranslation();
@@ -1743,90 +1804,98 @@ function HomeTrackerSection({ pins, setPins }) {
           </div>
         </div>
 
-        {/* BOTTOM: GPS + DONOR WALL share one map background */}
-        <div
-          id="gps"
-          className="relative mt-20 left-1/2 -translate-x-1/2 w-screen overflow-hidden bg-white"
-        >
-          {/* Shared map background */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            <img
-              src={map}
-              alt=""
-              //className="absolute top--10 w-full object-cover opacity-100"
-              className="absolute left-1/2 top-0 w-[850px] sm:w-[1050px] lg:w-[1700px] max-w-none -translate-x-1/2"
-              draggable={false}
-            />
-            <div className="absolute inset-0 bg-white/45" />
-          </div>
 
-          {/* Marquee */}
-          <div className="relative z-10">
-            <Marquee />
-          </div>
 
-          {/* GPS content */}
-          <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 py-10">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div className="max-w-2xl">
-                <div className="mt-2 text-2xl sm:text-4xl font-black uppercase tracking-tight text-neutral-950">
-                  {t("tracker.gpsTitle")}
-                </div>
 
-                <div className="mt-2 text-sm text-neutral-950/70">
-                  {t("tracker.gpsBody")}
-                </div>
+{/* BOTTOM: GPS tracker */}
+<div
+  id="gps"
+  className="relative mt-20 left-1/2 -translate-x-1/2 w-screen overflow-hidden bg-white"
+>
+  {/* Shared map background */}
+  <div className="absolute inset-0 z-0 overflow-hidden">
+    <img
+      src={map}
+      alt=""
+      className="absolute left-1/2 top-0 w-[850px] sm:w-[1050px] lg:w-[1700px] max-w-none -translate-x-1/2"
+      draggable={false}
+    />
+    <div className="absolute inset-0 bg-white/45" />
+  </div>
 
-                <div className="mt-5 flex flex-wrap justify-start gap-3">
-                  <a
-                    href="https://instagram.com/jamesrunscanada"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    aria-label="Instagram"
-                    className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
-                  >
-                    <img src={insta} alt="" className="h-8 w-8 object-contain" />
-                    <span>Instagram</span>
-                  </a>
+  {/* Marquee */}
+  <div className="relative z-10">
+    <Marquee />
+  </div>
 
-                  {/* <a
-                    href="https://facebook.com/jamesrunscanada"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    aria-label="Facebook"
-                    className="inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-sm font-black uppercase tracking-wide text-neutral-950 transition hover:bg-neutral-100"
-                  >
-                    <img src={facebook} alt="" className="h-5 w-5 object-contain" />
-                    <span>Facebook</span>
-                  </a> */}
-                </div>
-              </div>
-            </div>
+  <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 py-12">
+    <div className="max-w-2xl">
+      <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-neutral-950">
+        Follow in real-time!
+      </h2>
 
-            <RunCounters
-              startDate="2026-05-18"
-              kmPerDay={80}
-              totalGoalDays={100}
-              amountRaised={amountRaised}
-            />
+      <p className="mt-3 max-w-xl text-sm sm:text-base leading-7 text-neutral-950/75">
+        The GPS tracker updates continuously as James makes progress each day.
+        At the end of each day the tracker is paused and James will continue his
+        run from there the next morning.
+      </p>
+      
+      <a
+        href="https://www.instagram.com/jamesrunscanada/"
+        target="_blank"
+        rel="noreferrer noopener"
+        className="mt-5 inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-xs font-black uppercase tracking-widest text-neutral-950 shadow-sm hover:bg-neutral-950/[0.03]"
+      >
+        <img src={insta} alt="" className="h- w-5" />
+        Instagram
+      </a>
+      
+    </div>
 
-            <div className="mt-8 rounded-[28px] border border-neutral-950/10 bg-neutral-950 p-4 sm:p-6">
-              <InteractiveMap pins={pins} setPins={setPins} />
-              <div className="mt-3 text-center text-xs font-semibold uppercase tracking-widest text-white/60">
-                Live GPS tracker
-              </div>
-            </div>
-          </div>
+    <RunCounters
+      startDate="2026-05-18"
+      kmPerDay={80}
+      totalGoalDays={100}
+      amountRaised={amountRaised}
+    />
 
-          {/* Donor wall INSIDE the map background */}
-          <div className="relative z-10">
-            <DonorWallSection />
-          </div>
-        </div>
+    <div className="mt-8 overflow-hidden rounded-[28px] border border-neutral-950/10 bg-neutral-950 p-4 sm:p- shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
+      
+      
+      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white">
+        <CorsaTrackerEmbed />
+      </div>
+
+      {/* <div className="mt-3 text-right text-xs font-semibold uppercase tracking-widest text-white/60">
+        Live GPS tracker - powered by Corsa
+      </div> */}
+      <a
+        href="https://www.corsa.run/profile/jamesrunscanada/stream/4a13f902-6ddf-4062-9ae0-c572234c9f54"
+        target="_blank"
+        rel="noreferrer noopener"
+        className="mt-3 inline-flex items-center gap-2 rounded-full border border-neutral-950/15 bg-white px-4 py-2 text-xs font-black uppercase tracking-widest text-neutral-950 shadow-sm hover:bg-neutral-100"
+      >
+        <img src={sponsorBronze5} alt="" className="h-4 w-4" />
+        Powered by Corsa
+      </a>
+    </div>
+
+    
+
+  </div>
+
+  {/* Donor wall inside the map background */}
+  <div className="relative z-10">
+    <DonorWallSection />
+  </div>
+</div>
+
+
       </div>
     </section>
   );
 }
+
 
 
 
@@ -1899,6 +1968,84 @@ function LatestBlogBreakSection({ posts, onOpenPost, onViewAll }) {
     </section>
   );
 }
+
+
+
+
+
+
+
+function AlongTheWaySupportersCarousel({
+  supporters = ALONG_THE_WAY_SUPPORTERS,
+}) {
+  const repeatedSupporters = [...supporters, ...supporters];
+
+  if (!supporters.length) return null;
+
+  return (
+    <section className="overflow-hidden bg-white py-16 text-neutral-950">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8">
+        <div className="max-w-3xl">
+          <div className="text-xs font-black uppercase tracking-widest text-neutral-950/55">
+            Along the way
+          </div>
+
+          <h2 className="mt-2 text-3xl sm:text-5xl font-black uppercase tracking-tight text-neutral-950">
+            A special thanks
+          </h2>
+
+          <p className="mt-4 text-sm sm:text-base leading-7 text-neutral-950/70">
+            To the people, families, businesses, and community
+            members helping James along the road.
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-10 overflow-hidden">
+        <div className="supporters-carousel-track flex w-max gap-5 px-4 sm:px-8">
+          {repeatedSupporters.map((supporter, index) => (
+            <div
+              key={`${supporter.id}-${index}`}
+              className="w-[280px] sm:w-[360px] shrink-0 rounded-3xl border border-neutral-950/10 bg-stone-100 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.10)]"
+            >
+              <div className="text-xl sm:text-2xl font-black uppercase tracking-tight text-neutral-950">
+                {supporter.title}
+              </div>
+
+              <p className="mt-4 text-sm sm:text-base leading-7 text-neutral-950/70">
+                {supporter.subtitle}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        .supporters-carousel-track {
+          animation: supportersCarouselScroll 30s linear infinite;
+        }
+
+        .supporters-carousel-track:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes supportersCarouselScroll {
+          from {
+            transform: translateX(0);
+          }
+
+          to {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+
+
+
 
 
 
@@ -1994,6 +2141,14 @@ function SupportSection({ setTab }) {
 
 
 
+
+
+
+
+
+
+
+
 function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
   const sorted = useMemo(() => [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)), [posts]);
   const latestPostId = sorted[0]?._id || sorted[0]?.id;
@@ -2007,6 +2162,9 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
       <FunFactsSection />
       <SponsorsGridSection groups={SPONSOR_GROUPS} />
       
+      {/* <AlongTheWaySupportersCarousel /> */}
+
+
       <SupportSection setTab={setTab} />
 
       <footer className="border-t border-white/10 bg-neutral-950">
