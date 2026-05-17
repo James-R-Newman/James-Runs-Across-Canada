@@ -115,24 +115,24 @@ const SPONSOR_GROUPS = [
 const ALONG_THE_WAY_SUPPORTERS = [
   {
     id: "helper-1",
-    title: "Community Helper",
-    subtitle: "Thank you for supporting James along the way.",
+    title: "Embroidery Elite",
+    subtitle: "Thank you for amazing James Runs Canada wearable merchandise!",
   },
   {
     id: "helper-2",
-    title: "Local Supporter",
-    subtitle: "Helping with encouragement, meals, places to rest, and community connection.",
+    title: "By D'Bay Cabins",
+    subtitle: "Great place to stay in Port Blanford, NL - thank you for your generousity!",
   },
   {
     id: "helper-3",
-    title: "Route Friend",
-    subtitle: "Supporting the run one stop, one message, and one kind gesture at a time.",
+    title: "One Eared Goat",
+    subtitle: "Incredible restaurant in St. John's, NL - outstanding food and fantastic people - thanks for screeching us in!",
   },
-  {
-    id: "helper-4",
-    title: "Road Crew Support",
-    subtitle: "Thank you for helping keep the mission moving forward.",
-  },
+  // {
+  //   id: "helper-4",
+  //   title: "Road Crew Support",
+  //   subtitle: "Thank you for helping keep the mission moving forward.",
+  // },
 ];
 
 
@@ -2194,7 +2194,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
       <FunFactsSection />
       <SponsorsGridSection groups={SPONSOR_GROUPS} />
       
-      {/* <AlongTheWaySupportersCarousel /> */}
+      <AlongTheWaySupportersCarousel />
 
 
       <SupportSection setTab={setTab} />
