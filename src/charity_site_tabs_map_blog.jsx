@@ -1226,7 +1226,7 @@ function StatCard({ label, value, suffix = "", prefix = "" }) {
 }
 
 function RunCounters({
-  startDate = "2026-05-18",
+  startDate = "2026-05-17",
   kmPerDay = 80,
   totalGoalDays = 100,
   amountRaised = 1000, // swap this to real data later
@@ -1245,8 +1245,8 @@ function RunCounters({
 
   return (
     <div className="mt-6 grid gap-4 sm:grid-cols-3">
-      <StatCard label={t("stats.daysCompleted")} value={days} suffix={` / ${totalGoalDays}`} />
-      <StatCard label={t("stats.kilometersRun")} value={km} suffix={t("stats.km")} />
+      <StatCard label={t("stats.daysCompleted")} value={1} suffix={` / ${totalGoalDays}`} />
+      <StatCard label={t("stats.kilometersRun")} value={80.18} suffix={t("stats.km")} />
       <StatCard label={t("stats.amountRaised")} value={amountRaised} prefix={t("stats.currency")} />
     </div>
   );
