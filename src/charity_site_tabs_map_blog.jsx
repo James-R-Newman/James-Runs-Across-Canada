@@ -128,11 +128,11 @@ const ALONG_THE_WAY_SUPPORTERS = [
     title: "One Eared Goat",
     subtitle: "Incredible restaurant in St. John's, NL - outstanding food and fantastic people - thanks for screeching us in!",
   },
-  // {
-  //   id: "helper-4",
-  //   title: "Road Crew Support",
-  //   subtitle: "Thank you for helping keep the mission moving forward.",
-  // },
+  {
+    id: "helper-4",
+    title: "Coach Jow",
+    subtitle: "Thank you for helping me get to where I am today in running, and for being a great mentor.",
+  },
 ];
 
 
