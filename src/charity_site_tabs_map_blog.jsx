@@ -130,7 +130,7 @@ const ALONG_THE_WAY_SUPPORTERS = [
   },
   {
     id: "helper-4",
-    title: "Coach Jow",
+    title: "Coach Joe - Stringbean - McConaughy",
     subtitle: "Thank you for helping me get to where I am today in running, and for being a great mentor.",
   },
 ];
