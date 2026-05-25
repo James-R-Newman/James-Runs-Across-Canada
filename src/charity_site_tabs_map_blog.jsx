@@ -1696,6 +1696,39 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 }
 
 
+function TemporaryBikingNotice() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="pointer-events-auto absolute right-4 top-4 z-30 sm:right-8 sm:top-8">
+      <div className="flex w-[340px] max-w-[calc(100vw-2rem)] items-center justify-between gap-3 rounded-2xl border border-yellow-300/60 bg-yellow-300 px-5 py-3 text-neutral-950 shadow-[0_14px_40px_rgba(0,0,0,0.18)]">
+        <div className="min-w-0 flex-1 text-left">
+          <div className="text-[10px] font-black uppercase tracking-widest text-neutral-950/60">
+            Switching gears
+          </div>
+
+          <div className="mt-0.5 text-sm sm:text-base font-black uppercase tracking-tight">
+            Temporarily biking
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsVisible(false)}
+          aria-label="Dismiss notification"
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-neutral-950/20 bg-white/70 text-lg font-black leading-none text-neutral-950 transition hover:bg-white"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+
 function CorsaTrackerEmbed() {
   return (
     <div className="corsa-frame">
@@ -1871,6 +1904,8 @@ function HomeTrackerSection({ pins, setPins }) {
   </div>
 
   <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 py-12">
+    
+
     <div className="max-w-2xl">
       <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-neutral-950">
         Follow in real-time!
@@ -1882,6 +1917,9 @@ function HomeTrackerSection({ pins, setPins }) {
         run from there the next morning.
       </p>
       
+          <TemporaryBikingNotice />
+
+
       <a
         href="https://www.instagram.com/jamesrunscanada/"
         target="_blank"
@@ -1891,6 +1929,9 @@ function HomeTrackerSection({ pins, setPins }) {
         <img src={insta} alt="" className="h- w-5" />
         Instagram
       </a>
+
+  
+
       
     </div>
 
@@ -1900,6 +1941,7 @@ function HomeTrackerSection({ pins, setPins }) {
       totalGoalDays={100}
       amountRaised={amountRaised}
     />
+
 
     <div className="mx-auto mt-8 w-full max-w-[700px] overflow-hidden rounded-[28px] border border-neutral-950/10 bg-neutral-950 p-4 sm:p-6 shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
       
