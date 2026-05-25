@@ -1696,6 +1696,11 @@ function HomeHeroTop({ latestPostId, onOpenPost }) {
 }
 
 
+
+
+
+
+
 function TemporaryBikingNotice() {
   const [isVisible, setIsVisible] = useState(true);
 
@@ -1726,6 +1731,11 @@ function TemporaryBikingNotice() {
     </div>
   );
 }
+
+
+
+
+
 
 
 
@@ -2213,7 +2223,7 @@ function SupportSection({ setTab }) {
               rel="noreferrer noopener"
               className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
             >
-              {t("support.cards.partners.title")}
+              {t("support.cards.partners.cta")}
             </a>
           </div>
           </Glass>
