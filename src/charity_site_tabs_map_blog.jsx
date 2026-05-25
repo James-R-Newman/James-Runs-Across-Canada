@@ -130,8 +130,18 @@ const ALONG_THE_WAY_SUPPORTERS = [
   },
   {
     id: "helper-4",
-    title: "Coach Joe - Stringbean - McConaughy",
+    title: "Coach Joe Stringbean McConaughy",
     subtitle: "Thank you for helping me get to where I am today in running, and for being a great mentor.",
+  },
+  {
+    id: "helper-5",
+    title: "Gander Comfort Inn",
+    subtitle: "Great place to rest in Gander, NL - thank you for your generousity!",
+  },
+  {
+    id: "helper-6",
+    title: "McGill Ultimate Team",
+    subtitle: "Thanks lads for letting us borrow your drone",
   },
 ];
 
@@ -1245,8 +1255,8 @@ function RunCounters({
 
   return (
     <div className="mt-6 grid gap-4 sm:grid-cols-3">
-      <StatCard label={t("stats.daysCompleted")} value={4} suffix={` / ${totalGoalDays}`} />
-      <StatCard label={t("stats.kilometersRun")} value={281.63} suffix={t("stats.km")} />
+      <StatCard label={t("stats.daysCompleted")} value={7} suffix={` / ${totalGoalDays}`} />
+      <StatCard label={t("stats.kilometersRun")} value={295.27} suffix={t("stats.km")} />
       <StatCard label={t("stats.amountRaised")} value={amountRaised} prefix={t("stats.currency")} />
     </div>
   );
@@ -2155,12 +2165,14 @@ function SupportSection({ setTab }) {
             <div className="mt-2 text-sm text-white/80">{t("support.cards.partners.body")}</div>
             <div className="mt-10 flex flex-wrap gap-2">
           
-            <button
-              onClick={() => setTab("contact")}
+            <a
+              href="https://www.gofundme.com/f/james-runs-canada-fund"
+              target="_blank"
+              rel="noreferrer noopener"
               className="rounded-full border border-yellow-300 bg-yellow-300 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-950 hover:bg-yellow-200"
             >
-              {t("support.cards.partners.cta")}
-            </button>
+              {t("support.cards.partners.title")}
+            </a>
           </div>
           </Glass>
         </div>
