@@ -1773,7 +1773,7 @@ function CorsaTrackerEmbed() {
           width: 160%;
           height: 710px;
           margin-left: 50%;
-          transform: translate(-50%, -260px);
+          transform: translate(-50%, -280px);
           transform-origin: top center;
         }
 
