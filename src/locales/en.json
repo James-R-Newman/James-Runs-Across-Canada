@@ -3,7 +3,7 @@
   "common": { "live": "Live", "donate": "Donate", "map": "Map", "feed": "Blog", "learnMore": "Learn more" },
   "hero": {
     "followStarting": "Follow the run starting",
-    "joinLine": "Join James as he runs across Canada in under 100 days, 75+ km/day, to fund scholarships for youth who’ve also been displaced in childhood.",
+    "joinLine": "Join James as he runs across Canada in under 100 days to fund scholarships for youth who’ve also been displaced in childhood.",
     "date": "May 18th, 2026."
   },
   "tracker": {
