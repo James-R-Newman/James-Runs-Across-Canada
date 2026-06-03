@@ -2264,7 +2264,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
       <HomeHeroTop latestPostId={latestPostId} onOpenPost={onOpenPost} />
       <HomeTrackerSection pins={pins} setPins={setPins} />
       <LatestBlogBreakSection posts={posts} onOpenPost={onOpenPost} onViewAll={() => setTab("blog")} />
-      <TemporaryBikingNotice />
+      {/* <TemporaryBikingNotice /> */}
       <FunFactsSection />
       <SponsorsGridSection groups={SPONSOR_GROUPS} />
       
