@@ -31,6 +31,8 @@ import sponsorSilver3 from "./assets/Burnbrae.png";
 import sponsorBronze5 from "./assets/corsa.png";
 import sponsorBronze6 from "./assets/rv.png";
 import sponsorBronze7 from "./assets/sponsor-bronze3.png";
+import sponsorBronze8 from "./assets/bell.png";
+
 
 
 
@@ -313,6 +315,7 @@ function LogoPlaceholder({
   alt = "Sponsor logo",
   href = null,
   imgClassName = "",
+  bare = false, // <- add this
 }) {
   const sizeCls =
     size === "lg"
@@ -325,13 +328,32 @@ function LogoPlaceholder({
     ? "border-white/35 bg-white/90 shadow-[0_18px_60px_rgba(0,0,0,0.35)]"
     : "border-white/10 bg-white/5 shadow-[0_12px_30px_rgba(0,0,0,0.18)]";
 
-  const inner = (
+  const inner = bare ? (
     <div
       className={[
-        "shrink-0 rounded-3xl border",
-        "backdrop-blur-xl",
-        "flex items-center justify-center",
-        "overflow-hidden transition",
+        "shrink-0 flex items-center justify-center",
+        href ? "transition hover:scale-[1.03]" : "",
+        sizeCls,
+      ].join(" ")}
+    >
+      {src ? (
+        <img
+          src={src}
+          alt={alt}
+          className={`h-full w-full object-contain ${imgClassName}`}
+          loading="lazy"
+          draggable={false}
+        />
+      ) : (
+        <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-white/25">
+          Logo
+        </span>
+      )}
+    </div>
+  ) : (
+    <div
+      className={[
+        "shrink-0 rounded-3xl border backdrop-blur-xl flex items-center justify-center overflow-hidden transition",
         href ? "hover:scale-[1.03] hover:border-yellow-300/70" : "",
         sizeCls,
         filledCls,
@@ -372,100 +394,152 @@ function LogoPlaceholder({
 
 
 
+
+
+function SponsorSectionDivider({ label }) {
+  return (
+    <div className="flex items-center justify-center gap-4 sm:gap-6 py-2">
+      <div className="h-px w-20 sm:w-40 bg-white/70" />
+      <div className="text-sm sm:text-xl font-black uppercase tracking-widest text-white">
+        {label}
+      </div>
+      <div className="h-px w-20 sm:w-40 bg-white/70" />
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
 function RunFundersLogoRows() {
   return (
     <div className="py-4">
-      <div className="space-y-7">
-        {/* Row 1: 2 large squares */}
-        <div className="flex items-center justify-center gap-12 sm:gap-16">
-          <LogoPlaceholder
-            size="lg"
-            imgClassName="scale-[1.0]"
-            src={sponsorGold}
-            alt="CIBC"
-            href="https://www.cibc.com/en/about-cibc/corporate-responsibility/community-and-sponsorship.html"
-          />
-          <LogoPlaceholder size="lg" />
+      <div className="space-y-10">
+        {/* Presenting partner */}
+        <div className="space-y-6">
+          <SponsorSectionDivider label="Presenting Partner" />
+
+          <div className="flex items-center justify-center">
+  <a
+    href="https://www.cibc.com/en/about-cibc/corporate-responsibility/community-and-sponsorship.html"
+    target="_blank"
+    rel="noreferrer noopener"
+    aria-label="CIBC"
+    className="group block"
+  >
+    <div className="flex h-28 w-[420px] max-w-[90vw] items-center justify-center rounded-2xl border border-neutral-950/15 bg-white/95 px-10 py-6 shadow-[0_18px_50px_rgba(0,0,0,0.16)] backdrop-blur-sm transition group-hover:scale-[1.03] group-hover:bg-white/90 sm:h-32 sm:w-[380px]">
+      <img
+        src={sponsorGold}
+        alt="CIBC"
+        className="h-full w-full object-contain"
+        loading="lazy"
+        draggable={false}
+      />
+    </div>
+  </a>
+</div>
         </div>
 
-        {/* Row 2: 4 medium squares */}
-        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-7">
-          <LogoPlaceholder
-            size="md"
-            imgClassName="scale-[1.48]"
-            src={sponsorSilver3}
-            alt="Burnbrae"
-            href="https://www.burnbraefarms.com/en/"
-          />
-          <LogoPlaceholder
-            size="md"
-            imgClassName="scale-[1.18]"
-            src={sponsorSilver1}
-            alt="Canadian Tire"
-            href="https://www.canadiantire.ca/"
-          />
-          <LogoPlaceholder
-            size="md"
-            imgClassName="scale-[1.25]"
-            src={sponsorSilver2}
-            alt="Abundant"
-            href="http://abundant.ca/"
-          />
-          <LogoPlaceholder
-            size="md"
-            imgClassName="scale-[1.05]"
-            src={sponsorBronze6}
-            alt="RV"
-            href="http://www.rvcanadaottawa.ca//"
-          />
-        </div>
+        {/* Major partners */}
+        <div className="space-y-7">
+          <SponsorSectionDivider label="Major Partners" />
 
-        {/* Row 3: 6 small squares */}
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-3.5">
-          <LogoPlaceholder
-            size="sm"
-            src={sponsorBronze7}
-            alt="RunEasi"
-            href="https://runeasi.ai/"
-          />
-          <LogoPlaceholder
-            size="sm"
-            src={sponsorBronze3}
-            alt="Organika"
-            href="https://www.organika.com/"
-          />
-          <LogoPlaceholder
-            size="sm"
-            imgClassName="scale-[1.35]"
-            src={sponsorBronze2}
-            alt="Predictive Success"
-            href="https://www.predictivesuccess.com/"
-          />
-          <LogoPlaceholder
-            size="sm"
-            src={sponsorBronze1}
-            alt="Record Press"
-            href="https://www.recordxpress.ca/"
-          />
-          <LogoPlaceholder
-            size="sm"
-            imgClassName="scale-[1.1]"
-            src={sponsorBronze4}
-            alt="Cambridge LLP"
-            href="https://www.cambridgellp.com/"
-          />
-          <LogoPlaceholder
-            size="sm"
-            imgClassName="scale-[1.1]"
-            src={sponsorBronze5}
-            alt="Corsa"
-            href="https://www.corsa.run/"
-          />
+          {/* Row 1 */}
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-7">
+            <LogoPlaceholder
+              size="md"
+              imgClassName="scale-[1.48]"
+              src={sponsorSilver3}
+              alt="Burnbrae"
+              href="https://www.burnbraefarms.com/en/"
+            />
+            <LogoPlaceholder
+              size="md"
+              imgClassName="scale-[1.18]"
+              src={sponsorSilver1}
+              alt="Canadian Tire"
+              href="https://www.canadiantire.ca/"
+            />
+            <LogoPlaceholder
+              size="md"
+              imgClassName="scale-[1.25]"
+              src={sponsorSilver2}
+              alt="Abundant"
+              href="http://abundant.ca/"
+            />
+            <LogoPlaceholder
+              size="md"
+              imgClassName="scale-[1.05]"
+              src={sponsorBronze6}
+              alt="RV"
+              href="http://www.rvcanadaottawa.ca//"
+            />
+          </div>
+
+          {/* Row 2 */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-3.5">
+            <LogoPlaceholder
+              size="sm"
+              src={sponsorBronze7}
+              alt="RunEasi"
+              href="https://runeasi.ai/"
+            />
+            <LogoPlaceholder
+              size="sm"
+              src={sponsorBronze3}
+              alt="Organika"
+              href="https://www.organika.com/"
+            />
+            <LogoPlaceholder
+              size="sm"
+              imgClassName="scale-[1.35]"
+              src={sponsorBronze2}
+              alt="Predictive Success"
+              href="https://www.predictivesuccess.com/"
+            />
+            <LogoPlaceholder
+              size="sm"
+              src={sponsorBronze1}
+              alt="Record Press"
+              href="https://www.recordxpress.ca/"
+            />
+            <LogoPlaceholder
+              size="sm"
+              imgClassName="scale-[1.1]"
+              src={sponsorBronze4}
+              alt="Cambridge LLP"
+              href="https://www.cambridgellp.com/"
+            />
+            <LogoPlaceholder
+              size="sm"
+              imgClassName="scale-[1.1]"
+              src={sponsorBronze5}
+              alt="Corsa"
+              href="https://www.corsa.run/"
+            />
+            <LogoPlaceholder
+              size="sm"
+              imgClassName="scale-[1.1]"
+              src={sponsorBronze8}
+              alt="Bell"
+              href="https://www.bell.ca/"
+            />
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
+
+
+
+
 
 
 
@@ -1265,8 +1339,8 @@ function RunCounters({
 
   return (
     <div className="mt-6 grid gap-4 sm:grid-cols-3">
-      <StatCard label={t("stats.daysCompleted")} value={16} suffix={` / ${totalGoalDays}`} />
-      <StatCard label={t("stats.kilometersRun")} value={1371.15} suffix={t("stats.km")} />
+      <StatCard label={t("stats.daysCompleted")} value={17} suffix={` / ${totalGoalDays}`} />
+      <StatCard label={t("stats.kilometersRun")} value={1456.15} suffix={t("stats.km")} />
       <StatCard label={t("stats.amountRaised")} value={amountRaised} prefix={t("stats.currency")} />
     </div>
   );
