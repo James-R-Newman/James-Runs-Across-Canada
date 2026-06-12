@@ -32,7 +32,7 @@ import sponsorBronze5 from "./assets/corsa.png";
 import sponsorBronze6 from "./assets/rv.png";
 import sponsorBronze7 from "./assets/sponsor-bronze3.png";
 import sponsorBronze8 from "./assets/bell.png";
-
+import powerpartner from "./assets/power_partner.png";
 
 
 
@@ -443,6 +443,31 @@ function RunFundersLogoRows() {
     </div>
   </a>
 </div>
+        </div>
+
+        {/* Power partner */}
+        <div className="space-y-6">
+          <SponsorSectionDivider label="Power Partner" />
+
+          <div className="flex items-center justify-center">
+            <a
+              href="https://www.rgfwealth.com/"
+              target="_blank"
+    rel="noreferrer noopener"
+              aria-label="Power Partner"
+              className="group block"
+            >
+              <div className="flex h-24 w-[360px] max-w-[90vw] items-center justify-center rounded-2xl border border-neutral-950/15 bg-white/90 px-8 py-5 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm transition group-hover:scale-[1.03] group-hover:bg-white sm:h-28 sm:w-[460px]">
+                <img
+                  src={powerpartner}
+                  alt="Power Partner"
+                  className="h-full w-full object-contain"
+                  loading="lazy"
+                  draggable={false}
+                />
+              </div>
+            </a>
+          </div>
         </div>
 
         {/* Major partners */}
