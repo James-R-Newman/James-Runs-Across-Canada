@@ -35,7 +35,7 @@
   },
   "stats": {
     "daysCompleted": "Days completed",
-    "kilometersRun": "Kilometres",
+    "kilometersRun": "Kilometres completed",
     "amountRaised": "Amount raised",
     "km": "km",
     "currency": "$"
