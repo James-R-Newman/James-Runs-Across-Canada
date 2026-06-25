@@ -1364,8 +1364,8 @@ function RunCounters({
 
   return (
     <div className="mt-6 grid gap-4 sm:grid-cols-3">
-      <StatCard label={t("stats.daysCompleted")} value={37} suffix={` / ${totalGoalDays}`} />
-      <StatCard label={t("stats.kilometersRun")} value={2891.97} suffix={t("stats.km")} />
+      <StatCard label={t("stats.daysCompleted")} value={38} suffix={` / ${totalGoalDays}`} />
+      <StatCard label={t("stats.kilometersRun")} value={2967.97} suffix={t("stats.km")} />
       <StatCard label={t("stats.amountRaised")} value={amountRaised} prefix={t("stats.currency")} />
     </div>
   );
