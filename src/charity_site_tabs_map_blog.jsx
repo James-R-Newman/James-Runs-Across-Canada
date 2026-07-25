@@ -161,7 +161,7 @@ const ALONG_THE_WAY_SUPPORTERS = [
     subtitle: "Thanks Flora and Don for the discount on the bike accessories!",
   },
   {
-    id: "helper-8",
+    id: "helper-10",
     title: "Christe's RV Shop",
     subtitle: "Thank you for rv inspection and guidance!",
   },
