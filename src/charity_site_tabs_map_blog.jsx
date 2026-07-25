@@ -126,6 +126,11 @@ const ALONG_THE_WAY_SUPPORTERS = [
     subtitle: "Great place to stay in Port Blanford, NL - thank you for your generousity!",
   },
   {
+    id: "helper-9",
+    title: "Lone Pine Inn",
+    subtitle: "Amazing Northern Ontario stop over. Great people and place!",
+  },
+  {
     id: "helper-3",
     title: "One Eared Goat",
     subtitle: "Incredible restaurant in St. John's, NL - outstanding food and fantastic people - thanks for screeching us in!",
