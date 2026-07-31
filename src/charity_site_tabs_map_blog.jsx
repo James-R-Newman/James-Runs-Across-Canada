@@ -1884,7 +1884,7 @@ function CorsaTrackerEmbed() {
           width: 160%;
           height: 710px;
           margin-left: 50%;
-          transform: translate(-50%, -280px);
+          transform: translate(-50%, -335px);
           transform-origin: top center;
         }
 
@@ -1897,7 +1897,7 @@ function CorsaTrackerEmbed() {
           .corsa-iframe {
           width: 220%;
           height: 900px;
-          transform: translate(-50%, -285px);
+          transform: translate(-50%, -335px);
         }
         }
 
@@ -1905,7 +1905,7 @@ function CorsaTrackerEmbed() {
         @media (max-width: 390px) {
           .corsa-iframe {
             width: 260%;
-            transform: translate(-50%, -285px);
+            transform: translate(-50%, -335px);
           }
         }
       `}</style>
