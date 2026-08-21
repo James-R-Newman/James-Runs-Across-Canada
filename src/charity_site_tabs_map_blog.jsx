@@ -165,6 +165,11 @@ const ALONG_THE_WAY_SUPPORTERS = [
     title: "Christe's RV Shop",
     subtitle: "Thank you for rv inspection and guidance!",
   },
+  {
+    id: "helper-11",
+    title: "Plains Motel Brooks",
+    subtitle: "Thank you for the warm welcome and hospitality!",
+  },
 ];
 
 
@@ -1374,8 +1379,8 @@ function RunCounters({
 
   return (
     <div className="mt-6 grid gap-4 sm:grid-cols-3">
-      <StatCard label={t("stats.daysCompleted")} value={94} suffix={` / ${totalGoalDays}`} />
-      <StatCard label={t("stats.kilometersRun")} value={6111.83} suffix={t("stats.km")} />
+      <StatCard label={t("stats.daysCompleted")} value={95} suffix={` / ${totalGoalDays}`} />
+      <StatCard label={t("stats.kilometersRun")} value={6171.83} suffix={t("stats.km")} />
       <StatCard label={t("stats.amountRaised")} value={amountRaised} prefix={t("stats.currency")} />
     </div>
   );
