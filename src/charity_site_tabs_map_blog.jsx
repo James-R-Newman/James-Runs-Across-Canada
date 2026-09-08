@@ -33,7 +33,7 @@ import sponsorBronze6 from "./assets/rv.png";
 import sponsorBronze7 from "./assets/sponsor-bronze3.png";
 import sponsorBronze8 from "./assets/bell.png";
 import powerpartner from "./assets/power_partner.png";
-
+import sponsorBronze9 from "./assets/loc2.png";
 
 
 /**
@@ -563,6 +563,13 @@ function RunFundersLogoRows() {
               src={sponsorBronze8}
               alt="Bell"
               href="https://www.bell.ca/"
+            />
+            <LogoPlaceholder
+              size="sm"
+              imgClassName="scale-[1.1]"
+              src={sponsorBronze9}
+              alt="Bell"
+              href="https://www.locinternational.com/about-loc-international/?keyword=hospitality%20tvs&gad_source=1&gad_campaignid=22307291009&gbraid=0AAAAAojFmBcF4-XL8aHjxL490P3MXDGko&gclid=CjwKCAjwwfnUBhAtEiwAfQpAYnvO8_fNlHQYKT5AJ_22O9tvBiCOaDGB-22KECqbKzpBtgk6nHJtnxoCbMQQAvD_BwE/"
             />
           </div>
         </div>
