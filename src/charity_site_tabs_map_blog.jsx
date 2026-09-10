@@ -1839,17 +1839,17 @@ function TemporaryBikingNotice() {
       <div className="pointer-events-auto fixed right-4 top-24 z-[9999] sm:right-8 sm:top-28">      <div className="flex w-[440px] max-w-[calc(100vw-2rem)] items-center justify-between gap-3 rounded-2xl border border-yellow-300/60 bg-yellow-300 px-5 py-3 text-neutral-950 shadow-[0_14px_40px_rgba(0,0,0,0.18)]">
         <div className="min-w-0 flex-1 text-left">
           <div className="text-[10px] font-black uppercase tracking-widest text-neutral-950/60">
-            Donation Matching
+            Finish Line
           </div>
 
           <div className="mt-0.5 text-sm sm:text-base font-black uppercase tracking-tight">
-            The Joyce Family Foundation are matching all donations up to our $250k charity goal! 
+            Join James at the finish line Friday September 11th at the Terry Fox in Victoria statue at 4pm!
             
           </div>
-          <div className="mt-0.5 text-sm sm:text-base font-black uppercase tracking-tight">
+          {/* <div className="mt-0.5 text-sm sm:text-base font-black uppercase tracking-tight">
             
             Road to 500k begins now!
-          </div>
+          </div> */}
         </div>
 
         <button
@@ -2388,7 +2388,7 @@ function HomeTab({ posts, onOpenPost, pins, setPins, setTab }) {
       <HomeHeroTop latestPostId={latestPostId} onOpenPost={onOpenPost} />
       <HomeTrackerSection pins={pins} setPins={setPins} />
       <LatestBlogBreakSection posts={posts} onOpenPost={onOpenPost} onViewAll={() => setTab("blog")} />
-      {/* <TemporaryBikingNotice /> */}
+      <TemporaryBikingNotice />
       <FunFactsSection />
       <SponsorsGridSection groups={SPONSOR_GROUPS} />
       
