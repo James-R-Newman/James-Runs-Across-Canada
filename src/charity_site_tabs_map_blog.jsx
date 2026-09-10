@@ -33,7 +33,7 @@ import sponsorBronze6 from "./assets/rv.png";
 import sponsorBronze7 from "./assets/sponsor-bronze3.png";
 import sponsorBronze8 from "./assets/bell.png";
 import powerpartner from "./assets/power_partner.png";
-import sponsorBronze9 from "./assets/loc2.png";
+import sponsorBronze9 from "./assets/loc2.PNG";
 
 
 /**
