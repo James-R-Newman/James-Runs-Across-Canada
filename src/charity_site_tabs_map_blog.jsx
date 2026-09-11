@@ -1843,7 +1843,7 @@ function TemporaryBikingNotice() {
           </div>
 
           <div className="mt-0.5 text-sm sm:text-base font-black uppercase tracking-tight">
-            Join James at the finish line Friday September 11th at the Terry Fox in Victoria statue at 4pm!
+            Join James at the finish line Friday September 11th at the Terry Fox statue in Victoria at 4pm!
             
           </div>
           {/* <div className="mt-0.5 text-sm sm:text-base font-black uppercase tracking-tight">
